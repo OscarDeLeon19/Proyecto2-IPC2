@@ -8,16 +8,16 @@ public class Medico {
     private String codigo;
     private String nombre;
     private int numero_colegiado;
-    private int dpi;
+    private String dpi;
     private int telefono;
     private String correo;
     private String hora_entrada;
     private String hora_salida;
     private Date fecha_inicio;
     private String contraseña;
-    private ArrayList<String> especialidades = new ArrayList<String>();
+    private ArrayList<Especialidad> especialidades = new ArrayList<Especialidad>();
 
-    public Medico(String codigo, String nombre, int numero_colegiado, int dpi, int telefono, String correo, String hora_entrada, String hora_salida, Date fecha_inicio, String contraseña) {
+    public Medico(String codigo, String nombre, int numero_colegiado, String dpi, int telefono, String correo, String hora_entrada, String hora_salida, Date fecha_inicio, String contraseña) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.numero_colegiado = numero_colegiado;
@@ -55,11 +55,11 @@ public class Medico {
         this.numero_colegiado = numero_colegiado;
     }
 
-    public int getDpi() {
+    public String getDpi() {
         return dpi;
     }
 
-    public void setDpi(int dpi) {
+    public void setDpi(String dpi) {
         this.dpi = dpi;
     }
 
@@ -111,31 +111,32 @@ public class Medico {
         this.contraseña = contraseña;
     }
 
-    public ArrayList<String> getEspecialidades() {
+    public ArrayList<Especialidad> getEspecialidades() {
         return especialidades;
     }
 
-    public void setEspecialidades(ArrayList<String> especialidades) {
+    public void setEspecialidades(ArrayList<Especialidad> especialidades) {
         this.especialidades = especialidades;
     }
 
-    public String AñadirEspecialidad(String Titulo) {
+    public String AñadirEspecialidad(String titulo) {
+        Especialidad especialidad = new Especialidad(codigo, titulo);
         String mensaje = null;
         if (especialidades.size() > 0) {
             boolean especialidad_repetida = false;
             for (int i = 0; i < especialidades.size(); i++) {
-                if (Titulo.equals(especialidades.get(i))) {
+                if (titulo.equals(especialidades.get(i).getTitulo())) {
                     especialidad_repetida = true;
                 }
             }
             if (especialidad_repetida == true) {
                 mensaje = "Este medico ya tiene la especialidad";
             } else {
-                especialidades.add(Titulo);
+                especialidades.add(especialidad);
                 mensaje = "Especialidad Añadida";
             }
         } else {
-            especialidades.add(Titulo);
+            especialidades.add(especialidad);
             mensaje = "Especialidad Añadida";
         }
         return mensaje;

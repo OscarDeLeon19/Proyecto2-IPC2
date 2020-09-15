@@ -9,14 +9,14 @@ public class Paciente {
     private String nombre;
     private String sexo;
     private Date fecha_de_nacimiento;
-    private int dpi;
+    private String dpi;
     private int telefono;
     private double peso;
     private String tipo_sangre;
     private String correo;
     private String contraseña;
 
-    public Paciente(String codigo, String nombre, String sexo, Date fecha_de_nacimiento, int dpi, int telefono, double peso, String tipo_sangre, String correo, String contraseña) {
+    public Paciente(String codigo, String nombre, String sexo, Date fecha_de_nacimiento, String dpi, int telefono, double peso, String tipo_sangre, String correo, String contraseña) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.sexo = sexo;
@@ -61,11 +61,11 @@ public class Paciente {
         this.fecha_de_nacimiento = fecha_de_nacimiento;
     }
 
-    public int getDpi() {
+    public String getDpi() {
         return dpi;
     }
 
-    public void setDpi(int dpi) {
+    public void setDpi(String dpi) {
         this.dpi = dpi;
     }
 
