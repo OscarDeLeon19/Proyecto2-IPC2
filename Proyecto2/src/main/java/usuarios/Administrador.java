@@ -4,10 +4,10 @@ public class Administrador {
 
     private String codigo;
     private String nombre;
-    private int dpi;
+    private String dpi;
     private String contraseña;
 
-    public Administrador(String codigo, String nombre, int dpi, String contraseña) {
+    public Administrador(String codigo, String nombre, String dpi, String contraseña) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.dpi = dpi;
@@ -30,11 +30,11 @@ public class Administrador {
         this.nombre = nombre;
     }
 
-    public int getDpi() {
+    public String getDpi() {
         return dpi;
     }
 
-    public void setDpi(int dpi) {
+    public void setDpi(String dpi) {
         this.dpi = dpi;
     }
 
