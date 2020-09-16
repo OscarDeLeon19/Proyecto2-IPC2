@@ -8,16 +8,15 @@ public class Laboratorista {
     private String codigo;
     private String nombre;
     private int numero_registro;
-    private int dpi;
+    private String dpi;
     private int telefono;
     private String tipo_examen;
     private String correo;
-    private String hora_salida;
     private Date fecha_inicio;
     private String contraseña;
-    private ArrayList<String> dias_de_trabajo = new ArrayList<String>();
+    private ArrayList<Dia_de_trabajo> dias_de_trabajo = new ArrayList<>();
 
-    public Laboratorista(String codigo, String nombre, int numero_registro, int dpi, int telefono, String tipo_examen, String correo, String hora_salida, Date fecha_inicio, String contraseña) {
+    public Laboratorista(String codigo, String nombre, int numero_registro, String dpi, int telefono, String tipo_examen, String correo, Date fecha_inicio, String contraseña) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.numero_registro = numero_registro;
@@ -25,7 +24,6 @@ public class Laboratorista {
         this.telefono = telefono;
         this.tipo_examen = tipo_examen;
         this.correo = correo;
-        this.hora_salida = hora_salida;
         this.fecha_inicio = fecha_inicio;
         this.contraseña = contraseña;
     }
@@ -54,11 +52,11 @@ public class Laboratorista {
         this.numero_registro = numero_registro;
     }
 
-    public int getDpi() {
+    public String getDpi() {
         return dpi;
     }
 
-    public void setDpi(int dpi) {
+    public void setDpi(String dpi) {
         this.dpi = dpi;
     }
 
@@ -86,14 +84,6 @@ public class Laboratorista {
         this.correo = correo;
     }
 
-    public String getHora_salida() {
-        return hora_salida;
-    }
-
-    public void setHora_salida(String hora_salida) {
-        this.hora_salida = hora_salida;
-    }
-
     public Date getFecha_inicio() {
         return fecha_inicio;
     }
@@ -110,16 +100,17 @@ public class Laboratorista {
         this.contraseña = contraseña;
     }
 
-    public ArrayList<String> getDias_de_trabajo() {
+    public ArrayList<Dia_de_trabajo> getDias_de_trabajo() {
         return dias_de_trabajo;
     }
 
-    public void setDias_de_trabajo(ArrayList<String> dias_de_trabajo) {
+    public void setDias_de_trabajo(ArrayList<Dia_de_trabajo> dias_de_trabajo) {
         this.dias_de_trabajo = dias_de_trabajo;
     }
 
     public void AñadirDiaDeTrabajo(String Dia) {
-        dias_de_trabajo.add(Dia);
+        Dia_de_trabajo dia = new Dia_de_trabajo(codigo, Dia);
+        dias_de_trabajo.add(dia);
     }
 
 }

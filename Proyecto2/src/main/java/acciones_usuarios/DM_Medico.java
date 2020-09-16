@@ -73,7 +73,7 @@ public class DM_Medico extends Datos_Conexion {
         }
         return lista_especialidades;
     }
-    
+
     public ArrayList<Especialidad> VerEspecialidadesPorCodigo(String codigo) {
         ArrayList<Especialidad> lista_especialidades = new ArrayList<>();
         try {
@@ -81,7 +81,7 @@ public class DM_Medico extends Datos_Conexion {
             ResultSet rs = null;
             String Query = "SELECT * FROM Especialidad WHERE Codigo_Medico = ?";
             PrSt = conexion.prepareStatement(Query);
-            PrSt.setString(1, codigo); 
+            PrSt.setString(1, codigo);
             rs = PrSt.executeQuery();
             while (rs.next()) {
                 Especialidad especialidad = new Especialidad(rs.getString("Codigo_Medico"), rs.getString("Titulo"));
@@ -154,7 +154,7 @@ public class DM_Medico extends Datos_Conexion {
         try {
             PreparedStatement PrSt;
             String Query = "UPDATE Medico SET Nombre = ?, Numero_De_Colegiado = ?, DPI = ?, Telefono = ?, Correo_Electronico = ?, Hora_Entrada = ?, Hora_Salida = ?, Fecha_Inicio = ? WHERE Codigo = ?";
-            PrSt = conexion.prepareStatement(Query);            
+            PrSt = conexion.prepareStatement(Query);
             PrSt.setString(1, medico.getNombre());
             PrSt.setInt(2, medico.getNumero_colegiado());
             PrSt.setString(3, medico.getDpi());
@@ -166,7 +166,7 @@ public class DM_Medico extends Datos_Conexion {
             PrSt.setString(9, medico.getCodigo());
             int ejecucion = PrSt.executeUpdate();
             if (ejecucion > 0) {
-                mensaje = "Informacion modificada";                
+                mensaje = "Informacion modificada";
             } else {
                 mensaje = "Fallo al modificar";
             }
@@ -176,9 +176,7 @@ public class DM_Medico extends Datos_Conexion {
         }
         return mensaje;
     }
-    
-    
-    
+
     public String EliminarMedico(String codigo) {
         String mensaje;
         try {
@@ -192,13 +190,14 @@ public class DM_Medico extends Datos_Conexion {
             } else {
                 mensaje = "No existe ese codigo";
             }
+            PrSt.close();
         } catch (Exception e) {
             mensaje = e.toString();
         }
         return mensaje;
     }
-    
-    public String EliminarEspecialidad(String codigo_medico, String titulo){
+
+    public String EliminarEspecialidad(String codigo_medico, String titulo) {
         String mensaje;
         try {
             PreparedStatement PrSt;
@@ -212,13 +211,14 @@ public class DM_Medico extends Datos_Conexion {
             } else {
                 mensaje = "No existe ese codigo o titulo";
             }
+            PrSt.close();
         } catch (Exception e) {
             mensaje = e.toString();
         }
         return mensaje;
     }
-    
-    public String EliminarEspecialidades(String codigo_medico){
+
+    public String EliminarEspecialidades(String codigo_medico) {
         String mensaje;
         try {
             PreparedStatement PrSt;
@@ -231,6 +231,7 @@ public class DM_Medico extends Datos_Conexion {
             } else {
                 mensaje = "No existe ese codigo o titulo";
             }
+            PrSt.close();
         } catch (Exception e) {
             mensaje = e.toString();
         }
