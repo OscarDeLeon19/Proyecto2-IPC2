@@ -22,7 +22,7 @@ public class DM_Laboratorista extends Datos_Conexion {
             PrSt = conexion.prepareStatement(Query);
             rs = PrSt.executeQuery();
             while (rs.next()) {
-                Laboratorista lab = new Laboratorista(rs.getString("Codigo"), rs.getString("Nombre"), rs.getInt("Numero_de_Registro"), rs.getString("DPI"), rs.getInt("Telefono"), rs.getString("Tipo_De_Examen"), rs.getString("Correo_Electronico"), rs.getDate("Fecha_Inicio"), rs.getString("Contraseña"));
+                Laboratorista lab = new Laboratorista(rs.getString("Codigo"), rs.getString("Nombre"), rs.getString("Numero_de_Registro"), rs.getString("DPI"), rs.getInt("Telefono"), rs.getString("Tipo_De_Examen"), rs.getString("Correo_Electronico"), rs.getDate("Fecha_Inicio"), rs.getString("Contraseña"));
                 lista_laboratorista.add(lab);
             }
             PrSt.close();
@@ -43,7 +43,7 @@ public class DM_Laboratorista extends Datos_Conexion {
             PrSt.setString(1, codigo);
             rs = PrSt.executeQuery();
             while (rs.next()) {
-                Laboratorista lab = new Laboratorista(rs.getString("Codigo"), rs.getString("Nombre"), rs.getInt("Numero_de_Registro"), rs.getString("DPI"), rs.getInt("Telefono"), rs.getString("Tipo_De_Examen"), rs.getString("Correo_Electronico"), rs.getDate("Fecha_Inicio"), rs.getString("Contraseña"));
+                Laboratorista lab = new Laboratorista(rs.getString("Codigo"), rs.getString("Nombre"), rs.getString("Numero_de_Registro"), rs.getString("DPI"), rs.getInt("Telefono"), rs.getString("Tipo_De_Examen"), rs.getString("Correo_Electronico"), rs.getDate("Fecha_Inicio"), rs.getString("Contraseña"));
                 laboratorista = lab;
             }
             PrSt.close();
@@ -103,7 +103,7 @@ public class DM_Laboratorista extends Datos_Conexion {
             PrSt = conexion.prepareStatement(Query);
             PrSt.setString(1, laboratorista.getCodigo());
             PrSt.setString(2, laboratorista.getNombre());
-            PrSt.setInt(3, laboratorista.getNumero_registro());
+            PrSt.setString(3, laboratorista.getNumero_registro());
             PrSt.setString(4, laboratorista.getDpi());
             PrSt.setInt(5, laboratorista.getTelefono());
             PrSt.setString(6, laboratorista.getTipo_examen());
@@ -155,7 +155,7 @@ public class DM_Laboratorista extends Datos_Conexion {
             String Query = "UPDATE Laboratorista SET Nombre = ?, Numero_de_Registro = ?, DPI = ?, Telefono = ?, Tipo_De_Examen = ?, Correo_Electronico = ?, Fecha_Inicio = ? WHERE Codigo = ?";
             PrSt = conexion.prepareStatement(Query);
             PrSt.setString(1, laboratorista.getNombre());
-            PrSt.setInt(2, laboratorista.getNumero_registro());
+            PrSt.setString(2, laboratorista.getNumero_registro());
             PrSt.setString(3, laboratorista.getDpi());
             PrSt.setInt(4, laboratorista.getTelefono());
             PrSt.setString(5, laboratorista.getTipo_examen());

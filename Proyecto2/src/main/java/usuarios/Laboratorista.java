@@ -7,7 +7,7 @@ public class Laboratorista {
 
     private String codigo;
     private String nombre;
-    private int numero_registro;
+    private String numero_registro;
     private String dpi;
     private int telefono;
     private String tipo_examen;
@@ -16,7 +16,7 @@ public class Laboratorista {
     private String contraseña;
     private ArrayList<Dia_de_trabajo> dias_de_trabajo = new ArrayList<>();
 
-    public Laboratorista(String codigo, String nombre, int numero_registro, String dpi, int telefono, String tipo_examen, String correo, Date fecha_inicio, String contraseña) {
+    public Laboratorista(String codigo, String nombre, String numero_registro, String dpi, int telefono, String tipo_examen, String correo, Date fecha_inicio, String contraseña) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.numero_registro = numero_registro;
@@ -44,11 +44,11 @@ public class Laboratorista {
         this.nombre = nombre;
     }
 
-    public int getNumero_registro() {
+    public String getNumero_registro() {
         return numero_registro;
     }
 
-    public void setNumero_registro(int numero_registro) {
+    public void setNumero_registro(String numero_registro) {
         this.numero_registro = numero_registro;
     }
 

@@ -15,7 +15,7 @@ public class Medico {
     private String hora_salida;
     private Date fecha_inicio;
     private String contraseña;
-    private ArrayList<Especialidad> especialidades = new ArrayList<Especialidad>();
+    private ArrayList<Especialidad> especialidades = new ArrayList<>();
 
     public Medico(String codigo, String nombre, int numero_colegiado, String dpi, int telefono, String correo, String hora_entrada, String hora_salida, Date fecha_inicio, String contraseña) {
         this.codigo = codigo;
