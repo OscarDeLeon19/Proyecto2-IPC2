@@ -168,7 +168,7 @@ public class Carga {
                     Paciente paciente = new Paciente(codigo, nombre, sexo, fecha_de_nacimiento, dpi, telefono, peso, tipo_sangre, correo, contraseña);
                     dmpac.AgregarPaciente(paciente);
                 }
-            }
+            }                      
             mensaje = "Datos agregados";
         } catch (Exception e) {
             mensaje = e.toString();
