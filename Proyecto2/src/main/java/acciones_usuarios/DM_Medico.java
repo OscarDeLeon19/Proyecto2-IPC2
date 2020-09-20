@@ -1,5 +1,6 @@
 package acciones_usuarios;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,11 +19,12 @@ public class DM_Medico extends Datos_Conexion {
         try {
             PreparedStatement PrSt;
             ResultSet rs = null;
-            String Query = "SELECT * FROM Medico ORDER BY Codigo";
+            String Query = "SELECT * FROM Medico c JOIN Especialidad e ON c.Codigo = e.Codigo_Medico";
             PrSt = conexion.prepareStatement(Query);
             rs = PrSt.executeQuery();
             while (rs.next()) {
                 Medico medico = new Medico(rs.getString("Codigo"), rs.getString("Nombre"), rs.getInt("Numero_De_Colegiado"), rs.getString("DPI"), rs.getInt("Telefono"), rs.getString("Correo_Electronico"), rs.getString("Hora_Entrada"), rs.getString("Hora_Salida"), rs.getDate("Fecha_Inicio"), rs.getString("Contraseña"));
+                medico.setTitulo(rs.getString("Titulo"));
                 lista_medicos.add(medico);
             }
             PrSt.close();
@@ -52,6 +54,99 @@ public class DM_Medico extends Datos_Conexion {
             medico = null;
         }
         return medico;
+    }
+    
+    public ArrayList<Medico> VerMedicoPorNombre(String Nombre) {
+        ArrayList<Medico> lista_medicos = new ArrayList<>();
+        Nombre = "%" + Nombre + "%";
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT * FROM Medico c JOIN Especialidad e ON c.Codigo = e.Codigo_Medico WHERE Nombre LIKE ?";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setString(1, Nombre);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                Medico medico = new Medico(rs.getString("Codigo"), rs.getString("Nombre"), rs.getInt("Numero_De_Colegiado"), rs.getString("DPI"), rs.getInt("Telefono"), rs.getString("Correo_Electronico"), rs.getString("Hora_Entrada"), rs.getString("Hora_Salida"), rs.getDate("Fecha_Inicio"), rs.getString("Contraseña"));
+                medico.setTitulo(rs.getString("Titulo"));
+                lista_medicos.add(medico);
+            }
+            PrSt.close();
+            rs.close();
+        } catch (SQLException e) {
+            lista_medicos.clear();
+        }
+        return lista_medicos;
+    }
+    
+    public ArrayList<Medico> VerMedicoPorTitulo(String titulo) {
+        ArrayList<Medico> lista_medicos = new ArrayList<>();
+        titulo = "%" + titulo + "%";
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT * FROM Medico c JOIN Especialidad e ON c.Codigo = e.Codigo_Medico WHERE Titulo LIKE ?";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setString(1, titulo);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                Medico medico = new Medico(rs.getString("Codigo"), rs.getString("Nombre"), rs.getInt("Numero_De_Colegiado"), rs.getString("DPI"), rs.getInt("Telefono"), rs.getString("Correo_Electronico"), rs.getString("Hora_Entrada"), rs.getString("Hora_Salida"), rs.getDate("Fecha_Inicio"), rs.getString("Contraseña"));
+                medico.setTitulo(rs.getString("Titulo"));
+                lista_medicos.add(medico);
+            }
+            PrSt.close();
+            rs.close();
+        } catch (SQLException e) {
+            lista_medicos.clear();
+        }
+        return lista_medicos;
+    }
+    
+    public ArrayList<Medico> VerMedicoPorHorario(String inicio, String salida) {
+        ArrayList<Medico> lista_medicos = new ArrayList<>();
+        inicio = "%" + inicio + "%";
+        salida = "%" + salida + "%";
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT * FROM Medico c JOIN Especialidad e ON c.Codigo = e.Codigo_Medico WHERE Hora_Entrada LIKE ? AND Hora_Salida LIKE ?";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setString(1, inicio);
+            PrSt.setString(2, salida);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                Medico medico = new Medico(rs.getString("Codigo"), rs.getString("Nombre"), rs.getInt("Numero_De_Colegiado"), rs.getString("DPI"), rs.getInt("Telefono"), rs.getString("Correo_Electronico"), rs.getString("Hora_Entrada"), rs.getString("Hora_Salida"), rs.getDate("Fecha_Inicio"), rs.getString("Contraseña"));
+                medico.setTitulo(rs.getString("Titulo"));
+                lista_medicos.add(medico);
+            }
+            PrSt.close();
+            rs.close();
+        } catch (SQLException e) {
+            lista_medicos.clear();
+        }
+        return lista_medicos;
+    }
+    
+    public ArrayList<Medico> VerMedicoPorFecha(Date fecha) {
+        ArrayList<Medico> lista_medicos = new ArrayList<>();
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT * FROM Medico c JOIN Especialidad e ON c.Codigo = e.Codigo_Medico WHERE Fecha_Inicio >= ?";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setDate(1, fecha);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                Medico medico = new Medico(rs.getString("Codigo"), rs.getString("Nombre"), rs.getInt("Numero_De_Colegiado"), rs.getString("DPI"), rs.getInt("Telefono"), rs.getString("Correo_Electronico"), rs.getString("Hora_Entrada"), rs.getString("Hora_Salida"), rs.getDate("Fecha_Inicio"), rs.getString("Contraseña"));
+                medico.setTitulo(rs.getString("Titulo"));
+                lista_medicos.add(medico);
+            }
+            PrSt.close();
+            rs.close();
+        } catch (SQLException e) {
+            lista_medicos.clear();
+        }
+        return lista_medicos;
     }
 
     public ArrayList<Especialidad> VerEspecialidades() {

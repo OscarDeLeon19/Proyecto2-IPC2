@@ -15,6 +15,7 @@ public class Medico {
     private String hora_salida;
     private Date fecha_inicio;
     private String contraseña;
+    private String titulo;
     private ArrayList<Especialidad> especialidades = new ArrayList<>();
 
     public Medico(String codigo, String nombre, int numero_colegiado, String dpi, int telefono, String correo, String hora_entrada, String hora_salida, Date fecha_inicio, String contraseña) {
@@ -118,6 +119,16 @@ public class Medico {
     public void setEspecialidades(ArrayList<Especialidad> especialidades) {
         this.especialidades = especialidades;
     }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+    
+    
 
     public String AñadirEspecialidad(String titulo) {
         Especialidad especialidad = new Especialidad(codigo, titulo);

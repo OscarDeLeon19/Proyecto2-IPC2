@@ -34,8 +34,8 @@ public class DM_Administrador extends Datos_Conexion{
         return lista;
     }
     
-    public ArrayList<Administrador> VerAdministradorPorCodigo(String codigo) {
-        ArrayList<Administrador> lista = new ArrayList<>();
+    public Administrador VerAdministradorPorCodigo(String codigo) {
+        Administrador admin = null;
         try {
             PreparedStatement PrSt;
             ResultSet rs = null;
@@ -44,15 +44,15 @@ public class DM_Administrador extends Datos_Conexion{
             PrSt.setString(1, codigo);
             rs = PrSt.executeQuery();
             while (rs.next()) {
-                Administrador admin = new Administrador(rs.getString("Codigo"), rs.getString("Nombre"), rs.getString("DPI"), rs.getString("Contraseña"));
-                lista.add(admin);
+                Administrador nuevo_admin = new Administrador(rs.getString("Codigo"), rs.getString("Nombre"), rs.getString("DPI"), rs.getString("Contraseña"));
+                admin = nuevo_admin;
             }
             PrSt.close();
             rs.close();
         } catch (SQLException e) {
-            lista.clear();
+            admin = null;
         }
-        return lista;
+        return admin;
     }
     
     public String AgregarAdministrador(Administrador administrador) {

@@ -13,13 +13,12 @@ public class Cita {
     private String hora;
     private String estado;
 
-    public Cita(String codigo, String codigo_paciente, String codigo_medico, Date fecha, String hora, String estado) {
+    public Cita(String codigo, String codigo_paciente, String codigo_medico, Date fecha, String hora) {
         this.codigo = codigo;
         this.codigo_paciente = codigo_paciente;
         this.codigo_medico = codigo_medico;
         this.fecha = fecha;
         this.hora = hora;
-        this.estado = estado;
     }
 
     public String getCodigo() {

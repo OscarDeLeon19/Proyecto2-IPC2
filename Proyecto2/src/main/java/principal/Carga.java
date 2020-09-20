@@ -93,7 +93,7 @@ public class Carga {
                     dmadmin.AgregarAdministrador(administrador);
                 }
             }
-            
+
             NodeList consultas = document.getElementsByTagName("consulta");
 
             for (int i = 0; i < consultas.getLength(); i++) {
@@ -107,7 +107,7 @@ public class Carga {
                     dmcon.AgregarConsulta(consulta);
                 }
             }
-            
+
             NodeList doctores = document.getElementsByTagName("doctor");
 
             for (int i = 0; i < doctores.getLength(); i++) {
@@ -267,13 +267,50 @@ public class Carga {
                     String codigo_medico = element.getElementsByTagName("MEDICO").item(0).getTextContent();
                     Date fecha = Date.valueOf(element.getElementsByTagName("FECHA").item(0).getTextContent());
                     String hora = element.getElementsByTagName("HORA").item(0).getTextContent();
-                    Cita cita = new Cita(codigo, codigo_paciente, codigo_medico, fecha, hora, null);
+                    Cita cita = new Cita(codigo, codigo_paciente, codigo_medico, fecha, hora);
                     dmcit.AgregarCita(cita);
                 }
             }
 
-            
             mensaje = "Datos agregados";
+        } catch (Exception e) {
+            mensaje = e.toString();
+        }
+        return mensaje;
+    }
+
+    public String CargarOrden(String tipo) {
+        String mensaje = null;
+        try {
+            JFileChooser seleccionar = new JFileChooser();
+            final FileNameExtensionFilter filtro_pdf = new FileNameExtensionFilter("Archivo PDF", "pdf");
+            final FileNameExtensionFilter filtro_img = new FileNameExtensionFilter("Archivo IMG", "jpg", "png");
+            if ("PDF".equals(tipo)) {
+                seleccionar.setFileFilter(filtro_pdf);
+            } else if ("IMG".equals(tipo)) {
+                seleccionar.setFileFilter(filtro_img);
+            }
+
+            int seleccion = seleccionar.showOpenDialog(null);
+            if (seleccion == JFileChooser.APPROVE_OPTION) {
+                File fichero = seleccionar.getSelectedFile();
+                if ("PDF".equals(tipo)) {
+                    if (fichero.getName().endsWith(".pdf")) {
+                        mensaje = fichero.getPath();
+                    } else {
+                        mensaje = "Archivo incorrecto";
+                    }
+                }
+                if ("IMG".equals(tipo)) {
+                    if (fichero.getName().endsWith(".jpg") || fichero.getName().endsWith(".png")) {
+                        mensaje = fichero.getPath();
+                    } else {
+                        mensaje = "Archivo incorrecto";
+                    }
+                }
+            } else {
+                mensaje = "No se cargo ningun archivo";
+            }
         } catch (Exception e) {
             mensaje = e.toString();
         }

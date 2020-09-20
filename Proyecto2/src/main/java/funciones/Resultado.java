@@ -89,6 +89,7 @@ public class Resultado {
     public void setHora(String hora) {
         this.hora = hora;
     }
+
     
     
 }
