@@ -11,13 +11,15 @@ public class Cita {
     private String codigo_medico;
     private Date fecha;
     private String hora;
+    private String estado;
 
-    public Cita(String codigo, String codigo_paciente, String codigo_medico, Date fecha, String hora) {
+    public Cita(String codigo, String codigo_paciente, String codigo_medico, Date fecha, String hora, String estado) {
         this.codigo = codigo;
         this.codigo_paciente = codigo_paciente;
         this.codigo_medico = codigo_medico;
         this.fecha = fecha;
         this.hora = hora;
+        this.estado = estado;
     }
 
     public String getCodigo() {
@@ -58,6 +60,14 @@ public class Cita {
 
     public void setHora(String hora) {
         this.hora = hora;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
     
     

@@ -74,6 +74,7 @@ public class DM_Administrador extends Datos_Conexion{
             PrSt.close();
         } catch (SQLException e) {
             mensaje = e.toString();
+            System.out.println(e.toString());
         }
         return mensaje;
     }

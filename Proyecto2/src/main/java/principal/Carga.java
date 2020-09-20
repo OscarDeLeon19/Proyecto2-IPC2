@@ -1,9 +1,19 @@
 package principal;
 
+import acciones_funciones.DM_Cita;
+import acciones_funciones.DM_Consulta;
+import acciones_funciones.DM_Examen;
+import acciones_funciones.DM_Informe;
+import acciones_funciones.DM_Resultado;
 import acciones_usuarios.DM_Administrador;
 import acciones_usuarios.DM_Laboratorista;
 import acciones_usuarios.DM_Medico;
 import acciones_usuarios.DM_Paciente;
+import funciones.Cita;
+import funciones.Consulta;
+import funciones.Examen;
+import funciones.Informe;
+import funciones.Resultado;
 import java.io.File;
 import java.sql.Date;
 import javax.swing.JFileChooser;
@@ -25,6 +35,11 @@ public class Carga {
     private DM_Laboratorista dmlab = new DM_Laboratorista();
     private DM_Medico dmmed = new DM_Medico();
     private DM_Paciente dmpac = new DM_Paciente();
+    private DM_Cita dmcit = new DM_Cita();
+    private DM_Consulta dmcon = new DM_Consulta();
+    private DM_Examen dmexa = new DM_Examen();
+    private DM_Informe dminf = new DM_Informe();
+    private DM_Resultado dmres = new DM_Resultado();
 
     public Carga() {
     }
@@ -78,7 +93,21 @@ public class Carga {
                     dmadmin.AgregarAdministrador(administrador);
                 }
             }
+            
+            NodeList consultas = document.getElementsByTagName("consulta");
 
+            for (int i = 0; i < consultas.getLength(); i++) {
+                Node nodo = consultas.item(i);
+
+                if (nodo.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) nodo;
+                    String tipo = element.getElementsByTagName("TIPO").item(0).getTextContent();
+                    double costo = Double.parseDouble(element.getElementsByTagName("COSTO").item(0).getTextContent());
+                    Consulta consulta = new Consulta(tipo, costo);
+                    dmcon.AgregarConsulta(consulta);
+                }
+            }
+            
             NodeList doctores = document.getElementsByTagName("doctor");
 
             for (int i = 0; i < doctores.getLength(); i++) {
@@ -168,7 +197,82 @@ public class Carga {
                     Paciente paciente = new Paciente(codigo, nombre, sexo, fecha_de_nacimiento, dpi, telefono, peso, tipo_sangre, correo, contraseña);
                     dmpac.AgregarPaciente(paciente);
                 }
-            }                      
+            }
+
+            NodeList examenes = document.getElementsByTagName("examen");
+
+            for (int i = 0; i < examenes.getLength(); i++) {
+                Node nodo = examenes.item(i);
+
+                if (nodo.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) nodo;
+                    String codigo = element.getElementsByTagName("CODIGO").item(0).getTextContent();
+                    String nombre = element.getElementsByTagName("NOMBRE").item(0).getTextContent();
+                    String orden = element.getElementsByTagName("ORDEN").item(0).getTextContent().toLowerCase();
+                    String descripcion = element.getElementsByTagName("DESCRIPCION").item(0).getTextContent();
+                    double costo = Double.parseDouble(element.getElementsByTagName("COSTO").item(0).getTextContent());
+                    String informe = element.getElementsByTagName("INFORME").item(0).getTextContent();
+                    Examen examen = new Examen(codigo, nombre, Boolean.valueOf(orden), descripcion, costo, informe);
+                    dmexa.AgregarExamen(examen);
+                }
+            }
+
+            NodeList informes = document.getElementsByTagName("reporte");
+
+            for (int i = 0; i < informes.getLength(); i++) {
+                Node nodo = informes.item(i);
+
+                if (nodo.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) nodo;
+                    String codigo = element.getElementsByTagName("CODIGO").item(0).getTextContent();
+                    String codigo_paciente = element.getElementsByTagName("PACIENTE").item(0).getTextContent();
+                    String codigo_medico = element.getElementsByTagName("MEDICO").item(0).getTextContent();
+                    String descripcion = element.getElementsByTagName("INFORME").item(0).getTextContent();
+                    Date fecha = Date.valueOf(element.getElementsByTagName("FECHA").item(0).getTextContent());
+                    String hora = element.getElementsByTagName("HORA").item(0).getTextContent();
+                    Informe informe = new Informe(codigo, codigo_paciente, codigo_medico, descripcion, fecha, hora);
+                    dminf.AgregarInforme(informe);
+                }
+            }
+
+            NodeList resultados = document.getElementsByTagName("resultado");
+
+            for (int i = 0; i < resultados.getLength(); i++) {
+                Node nodo = resultados.item(i);
+
+                if (nodo.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) nodo;
+                    String codigo = element.getElementsByTagName("CODIGO").item(0).getTextContent();
+                    String codigo_paciente = element.getElementsByTagName("PACIENTE").item(0).getTextContent();
+                    String codigo_examen = element.getElementsByTagName("EXAMEN").item(0).getTextContent();
+                    String codigo_laboratorista = element.getElementsByTagName("LABORATORISTA").item(0).getTextContent();
+                    String orden = element.getElementsByTagName("ORDEN").item(0).getTextContent();
+                    String informe = element.getElementsByTagName("INFORME").item(0).getTextContent();
+                    Date fecha = Date.valueOf(element.getElementsByTagName("FECHA").item(0).getTextContent());
+                    String hora = element.getElementsByTagName("HORA").item(0).getTextContent();
+                    Resultado resultado = new Resultado(codigo, codigo_paciente, codigo_examen, codigo_laboratorista, orden, informe, fecha, hora);
+                    dmres.AgregarResultado(resultado);
+                }
+            }
+
+            NodeList citas = document.getElementsByTagName("cita");
+
+            for (int i = 0; i < citas.getLength(); i++) {
+                Node nodo = citas.item(i);
+
+                if (nodo.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) nodo;
+                    String codigo = element.getElementsByTagName("CODIGO").item(0).getTextContent();
+                    String codigo_paciente = element.getElementsByTagName("PACIENTE").item(0).getTextContent();
+                    String codigo_medico = element.getElementsByTagName("MEDICO").item(0).getTextContent();
+                    Date fecha = Date.valueOf(element.getElementsByTagName("FECHA").item(0).getTextContent());
+                    String hora = element.getElementsByTagName("HORA").item(0).getTextContent();
+                    Cita cita = new Cita(codigo, codigo_paciente, codigo_medico, fecha, hora, null);
+                    dmcit.AgregarCita(cita);
+                }
+            }
+
+            
             mensaje = "Datos agregados";
         } catch (Exception e) {
             mensaje = e.toString();
