@@ -2,7 +2,7 @@ package principal;
 
 import acciones_funciones.DM_Cita;
 import acciones_funciones.DM_Consulta;
-import acciones_funciones.DM_Examen;
+import acciones_funciones.DM_TipoExamen;
 import acciones_funciones.DM_Informe;
 import acciones_funciones.DM_Resultado;
 import acciones_usuarios.DM_Administrador;
@@ -11,11 +11,12 @@ import acciones_usuarios.DM_Medico;
 import acciones_usuarios.DM_Paciente;
 import funciones.Cita;
 import funciones.Consulta;
-import funciones.Examen;
+import funciones.Tipo_Examen;
 import funciones.Informe;
 import funciones.Resultado;
 import java.io.File;
 import java.sql.Date;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.DocumentBuilder;
@@ -37,13 +38,24 @@ public class Carga {
     private DM_Paciente dmpac = new DM_Paciente();
     private DM_Cita dmcit = new DM_Cita();
     private DM_Consulta dmcon = new DM_Consulta();
-    private DM_Examen dmexa = new DM_Examen();
+    private DM_TipoExamen dmtipoexame = new DM_TipoExamen();
     private DM_Informe dminf = new DM_Informe();
     private DM_Resultado dmres = new DM_Resultado();
+    private ArrayList<String> mesajes = new ArrayList<>();
 
     public Carga() {
     }
 
+    public ArrayList<String> getMesajes() {
+        return mesajes;
+    }
+
+    public void setMesajes(ArrayList<String> mesajes) {
+        this.mesajes = mesajes;
+    }
+
+    
+    
     public String CargarDatos() {
         String mensaje = null;
         try {
@@ -90,7 +102,8 @@ public class Carga {
                     String nombre = element.getElementsByTagName("NOMBRE").item(0).getTextContent();
                     String contraseña = element.getElementsByTagName("PASSWORD").item(0).getTextContent();
                     Administrador administrador = new Administrador(codigo, nombre, dpi, contraseña);
-                    dmadmin.AgregarAdministrador(administrador);
+                    String msj = dmadmin.AgregarAdministrador(administrador);
+                    mesajes.add(msj);
                 }
             }
 
@@ -104,7 +117,8 @@ public class Carga {
                     String tipo = element.getElementsByTagName("TIPO").item(0).getTextContent();
                     double costo = Double.parseDouble(element.getElementsByTagName("COSTO").item(0).getTextContent());
                     Consulta consulta = new Consulta(tipo, costo);
-                    dmcon.AgregarConsulta(consulta);
+                    String msj = dmcon.AgregarConsulta(consulta);
+                    mesajes.add(msj);
                 }
             }
 
@@ -138,8 +152,8 @@ public class Carga {
                             }
                         }
                     }
-                    dmmed.AgregarMedico(medico);
-                    System.out.println("");
+                    String msj = dmmed.AgregarMedico(medico);
+                    mesajes.add(msj);
                 }
 
             }
@@ -173,7 +187,8 @@ public class Carga {
                             }
                         }
                     }
-                    dmlab.AñadirLaboratorista(laboratorista);
+                    String msj = dmlab.AñadirLaboratorista(laboratorista);
+                    mesajes.add(msj);
                 }
             }
 
@@ -195,7 +210,8 @@ public class Carga {
                     String correo = element.getElementsByTagName("CORREO").item(0).getTextContent();
                     String contraseña = element.getElementsByTagName("PASSWORD").item(0).getTextContent();
                     Paciente paciente = new Paciente(codigo, nombre, sexo, fecha_de_nacimiento, dpi, telefono, peso, tipo_sangre, correo, contraseña);
-                    dmpac.AgregarPaciente(paciente);
+                    String msj = dmpac.AgregarPaciente(paciente);
+                    mesajes.add(msj);
                 }
             }
 
@@ -212,8 +228,9 @@ public class Carga {
                     String descripcion = element.getElementsByTagName("DESCRIPCION").item(0).getTextContent();
                     double costo = Double.parseDouble(element.getElementsByTagName("COSTO").item(0).getTextContent());
                     String informe = element.getElementsByTagName("INFORME").item(0).getTextContent();
-                    Examen examen = new Examen(codigo, nombre, Boolean.valueOf(orden), descripcion, costo, informe);
-                    dmexa.AgregarExamen(examen);
+                    Tipo_Examen examen = new Tipo_Examen(codigo, nombre, Boolean.valueOf(orden), descripcion, costo, informe);
+                    String msj = dmtipoexame.AgregarExamen(examen);
+                    mesajes.add(msj);
                 }
             }
 
@@ -231,7 +248,8 @@ public class Carga {
                     Date fecha = Date.valueOf(element.getElementsByTagName("FECHA").item(0).getTextContent());
                     String hora = element.getElementsByTagName("HORA").item(0).getTextContent();
                     Informe informe = new Informe(codigo, codigo_paciente, codigo_medico, descripcion, fecha, hora);
-                    dminf.AgregarInforme(informe);
+                    String msj = dminf.AgregarInforme(informe);
+                    mesajes.add(msj);
                 }
             }
 
@@ -251,7 +269,8 @@ public class Carga {
                     Date fecha = Date.valueOf(element.getElementsByTagName("FECHA").item(0).getTextContent());
                     String hora = element.getElementsByTagName("HORA").item(0).getTextContent();
                     Resultado resultado = new Resultado(codigo, codigo_paciente, codigo_examen, codigo_laboratorista, orden, informe, fecha, hora);
-                    dmres.AgregarResultado(resultado);
+                    String msj = dmres.AgregarResultado(resultado);
+                    mesajes.add(msj);
                 }
             }
 
@@ -268,7 +287,8 @@ public class Carga {
                     Date fecha = Date.valueOf(element.getElementsByTagName("FECHA").item(0).getTextContent());
                     String hora = element.getElementsByTagName("HORA").item(0).getTextContent();
                     Cita cita = new Cita(codigo, codigo_paciente, codigo_medico, fecha, hora);
-                    dmcit.AgregarCita(cita);
+                    String msj = dmcit.AgregarCita(cita);
+                    mesajes.add(msj);
                 }
             }
 
@@ -316,4 +336,6 @@ public class Carga {
         }
         return mensaje;
     }
+    
+    
 }
