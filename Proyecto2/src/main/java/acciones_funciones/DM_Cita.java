@@ -2,6 +2,7 @@ package acciones_funciones;
 
 import funciones.Cita;
 import funciones.Resultado;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,17 +14,24 @@ public class DM_Cita extends Datos_Conexion {
     public DM_Cita() {
     }
 
+    /**
+     * Agrega una cita a la base de datos
+     *
+     * @param cita La cita que vamos a agregar
+     * @return El mensaje que indica si fue satisfactoria o no
+     */
     public String AgregarCita(Cita cita) {
         String mensaje = null;
         try {
             PreparedStatement PrSt;
-            String Query = "INSERT INTO Cita (Codigo, Codigo_Paciente, Codigo_Medico, Fecha, Hora)VALUES (?,?,?,?,?)";
+            String Query = "INSERT INTO Cita (Codigo, Codigo_Paciente, Codigo_Medico, Especialidad, Fecha, Hora)VALUES (?,?,?,?,?,?)";
             PrSt = conexion.prepareStatement(Query);
             PrSt.setString(1, cita.getCodigo());
             PrSt.setString(2, cita.getCodigo_paciente());
             PrSt.setString(3, cita.getCodigo_medico());
-            PrSt.setDate(4, cita.getFecha());
-            PrSt.setString(5, cita.getHora());
+            PrSt.setString(4, cita.getEspecialidad());
+            PrSt.setDate(5, cita.getFecha());
+            PrSt.setString(6, cita.getHora());
             int ejecucion = PrSt.executeUpdate();
             if (ejecucion > 0) {
                 mensaje = "Informacion ingresada";
@@ -37,7 +45,13 @@ public class DM_Cita extends Datos_Conexion {
         }
         return mensaje;
     }
-    
+
+    /**
+     * Devuelve una cita seguin su codigo
+     *
+     * @param codigo codigo de la cita
+     * @return La cita
+     */
     public Cita VerCitaPorCodigo(String codigo) {
         Cita cita = null;
         try {
@@ -48,7 +62,7 @@ public class DM_Cita extends Datos_Conexion {
             PrSt.setString(1, codigo);
             rs = PrSt.executeQuery();
             while (rs.next()) {
-                Cita nueva_cita = new Cita(rs.getString("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getDate("Fecha"), rs.getString("Hora"));
+                Cita nueva_cita = new Cita(rs.getString("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Especialidad"), rs.getDate("Fecha"), rs.getString("Hora"));
                 cita = nueva_cita;
             }
             PrSt.close();
@@ -58,7 +72,7 @@ public class DM_Cita extends Datos_Conexion {
         }
         return cita;
     }
-    
+
     public String RealizarCita(Cita cita) {
         String mensaje = null;
         try {
@@ -79,7 +93,7 @@ public class DM_Cita extends Datos_Conexion {
         }
         return mensaje;
     }
-    
+
     public ArrayList<Cita> VerHistorialCitasPaciente(String codigo_paciente) {
         ArrayList<Cita> lista = new ArrayList<>();
         try {
@@ -90,7 +104,7 @@ public class DM_Cita extends Datos_Conexion {
             PrSt.setString(1, codigo_paciente);
             rs = PrSt.executeQuery();
             while (rs.next()) {
-                Cita cita = new Cita(rs.getString("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getDate("Fecha"), rs.getString("Hora"));
+                Cita cita = new Cita(rs.getString("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Especialidad"), rs.getDate("Fecha"), rs.getString("Hora"));
                 lista.add(cita);
             }
             PrSt.close();
@@ -100,7 +114,7 @@ public class DM_Cita extends Datos_Conexion {
         }
         return lista;
     }
-    
+
     public ArrayList<Cita> VerCitasEnCurso(String codigo_paciente) {
         ArrayList<Cita> lista = new ArrayList<>();
         try {
@@ -111,7 +125,7 @@ public class DM_Cita extends Datos_Conexion {
             PrSt.setString(1, codigo_paciente);
             rs = PrSt.executeQuery();
             while (rs.next()) {
-                Cita cita = new Cita(rs.getString("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getDate("Fecha"), rs.getString("Hora"));
+                Cita cita = new Cita(rs.getString("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Especialidad"), rs.getDate("Fecha"), rs.getString("Hora"));
                 lista.add(cita);
             }
             PrSt.close();
@@ -121,6 +135,49 @@ public class DM_Cita extends Datos_Conexion {
         }
         return lista;
     }
-    
-    
+
+    public ArrayList<Cita> VerUltimas5Citas(String codigo_paciente) {
+        ArrayList<Cita> lista = new ArrayList<>();
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT * FROM Cita WHERE Codigo_Paciente = ? AND Estado = 'Realizada' ORDER BY Fecha DESC LIMIT 5";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setString(1, codigo_paciente);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                Cita cita = new Cita(rs.getString("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Especialidad"), rs.getDate("Fecha"), rs.getString("Hora"));
+                lista.add(cita);
+            }
+            PrSt.close();
+            rs.close();
+        } catch (SQLException e) {
+            lista.clear();
+        }
+        return lista;
+    }
+
+    public ArrayList<Cita> VerCitasPorMedicoYFechas(String codigo_paciente, String nombre_medico, Date fecha1, Date fecha2) {
+        ArrayList<Cita> lista = new ArrayList<>();
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT c.Codigo, c.Codigo_Paciente, m.Nombre AS Medico, c.Especialidad, c.Fecha, c.Hora FROM Cita c JOIN Medico m ON c.Codigo_Medico = m.Codigo WHERE c.Codigo_Paciente = ? AND m.Nombre LIKE ? AND c.Fecha BETWEEN ? AND ?";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setString(1, codigo_paciente);
+            PrSt.setString(2, nombre_medico);
+            PrSt.setDate(3, fecha1);
+            PrSt.setDate(4, fecha2);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                Cita cita = new Cita(rs.getString("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Medico"), rs.getString("Especialidad"), rs.getDate("Fecha"), rs.getString("Hora"));
+                lista.add(cita);
+            }
+            PrSt.close();
+            rs.close();
+        } catch (SQLException e) {
+            lista.clear();
+        }
+        return lista;
+    }
 }

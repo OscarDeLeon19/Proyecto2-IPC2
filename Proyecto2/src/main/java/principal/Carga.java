@@ -262,13 +262,14 @@ public class Carga {
                     Element element = (Element) nodo;
                     String codigo = element.getElementsByTagName("CODIGO").item(0).getTextContent();
                     String codigo_paciente = element.getElementsByTagName("PACIENTE").item(0).getTextContent();
+                    String codigo_medico = element.getElementsByTagName("MEDICO").item(0).getTextContent();
                     String codigo_examen = element.getElementsByTagName("EXAMEN").item(0).getTextContent();
                     String codigo_laboratorista = element.getElementsByTagName("LABORATORISTA").item(0).getTextContent();
                     String orden = element.getElementsByTagName("ORDEN").item(0).getTextContent();
                     String informe = element.getElementsByTagName("INFORME").item(0).getTextContent();
                     Date fecha = Date.valueOf(element.getElementsByTagName("FECHA").item(0).getTextContent());
                     String hora = element.getElementsByTagName("HORA").item(0).getTextContent();
-                    Resultado resultado = new Resultado(codigo, codigo_paciente, codigo_examen, codigo_laboratorista, orden, informe, fecha, hora);
+                    Resultado resultado = new Resultado(codigo, codigo_paciente, codigo_medico, codigo_examen, codigo_laboratorista, orden, informe, fecha, hora);
                     String msj = dmres.AgregarResultado(resultado);
                     mesajes.add(msj);
                 }
@@ -284,9 +285,10 @@ public class Carga {
                     String codigo = element.getElementsByTagName("CODIGO").item(0).getTextContent();
                     String codigo_paciente = element.getElementsByTagName("PACIENTE").item(0).getTextContent();
                     String codigo_medico = element.getElementsByTagName("MEDICO").item(0).getTextContent();
+                    String especialidad = element.getElementsByTagName("ESPECIALIDAD").item(0).getTextContent();
                     Date fecha = Date.valueOf(element.getElementsByTagName("FECHA").item(0).getTextContent());
                     String hora = element.getElementsByTagName("HORA").item(0).getTextContent();
-                    Cita cita = new Cita(codigo, codigo_paciente, codigo_medico, fecha, hora);
+                    Cita cita = new Cita(codigo, codigo_paciente, codigo_medico, especialidad, fecha, hora);
                     String msj = dmcit.AgregarCita(cita);
                     mesajes.add(msj);
                 }

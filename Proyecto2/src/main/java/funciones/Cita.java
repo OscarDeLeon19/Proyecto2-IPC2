@@ -9,18 +9,20 @@ public class Cita {
     private String codigo;
     private String codigo_paciente;
     private String codigo_medico;
+    private String especialidad;
     private Date fecha;
     private String hora;
     private String estado;
 
-    public Cita(String codigo, String codigo_paciente, String codigo_medico, Date fecha, String hora) {
+    public Cita(String codigo, String codigo_paciente, String codigo_medico, String especialidad, Date fecha, String hora) {
         this.codigo = codigo;
         this.codigo_paciente = codigo_paciente;
         this.codigo_medico = codigo_medico;
+        this.especialidad = especialidad;
         this.fecha = fecha;
         this.hora = hora;
     }
-
+    
     public String getCodigo() {
         return codigo;
     }
@@ -67,6 +69,14 @@ public class Cita {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
     }
     
     

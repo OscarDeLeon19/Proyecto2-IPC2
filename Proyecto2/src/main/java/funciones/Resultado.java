@@ -8,6 +8,7 @@ public class Resultado {
     
     private String codigo;
     private String codigo_paciente;
+    private String codigo_medico;
     private String codigo_examen;
     private String codigo_laboratorista;
     private String orden;
@@ -15,9 +16,10 @@ public class Resultado {
     private Date fecha;
     private String hora;
 
-    public Resultado(String codigo, String codigo_paciente, String codigo_examen, String codigo_laboratorista, String orden, String informe, Date fecha, String hora) {
+    public Resultado(String codigo, String codigo_paciente, String codigo_medico, String codigo_examen, String codigo_laboratorista, String orden, String informe, Date fecha, String hora) {
         this.codigo = codigo;
         this.codigo_paciente = codigo_paciente;
+        this.codigo_medico = codigo_medico;
         this.codigo_examen = codigo_examen;
         this.codigo_laboratorista = codigo_laboratorista;
         this.orden = orden;
@@ -88,6 +90,14 @@ public class Resultado {
 
     public void setHora(String hora) {
         this.hora = hora;
+    }
+
+    public String getCodigo_medico() {
+        return codigo_medico;
+    }
+
+    public void setCodigo_medico(String codigo_medico) {
+        this.codigo_medico = codigo_medico;
     }
 
     
