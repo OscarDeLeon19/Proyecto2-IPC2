@@ -136,7 +136,7 @@ public class DM_Cita extends Datos_Conexion {
         return lista;
     }
 
-    public ArrayList<Cita> VerUltimas5Citas(String codigo_paciente) {
+    public ArrayList<Cita> ReporteVerUltimas5Citas(String codigo_paciente) {
         ArrayList<Cita> lista = new ArrayList<>();
         try {
             PreparedStatement PrSt;
@@ -157,12 +157,12 @@ public class DM_Cita extends Datos_Conexion {
         return lista;
     }
 
-    public ArrayList<Cita> VerCitasPorMedicoYFechas(String codigo_paciente, String nombre_medico, Date fecha1, Date fecha2) {
+    public ArrayList<Cita> ReporteVerCitasPorMedicoYFechas(String codigo_paciente, String nombre_medico, Date fecha1, Date fecha2) {
         ArrayList<Cita> lista = new ArrayList<>();
         try {
             PreparedStatement PrSt;
             ResultSet rs = null;
-            String Query = "SELECT c.Codigo, c.Codigo_Paciente, m.Nombre AS Medico, c.Especialidad, c.Fecha, c.Hora FROM Cita c JOIN Medico m ON c.Codigo_Medico = m.Codigo WHERE c.Codigo_Paciente = ? AND m.Nombre LIKE ? AND c.Fecha BETWEEN ? AND ?";
+            String Query = "SELECT c.Codigo, c.Codigo_Paciente, m.Nombre AS Medico, c.Especialidad, c.Fecha, c.Hora FROM Cita c JOIN Medico m ON c.Codigo_Medico = m.Codigo WHERE c.Codigo_Paciente = ? AND m.Nombre LIKE ? AND c.Fecha BETWEEN ? AND ? AND Estado = 'Realizada'";
             PrSt = conexion.prepareStatement(Query);
             PrSt.setString(1, codigo_paciente);
             PrSt.setString(2, nombre_medico);
@@ -171,6 +171,51 @@ public class DM_Cita extends Datos_Conexion {
             rs = PrSt.executeQuery();
             while (rs.next()) {
                 Cita cita = new Cita(rs.getString("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Medico"), rs.getString("Especialidad"), rs.getDate("Fecha"), rs.getString("Hora"));
+                lista.add(cita);
+            }
+            PrSt.close();
+            rs.close();
+        } catch (SQLException e) {
+            lista.clear();
+        }
+        return lista;
+    }
+    
+    public ArrayList<Cita> ReporteCitasEnIntervaloDeTiempo(String codigo_medico, Date fecha1, Date fecha2) {
+        ArrayList<Cita> lista = new ArrayList<>();
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT * FROM Cita WHERE Codigo_Medico = ? AND Estado = 'Realizada' AND Fecha BETWEEN ? AND ? ORDER BY Fecha";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setString(1, codigo_medico);
+            PrSt.setDate(2, fecha1);
+            PrSt.setDate(3, fecha2);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                Cita cita = new Cita(rs.getString("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Especialidad"), rs.getDate("Fecha"), rs.getString("Hora"));
+                lista.add(cita);
+            }
+            PrSt.close();
+            rs.close();
+        } catch (SQLException e) {
+            lista.clear();
+        }
+        return lista;
+    }
+    
+    public ArrayList<Cita> ReportesCitasDiaActual(String codigo_medica, Date fecha) {
+        ArrayList<Cita> lista = new ArrayList<>();
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT * FROM Cita WHERE Codigo_Medico = ? AND Fecha = ? AND Estado IS NULL";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setString(1, codigo_medica);
+            PrSt.setDate(2, fecha);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                Cita cita = new Cita(rs.getString("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Especialidad"), rs.getDate("Fecha"), rs.getString("Hora"));
                 lista.add(cita);
             }
             PrSt.close();

@@ -16,6 +16,9 @@ public class Resultado {
     private Date fecha;
     private String hora;
 
+    public Resultado() {
+    }
+    
     public Resultado(String codigo, String codigo_paciente, String codigo_medico, String codigo_examen, String codigo_laboratorista, String orden, String informe, Date fecha, String hora) {
         this.codigo = codigo;
         this.codigo_paciente = codigo_paciente;

@@ -65,7 +65,7 @@ public class DM_Resultado extends Datos_Conexion{
         return lista;
     }
     
-    public ArrayList<Resultado> VerUltimos5(String codigo_paciente) {
+    public ArrayList<Resultado> ReporteVerUltimos5Resultados(String codigo_paciente) {
         ArrayList<Resultado> lista = new ArrayList<>();
         try {
             PreparedStatement PrSt;
@@ -86,7 +86,7 @@ public class DM_Resultado extends Datos_Conexion{
         return lista;
     }
     
-    public ArrayList<Resultado> Reporte2Paciente(String codigo_paciente, String nombre_examen, Date fecha1, Date fecha2) {
+    public ArrayList<Resultado> ReporteVerExamenesDeUnTipo(String codigo_paciente, String nombre_examen, Date fecha1, Date fecha2) {
         nombre_examen = "%" + nombre_examen + "%";
         ArrayList<Resultado> lista = new ArrayList<>();
         try {
