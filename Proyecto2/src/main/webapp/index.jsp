@@ -27,6 +27,9 @@
             <h1> Hospital Proyecto 2 </h1>
             <a href="Inicial?accion=paciente">Ingreso Paciente</a>
         </div>
+        <div>
+            <a href="Inicial?accion=medico">Ingreso Medico</a>
+        </div>
         <div>   
             <%
                 DM_Administrador dmadmin = new DM_Administrador();

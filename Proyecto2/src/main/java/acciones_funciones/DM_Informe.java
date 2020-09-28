@@ -38,9 +38,11 @@ public class DM_Informe extends Datos_Conexion {
         return mensaje;
     }
     
-    public ArrayList<String> ReportePacienteConMasInformes(String codigo_medico, Date fecha1, Date fecha2) {
+    public ArrayList<String> ReportePacienteConMasInformes(String codigo_medico, String f1, String f2) {
         ArrayList<String> lista = new ArrayList<>();
         try {
+            Date fecha1 = Date.valueOf(f1);
+            Date fecha2 = Date.valueOf(f2);
             PreparedStatement PrSt;
             ResultSet rs = null;
             String Query = "SELECT COUNT(Codigo_Paciente) AS Informes, Codigo_Paciente FROM Informe WHERE Codigo_Medico = ? AND Fecha BETWEEN ? AND ? GROUP BY Codigo_Paciente ORDER BY COUNT(Codigo_Paciente) DESC LIMIT 1";
@@ -57,7 +59,7 @@ public class DM_Informe extends Datos_Conexion {
             }
             PrSt.close();
             rs.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             lista.clear();
         }
         return lista;

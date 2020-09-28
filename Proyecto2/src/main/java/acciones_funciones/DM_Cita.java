@@ -202,12 +202,14 @@ public class DM_Cita extends Datos_Conexion {
         return lista;
     }
     
-    public ArrayList<Cita> ReporteCitasEnIntervaloDeTiempo(String codigo_medico, Date fecha1, Date fecha2) {
+    public ArrayList<Cita> ReporteCitasEnIntervaloDeTiempo(String codigo_medico, String f1, String f2) {
         ArrayList<Cita> lista = new ArrayList<>();
         try {
+            Date fecha1 = Date.valueOf(f1);
+            Date fecha2 = Date.valueOf(f2);
             PreparedStatement PrSt;
             ResultSet rs = null;
-            String Query = "SELECT * FROM Cita WHERE Codigo_Medico = ? AND Estado = 'Realizada' AND Fecha BETWEEN ? AND ? ORDER BY Fecha";
+            String Query = "SELECT * FROM Cita WHERE Codigo_Medico = ? AND Estado = 'Realizada' AND Fecha BETWEEN ? AND ? ORDER BY Fecha DESC";
             PrSt = conexion.prepareStatement(Query);
             PrSt.setString(1, codigo_medico);
             PrSt.setDate(2, fecha1);
@@ -219,15 +221,16 @@ public class DM_Cita extends Datos_Conexion {
             }
             PrSt.close();
             rs.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             lista.clear();
         }
         return lista;
     }
     
-    public ArrayList<Cita> ReportesCitasDiaActual(String codigo_medica, Date fecha) {
+    public ArrayList<Cita> ReportesCitasDiaActual(String codigo_medica, String f) {
         ArrayList<Cita> lista = new ArrayList<>();
         try {
+            Date fecha = Date.valueOf(f);
             PreparedStatement PrSt;
             ResultSet rs = null;
             String Query = "SELECT * FROM Cita WHERE Codigo_Medico = ? AND Fecha = ? AND Estado IS NULL";
