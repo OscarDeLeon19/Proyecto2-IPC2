@@ -17,14 +17,13 @@ public class DM_Informe extends Datos_Conexion {
         String mensaje = null;
         try {
             PreparedStatement PrSt;
-            String Query = "INSERT INTO Informe (Codigo, Codigo_Paciente, Codigo_Medico, Descripcion, Fecha, Hora)VALUES (?,?,?,?,?,?)";
+            String Query = "INSERT INTO Informe (Codigo_Paciente, Codigo_Medico, Descripcion, Fecha, Hora)VALUES (?,?,?,?,?)";
             PrSt = conexion.prepareStatement(Query);
-            PrSt.setString(1, informe.getCodigo());
-            PrSt.setString(2, informe.getCodigo_paciente());
-            PrSt.setString(3, informe.getCodigo_medico());
-            PrSt.setString(4, informe.getDescripcion());
-            PrSt.setDate(5, informe.getFecha());
-            PrSt.setString(6, informe.getHora());
+            PrSt.setString(1, informe.getCodigo_paciente());
+            PrSt.setString(2, informe.getCodigo_medico());
+            PrSt.setString(3, informe.getDescripcion());
+            PrSt.setDate(4, informe.getFecha());
+            PrSt.setString(5, informe.getHora());
             int ejecucion = PrSt.executeUpdate();
             if (ejecucion > 0) {
                 mensaje = "Informacion ingresada";

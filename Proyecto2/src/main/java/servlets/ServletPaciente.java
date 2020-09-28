@@ -176,12 +176,12 @@ public class ServletPaciente extends HttpServlet {
                 String contraseña = request.getParameter("contra");
                 Paciente paciente = new Paciente(codigo, nombre, sexo, fecha_de_nacimiento, dpi, telefono, peso, tipo_sangre, correo, contraseña);
                 String agregar_paciente = dmpac.AgregarPaciente(paciente);
-                request.getSession().setAttribute("mensaje", agregar_paciente);
+                request.getSession().setAttribute("mensaje_r", agregar_paciente);
                 acceder = "paciente/registrar.jsp";
                 RequestDispatcher pagina = request.getRequestDispatcher(acceder);
                 pagina.forward(request, response);
             } catch (Exception e) {
-                request.getSession().setAttribute("mensaje", e.toString());
+                request.getSession().setAttribute("mensaje_r", e.toString());
                 acceder = "paciente/registrar.jsp";
                 RequestDispatcher pagina = request.getRequestDispatcher(acceder);
                 pagina.forward(request, response);
@@ -208,10 +208,16 @@ public class ServletPaciente extends HttpServlet {
             acceder = "paciente/agendar_consulta.jsp";
             RequestDispatcher pagina = request.getRequestDispatcher(acceder);
             pagina.forward(request, response);
+        } else if (accion.equalsIgnoreCase("Busqueda Por Horario")) {
+            ArrayList<Medico> lista = dmmed.VerMedicoPorHorario(request.getParameter("cajatexto"));
+            request.setAttribute("medicos", lista);
+            acceder = "paciente/agendar_consulta.jsp";
+            RequestDispatcher pagina = request.getRequestDispatcher(acceder);
+            pagina.forward(request, response);
         } else if (accion.equalsIgnoreCase("Agendar Consulta")) {
             String alerta = "Fallo para agendar consulta";
             try {
-                String codigo = request.getParameter("codigo");
+                int codigo = 0;
                 String codigo_paciente = request.getParameter("codigo_paciente");
                 String codigo_medico = request.getParameter("codigo_medico");
                 String especialidad = request.getParameter("tipo_consulta");
@@ -252,7 +258,7 @@ public class ServletPaciente extends HttpServlet {
         } else if (accion.equalsIgnoreCase("Agendar Examen")) {
             String alerta = "Fallo para agendar examen";
             try {
-                String codigo = request.getParameter("codigo");
+                int codigo = 0;
                 String codigo_paciente = request.getParameter("codigo_paciente");
                 String codigo_medico = request.getParameter("codigo_medico");
                 String tipo_examen = request.getParameter("codigo_examen");
@@ -292,7 +298,7 @@ public class ServletPaciente extends HttpServlet {
             } catch (Exception e) {
                 alerta = e.toString();
             }
-            request.getSession().setAttribute("alerta", alerta);
+            request.getSession().setAttribute("alerta_e", alerta);
             acceder = "paciente/examen.jsp";
             RequestDispatcher pagina = request.getRequestDispatcher(acceder);
             pagina.forward(request, response);

@@ -65,7 +65,7 @@
             </form>
         </div>
         <%
-            String mensaje = (String) session.getAttribute("mensaje");
+            String mensaje = (String) session.getAttribute("mensaje_r");
             if (mensaje != null) {
         %>
         <div class="alert alert-primary">

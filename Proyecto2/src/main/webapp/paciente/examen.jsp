@@ -24,10 +24,6 @@
                 <h3>Agendar Exmanen Medico</h3>
                 <form action ="ServletPaciente" method = "POST" class="form-group">
                     <div class="form-group">
-                        <label>Codigo</label>
-                        <input type = "text" name = "codigo" class="form-control">
-                    </div>
-                    <div class="form-group">
                         <label>Codigo del paciente</label>
                         <input type = "text" name = "codigo_paciente"  class="form-control">
                         <small class="form-text text-muted">El codigo con el que ingreso</small>
@@ -96,7 +92,7 @@
                 </table>
             </div>
         </div>
-        <%  String mensaje = (String) session.getAttribute("alerta");
+        <%  String mensaje = (String) session.getAttribute("alerta_e");
             if (mensaje != null) {
         %>     
         <div class="alert alert-primary">

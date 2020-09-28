@@ -69,6 +69,10 @@ public class Inicial extends HttpServlet {
         String accion = request.getParameter("accion");
         if (accion.equalsIgnoreCase("paciente")) {
             acceder = "paciente/login.jsp";
+
+        }
+        if (accion.equalsIgnoreCase("medico")) {
+            acceder = "medico/login.jsp";
         }
         RequestDispatcher pagina = request.getRequestDispatcher(acceder);
         pagina.forward(request, response);

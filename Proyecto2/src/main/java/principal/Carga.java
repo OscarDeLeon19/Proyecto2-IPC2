@@ -241,7 +241,7 @@ public class Carga {
 
                     if (nodo.getNodeType() == Node.ELEMENT_NODE) {
                         Element element = (Element) nodo;
-                        String codigo = element.getElementsByTagName("CODIGO").item(0).getTextContent();
+                        int codigo = 0;
                         String codigo_paciente = element.getElementsByTagName("PACIENTE").item(0).getTextContent();
                         String codigo_medico = element.getElementsByTagName("MEDICO").item(0).getTextContent();
                         String descripcion = element.getElementsByTagName("INFORME").item(0).getTextContent();
@@ -260,7 +260,7 @@ public class Carga {
 
                     if (nodo.getNodeType() == Node.ELEMENT_NODE) {
                         Element element = (Element) nodo;
-                        String codigo = element.getElementsByTagName("CODIGO").item(0).getTextContent();
+                        int codigo = 0;
                         String codigo_paciente = element.getElementsByTagName("PACIENTE").item(0).getTextContent();
                         String codigo_medico = element.getElementsByTagName("MEDICO").item(0).getTextContent();
                         String codigo_examen = element.getElementsByTagName("EXAMEN").item(0).getTextContent();
@@ -282,7 +282,7 @@ public class Carga {
 
                     if (nodo.getNodeType() == Node.ELEMENT_NODE) {
                         Element element = (Element) nodo;
-                        String codigo = element.getElementsByTagName("CODIGO").item(0).getTextContent();
+                        int codigo = 0;
                         String codigo_paciente = element.getElementsByTagName("PACIENTE").item(0).getTextContent();
                         String codigo_medico = element.getElementsByTagName("MEDICO").item(0).getTextContent();
                         String especialidad = element.getElementsByTagName("ESPECIALIDAD").item(0).getTextContent();

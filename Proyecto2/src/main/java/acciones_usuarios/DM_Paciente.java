@@ -17,8 +17,6 @@ public class DM_Paciente extends Datos_Conexion {
 
     public Paciente Validar(String codigo, String contraseña){
         Paciente paciente = null;
-        out.println(codigo);
-        out.println(contraseña);
         try {
             PreparedStatement PrSt;
             ResultSet rs = null;

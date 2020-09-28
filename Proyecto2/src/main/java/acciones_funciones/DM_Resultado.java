@@ -19,17 +19,16 @@ public class DM_Resultado extends Datos_Conexion{
         String mensaje = null;
         try {
             PreparedStatement PrSt;
-            String Query = "INSERT INTO Resultado (Codigo, Codigo_Paciente, Codigo_Medico, Codigo_Examen, Codigo_Laboratorista, Orden, Informe, Fecha, Hora )VALUES (?,?,?,?,?,?,?,?,?)";
+            String Query = "INSERT INTO Resultado (Codigo_Paciente, Codigo_Medico, Codigo_Examen, Codigo_Laboratorista, Orden, Informe, Fecha, Hora )VALUES (?,?,?,?,?,?,?,?)";
             PrSt = conexion.prepareStatement(Query);
-            PrSt.setString(1, resultado.getCodigo());
-            PrSt.setString(2, resultado.getCodigo_paciente());
-            PrSt.setString(3, resultado.getCodigo_medico());
-            PrSt.setString(4, resultado.getCodigo_examen());
-            PrSt.setString(5, resultado.getCodigo_laboratorista());
-            PrSt.setString(6, resultado.getOrden());
-            PrSt.setString(7, resultado.getInforme());
-            PrSt.setDate(8, resultado.getFecha());
-            PrSt.setString(9, resultado.getHora());
+            PrSt.setString(1, resultado.getCodigo_paciente());
+            PrSt.setString(2, resultado.getCodigo_medico());
+            PrSt.setString(3, resultado.getCodigo_examen());
+            PrSt.setString(4, resultado.getCodigo_laboratorista());
+            PrSt.setString(5, resultado.getOrden());
+            PrSt.setString(6, resultado.getInforme());
+            PrSt.setDate(7, resultado.getFecha());
+            PrSt.setString(8, resultado.getHora());
             int ejecucion = PrSt.executeUpdate();
             if (ejecucion > 0) {
                 mensaje = "Informacion ingresada";
@@ -54,7 +53,7 @@ public class DM_Resultado extends Datos_Conexion{
             PrSt.setString(1, codigo_paciente);
             rs = PrSt.executeQuery();
             while (rs.next()) {
-                Resultado resultado = new Resultado(rs.getString("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Examen"), rs.getString("Codigo_Laboratorista"), rs.getString("Orden"), rs.getString("Informe"), rs.getDate("Fecha"), rs.getString("Hora"));
+                Resultado resultado = new Resultado(rs.getInt("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Examen"), rs.getString("Codigo_Laboratorista"), rs.getString("Orden"), rs.getString("Informe"), rs.getDate("Fecha"), rs.getString("Hora"));
                 lista.add(resultado);
             }
             PrSt.close();
@@ -75,7 +74,7 @@ public class DM_Resultado extends Datos_Conexion{
             PrSt.setString(1, codigo_paciente);
             rs = PrSt.executeQuery();
             while (rs.next()) {
-                Resultado resultado = new Resultado(rs.getString("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"),rs.getString("Codigo_Examen"), rs.getString("Codigo_Laboratorista"), rs.getString("Orden"), rs.getString("Informe"), rs.getDate("Fecha"), rs.getString("Hora"));
+                Resultado resultado = new Resultado(rs.getInt("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"),rs.getString("Codigo_Examen"), rs.getString("Codigo_Laboratorista"), rs.getString("Orden"), rs.getString("Informe"), rs.getDate("Fecha"), rs.getString("Hora"));
                 lista.add(resultado);
             }
             PrSt.close();
@@ -102,7 +101,7 @@ public class DM_Resultado extends Datos_Conexion{
             PrSt.setDate(4, fecha2);
             rs = PrSt.executeQuery();
             while (rs.next()) {
-                Resultado resultado = new Resultado(rs.getString("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Examen"), rs.getString("Codigo_Laboratorista"), rs.getString("Orden"), rs.getString("Informe"), rs.getDate("Fecha"), rs.getString("Hora"));
+                Resultado resultado = new Resultado(rs.getInt("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Examen"), rs.getString("Codigo_Laboratorista"), rs.getString("Orden"), rs.getString("Informe"), rs.getDate("Fecha"), rs.getString("Hora"));
                 lista.add(resultado);
             }
             PrSt.close();
@@ -125,7 +124,7 @@ public class DM_Resultado extends Datos_Conexion{
             PrSt.setDate(1, fecha);
             rs = PrSt.executeQuery();
             while (rs.next()) {
-                Resultado resultado = new Resultado(rs.getString("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Codigo_Examen"), rs.getString("Codigo_Laboratorista"), rs.getString("Orden"), rs.getString("Informe"), rs.getDate("Fecha"), rs.getString("Hora"));
+                Resultado resultado = new Resultado(rs.getInt("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Codigo_Examen"), rs.getString("Codigo_Laboratorista"), rs.getString("Orden"), rs.getString("Informe"), rs.getDate("Fecha"), rs.getString("Hora"));
                 lista.add(resultado);
             }
             PrSt.close();
@@ -146,7 +145,7 @@ public class DM_Resultado extends Datos_Conexion{
             PrSt.setString(1, codigo_lab);
             rs = PrSt.executeQuery();
             while (rs.next()) {
-                Resultado resultado = new Resultado(rs.getString("Examenes"), "xxxx", "xxxx", "xxxx", "xxxx", "xxxx", "xxxx", rs.getDate("Fecha"), "xxxx");
+                Resultado resultado = new Resultado(Integer.parseInt(rs.getString("Examenes")), "xxxx", "xxxx", "xxxx", "xxxx", "xxxx", "xxxx", rs.getDate("Fecha"), "xxxx");
                 lista.add(resultado);
             }
             PrSt.close();

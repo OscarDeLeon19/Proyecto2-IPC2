@@ -14,6 +14,27 @@ public class DM_Medico extends Datos_Conexion {
     public DM_Medico() {
     }
 
+    public Medico Validar(String codigo, String contraseña) {
+        Medico medico = null;
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT * FROM Medico WHERE Codigo = ? AND Contraseña = ?";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setString(1, codigo);
+            PrSt.setString(2, ObtenerEncriptacion(contraseña));
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                medico = new Medico(rs.getString("Codigo"), rs.getString("Nombre"), rs.getInt("Numero_De_Colegiado"), rs.getString("DPI"), rs.getInt("Telefono"), rs.getString("Correo_Electronico"), rs.getString("Hora_Entrada"), rs.getString("Hora_Salida"), rs.getDate("Fecha_Inicio"), rs.getString("Contraseña"));
+            }
+            PrSt.close();
+            rs.close();
+        } catch (Exception e) {
+            medico = null;
+        }
+        return medico;
+    }
+
     public ArrayList<Medico> VerMedicos() {
         ArrayList<Medico> lista_medicos = new ArrayList<>();
         try {
@@ -102,26 +123,29 @@ public class DM_Medico extends Datos_Conexion {
         return lista_medicos;
     }
 
-    public ArrayList<Medico> VerMedicoPorHorario(String inicio, String salida) {
+    public ArrayList<Medico> VerMedicoPorHorario(String hora) {
         ArrayList<Medico> lista_medicos = new ArrayList<>();
-        inicio = "%" + inicio + "%";
-        salida = "%" + salida + "%";
         try {
+            int Hora = Integer.parseInt(hora);
             PreparedStatement PrSt;
             ResultSet rs = null;
-            String Query = "SELECT * FROM Medico c JOIN Especialidad e ON c.Codigo = e.Codigo_Medico WHERE Hora_Entrada LIKE ? AND Hora_Salida LIKE ?";
+            String Query = "SELECT * FROM Medico c JOIN Especialidad e ON c.Codigo = e.Codigo_Medico";
             PrSt = conexion.prepareStatement(Query);
-            PrSt.setString(1, inicio);
-            PrSt.setString(2, salida);
             rs = PrSt.executeQuery();
             while (rs.next()) {
-                Medico medico = new Medico(rs.getString("Codigo"), rs.getString("Nombre"), rs.getInt("Numero_De_Colegiado"), rs.getString("DPI"), rs.getInt("Telefono"), rs.getString("Correo_Electronico"), rs.getString("Hora_Entrada"), rs.getString("Hora_Salida"), rs.getDate("Fecha_Inicio"), rs.getString("Contraseña"));
-                medico.setTitulo(rs.getString("Titulo"));
-                lista_medicos.add(medico);
+                String horaI = rs.getString("Hora_Entrada");
+                String horaS = rs.getString("Hora_Salida");
+                int hora1 = ObtenerHora(horaI);
+                int hora2 = ObtenerHora(horaS);
+                if (Hora >= hora1 && Hora <= hora2) {
+                    Medico medico = new Medico(rs.getString("Codigo"), rs.getString("Nombre"), rs.getInt("Numero_De_Colegiado"), rs.getString("DPI"), rs.getInt("Telefono"), rs.getString("Correo_Electronico"), rs.getString("Hora_Entrada"), rs.getString("Hora_Salida"), rs.getDate("Fecha_Inicio"), rs.getString("Contraseña"));
+                    medico.setTitulo(rs.getString("Titulo"));
+                    lista_medicos.add(medico);
+                }
             }
             PrSt.close();
             rs.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             lista_medicos.clear();
         }
         return lista_medicos;
@@ -392,5 +416,11 @@ public class DM_Medico extends Datos_Conexion {
         }
         int numero = Integer.parseInt(hora.substring(0, signo));
         return numero;
+    }
+
+    public String ConvertirHora(int hora) {
+        String Hora = String.valueOf(hora);
+        Hora = Hora + ":00";
+        return Hora;
     }
 }

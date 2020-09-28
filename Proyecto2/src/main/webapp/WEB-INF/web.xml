@@ -8,6 +8,10 @@
         <servlet-name>ServletPaciente</servlet-name>
         <servlet-class>servlets.ServletPaciente</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletMedico</servlet-name>
+        <servlet-class>servlets.ServletMedico</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Inicial</servlet-name>
         <url-pattern>/Inicial</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>ServletPaciente</servlet-name>
         <url-pattern>/ServletPaciente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletMedico</servlet-name>
+        <url-pattern>/ServletMedico</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

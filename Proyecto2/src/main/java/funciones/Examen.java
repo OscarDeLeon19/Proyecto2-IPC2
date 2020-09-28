@@ -5,7 +5,7 @@ import java.sql.Date;
 
 public class Examen {
     
-    private String codigo;
+    private int codigo;
     private String codigo_paciente;
     private String codigo_medico;
     private String tipo_examen;
@@ -13,7 +13,7 @@ public class Examen {
     private String Orden;
     private String Estado;
 
-    public Examen(String codigo, String codigo_paciente, String codigo_medico, String tipo_examen, Date fecha) {
+    public Examen(int codigo, String codigo_paciente, String codigo_medico, String tipo_examen, Date fecha) {
         this.codigo = codigo;
         this.codigo_paciente = codigo_paciente;
         this.codigo_medico = codigo_medico;
@@ -21,11 +21,11 @@ public class Examen {
         this.fecha = fecha;
     }
     
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 

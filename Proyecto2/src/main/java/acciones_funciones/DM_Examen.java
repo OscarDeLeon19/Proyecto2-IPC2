@@ -18,14 +18,13 @@ public class DM_Examen extends Datos_Conexion {
         String mensaje = null;
         try {
             PreparedStatement PrSt;
-            String Query = "INSERT INTO Examen (Codigo, Codigo_Paciente, Codigo_Medico, Codigo_Examen, Fecha, Orden )VALUES (?,?,?,?,?,?)";
+            String Query = "INSERT INTO Examen (Codigo_Paciente, Codigo_Medico, Codigo_Examen, Fecha, Orden )VALUES (?,?,?,?,?)";
             PrSt = conexion.prepareStatement(Query);
-            PrSt.setString(1, examen.getCodigo());
-            PrSt.setString(2, examen.getCodigo_paciente());
-            PrSt.setString(3, examen.getCodigo_medico());
-            PrSt.setString(4, examen.getTipo_examen());
-            PrSt.setDate(5, examen.getFecha());
-            PrSt.setString(6, examen.getOrden());
+            PrSt.setString(1, examen.getCodigo_paciente());
+            PrSt.setString(2, examen.getCodigo_medico());
+            PrSt.setString(3, examen.getTipo_examen());
+            PrSt.setDate(4, examen.getFecha());
+            PrSt.setString(5, examen.getOrden());
             int ejecucion = PrSt.executeUpdate();
             if (ejecucion > 0) {
                 mensaje = "Informacion ingresada";
@@ -50,7 +49,7 @@ public class DM_Examen extends Datos_Conexion {
             PrSt.setString(1, codigo);
             rs = PrSt.executeQuery();
             while (rs.next()) {
-                Examen nuevo = new Examen(rs.getString("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Codigo_Examen"), rs.getDate("Fecha"));
+                Examen nuevo = new Examen(rs.getInt("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Codigo_Examen"), rs.getDate("Fecha"));
                 examen = nuevo;
             }
             PrSt.close();
@@ -66,7 +65,7 @@ public class DM_Examen extends Datos_Conexion {
             PreparedStatement PrSt;
             String Query = "UPDATE Examen SET Estado = 'Realizado' WHERE Codigo = ?";
             PrSt = conexion.prepareStatement(Query);
-            PrSt.setString(1, examen.getCodigo());
+            PrSt.setInt(1, examen.getCodigo());
             int ejecucion = PrSt.executeUpdate();
             if (ejecucion > 0) {
                 resultado.setCodigo_paciente(examen.getCodigo_paciente());
@@ -94,7 +93,7 @@ public class DM_Examen extends Datos_Conexion {
             PrSt.setDate(2, fecha);
             rs = PrSt.executeQuery();
             while (rs.next()) {
-                Examen examen = new Examen(rs.getString("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Nombre"), rs.getDate("Fecha"));
+                Examen examen = new Examen(rs.getInt("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Nombre"), rs.getDate("Fecha"));
                 lista.add(examen);
             }
             PrSt.close();
@@ -116,7 +115,7 @@ public class DM_Examen extends Datos_Conexion {
             PrSt.setString(1, codigo_paciente);
             rs = PrSt.executeQuery();
             while (rs.next()) {
-                Examen examen = new Examen(rs.getString("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Nombre"), rs.getDate("Fecha"));
+                Examen examen = new Examen(rs.getInt("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Nombre"), rs.getDate("Fecha"));
                 examen.setOrden(rs.getString("Orden"));
                 lista.add(examen);
             }
