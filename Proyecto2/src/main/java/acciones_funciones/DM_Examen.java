@@ -2,9 +2,11 @@ package acciones_funciones;
 
 import funciones.Examen;
 import funciones.Resultado;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import principal.Datos_Conexion;
 
 public class DM_Examen extends Datos_Conexion {
@@ -37,7 +39,7 @@ public class DM_Examen extends Datos_Conexion {
         }
         return mensaje;
     }
-    
+
     public Examen ObtenerExamen(String codigo) {
         Examen examen = null;
         try {
@@ -47,7 +49,7 @@ public class DM_Examen extends Datos_Conexion {
             PrSt = conexion.prepareStatement(Query);
             PrSt.setString(1, codigo);
             rs = PrSt.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Examen nuevo = new Examen(rs.getString("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Codigo_Examen"), rs.getDate("Fecha"));
                 examen = nuevo;
             }
@@ -57,7 +59,7 @@ public class DM_Examen extends Datos_Conexion {
         }
         return examen;
     }
-    
+
     public Resultado RealizarExamen(Examen examen) {
         Resultado resultado = new Resultado();
         try {
@@ -70,14 +72,60 @@ public class DM_Examen extends Datos_Conexion {
                 resultado.setCodigo_paciente(examen.getCodigo_paciente());
                 resultado.setCodigo_examen(examen.getTipo_examen());
                 resultado.setCodigo_medico(examen.getCodigo_medico());
-                resultado.setFecha(examen.getFecha());                
+                resultado.setFecha(examen.getFecha());
             } else {
-                
+
             }
             PrSt.close();
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
         return resultado;
+    }
+
+    public ArrayList<Examen> ReporteLabExamenesParaElDia(String tipo_examen, Date fecha) {
+        ArrayList<Examen> lista = new ArrayList<>();
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT e.Codigo, e.Codigo_Paciente, e.Codigo_Medico, t.Nombre, e.Fecha FROM Examen e JOIN Tipo_Examen t ON e.Codigo_Examen = t.Codigo WHERE t.Nombre = ? AND e.Fecha = ?";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setString(1, tipo_examen);
+            PrSt.setDate(2, fecha);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                Examen examen = new Examen(rs.getString("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Nombre"), rs.getDate("Fecha"));
+                lista.add(examen);
+            }
+            PrSt.close();
+            rs.close();
+        } catch (SQLException e) {
+            lista.clear();
+            System.out.println(e.toString());
+        }
+        return lista;
+    }
+    
+    public ArrayList<Examen> VerExamenesSinRealizarPaciente(String codigo_paciente) {
+        ArrayList<Examen> lista = new ArrayList<>();
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT e.Codigo, e.Codigo_Paciente, e.Codigo_Medico, t.Nombre, e.Fecha, e.Orden FROM Examen e JOIN Tipo_Examen t ON e.Codigo_Examen = t.Codigo  WHERE Codigo_Paciente = ? AND Estado IS NULL ORDER BY Fecha ASC";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setString(1, codigo_paciente);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                Examen examen = new Examen(rs.getString("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Nombre"), rs.getDate("Fecha"));
+                examen.setOrden(rs.getString("Orden"));
+                lista.add(examen);
+            }
+            PrSt.close();
+            rs.close();
+        } catch (SQLException e) {
+            lista.clear();
+            System.out.println(e.toString());
+        }
+        return lista;
     }
 }

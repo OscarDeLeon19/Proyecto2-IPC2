@@ -94,8 +94,28 @@ public class DM_TipoExamen extends Datos_Conexion {
             PrSt.close();
             rs.close();
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            comprobacion = false;
         }
         return comprobacion;
+    }
+    
+    public String ObtenerTipo(String codigo) {
+        String tipo = null;
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT * FROM Tipo_Examen WHERE Codigo = ?";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setString(1, codigo);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                tipo = rs.getString("Tipo_Informe");
+            }
+            PrSt.close();
+            rs.close();
+        } catch (SQLException e) {
+            tipo = null;
+        }
+        return tipo;
     }
 }

@@ -55,7 +55,7 @@ public class DM_Medico extends Datos_Conexion {
         }
         return medico;
     }
-    
+
     public ArrayList<Medico> VerMedicoPorNombre(String Nombre) {
         ArrayList<Medico> lista_medicos = new ArrayList<>();
         Nombre = "%" + Nombre + "%";
@@ -78,7 +78,7 @@ public class DM_Medico extends Datos_Conexion {
         }
         return lista_medicos;
     }
-    
+
     public ArrayList<Medico> VerMedicoPorTitulo(String titulo) {
         ArrayList<Medico> lista_medicos = new ArrayList<>();
         titulo = "%" + titulo + "%";
@@ -101,7 +101,7 @@ public class DM_Medico extends Datos_Conexion {
         }
         return lista_medicos;
     }
-    
+
     public ArrayList<Medico> VerMedicoPorHorario(String inicio, String salida) {
         ArrayList<Medico> lista_medicos = new ArrayList<>();
         inicio = "%" + inicio + "%";
@@ -126,10 +126,11 @@ public class DM_Medico extends Datos_Conexion {
         }
         return lista_medicos;
     }
-    
-    public ArrayList<Medico> VerMedicoPorFecha(Date fecha) {
+
+    public ArrayList<Medico> VerMedicoPorFecha(String fecha_medico) {
         ArrayList<Medico> lista_medicos = new ArrayList<>();
         try {
+            Date fecha = Date.valueOf(fecha_medico);
             PreparedStatement PrSt;
             ResultSet rs = null;
             String Query = "SELECT * FROM Medico c JOIN Especialidad e ON c.Codigo = e.Codigo_Medico WHERE Fecha_Inicio >= ?";
@@ -143,7 +144,7 @@ public class DM_Medico extends Datos_Conexion {
             }
             PrSt.close();
             rs.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             lista_medicos.clear();
         }
         return lista_medicos;
@@ -332,5 +333,64 @@ public class DM_Medico extends Datos_Conexion {
             mensaje = e.toString();
         }
         return mensaje;
+    }
+
+    public Boolean ComprobarEspecialidad(String codigo_medico, String titulo) {
+        Boolean comprobacion = false;
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT * FROM Especialidad WHERE Codigo_Medico = ? AND Titulo = ?";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setString(1, codigo_medico);
+            PrSt.setString(2, titulo);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                comprobacion = true;
+            }
+            PrSt.close();
+            rs.close();
+        } catch (SQLException e) {
+            comprobacion = false;
+        }
+        return comprobacion;
+    }
+
+    public Boolean ComprobarHorario(String codigo_medico, int hora) {
+        Boolean comprobacion = false;
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT * FROM Medico WHERE Codigo = ?";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setString(1, codigo_medico);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                String hora_inicio = rs.getString("Hora_Entrada");
+                String hora_salida = rs.getString("Hora_Salida");
+                int hora1 = ObtenerHora(hora_inicio);
+                int hora2 = ObtenerHora(hora_salida);
+                if (hora >= hora1 && hora <= hora2) {
+                    comprobacion = true;
+                }
+            }
+            PrSt.close();
+            rs.close();
+        } catch (SQLException e) {
+            comprobacion = false;
+        }
+        return comprobacion;
+    }
+
+    public int ObtenerHora(String hora) {
+        int signo = 0;
+        for (int i = 0; i < hora.length(); i++) {
+            int j = i + 1;
+            if (":".equals(hora.substring(i, j))) {
+                signo = i;
+            }
+        }
+        int numero = Integer.parseInt(hora.substring(0, signo));
+        return numero;
     }
 }

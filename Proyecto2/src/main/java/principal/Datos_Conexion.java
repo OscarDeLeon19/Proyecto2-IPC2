@@ -4,6 +4,9 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Datos_Conexion {
 
@@ -33,4 +36,48 @@ public class Datos_Conexion {
 
     }
 
+    public void EliminarSesion() {
+        try {
+            PreparedStatement PrSt;
+            String Query = "DELETE FROM Sesion";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.executeUpdate();
+            PrSt.close();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+    }
+
+    public String ObtenerCodigoSesion() {
+        String codigo = null;
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT * FROM Sesion";
+            PrSt = conexion.prepareStatement(Query);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                codigo = rs.getString("Codigo");
+            }
+            PrSt.close();
+            rs.close();
+        } catch (SQLException e) {
+
+        }
+        return codigo;
+    }
+
+    public void AbrirSesion(String codigo) {
+
+        try {
+            PreparedStatement PrSt;
+            String Query = " INSERT INTO Sesion(Codigo) VALUES(?)";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setString(1, codigo);
+            PrSt.executeUpdate();
+            PrSt.close();
+        } catch (SQLException e) {
+
+        }
+    }
 }

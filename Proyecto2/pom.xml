@@ -15,6 +15,12 @@
     </properties>
     
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/servlets.com/cos -->
+        <dependency>
+            <groupId>servlets.com</groupId>
+            <artifactId>cos</artifactId>
+            <version>05Nov2002</version>
+        </dependency>
         <dependency>
             <groupId>org.w3c</groupId>
             <artifactId>dom</artifactId>
@@ -25,6 +31,12 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.21</version>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

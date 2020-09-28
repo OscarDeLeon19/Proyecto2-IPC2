@@ -99,7 +99,7 @@ public class DM_Cita extends Datos_Conexion {
         try {
             PreparedStatement PrSt;
             ResultSet rs = null;
-            String Query = "SELECT * FROM Cita WHERE Codigo_Paciente = ? AND Estado = 'Realizada' ORDER BY Fecha";
+            String Query = "SELECT * FROM Cita WHERE Codigo_Paciente = ? AND Estado = 'Realizada' ORDER BY Fecha DESC";
             PrSt = conexion.prepareStatement(Query);
             PrSt.setString(1, codigo_paciente);
             rs = PrSt.executeQuery();
@@ -120,7 +120,7 @@ public class DM_Cita extends Datos_Conexion {
         try {
             PreparedStatement PrSt;
             ResultSet rs = null;
-            String Query = "SELECT * FROM Cita WHERE Codigo_Paciente = ? AND Estado IS NULL ORDER BY Fecha";
+            String Query = "SELECT * FROM Cita WHERE Codigo_Paciente = ? AND Estado IS NULL ORDER BY Fecha ASC";
             PrSt = conexion.prepareStatement(Query);
             PrSt.setString(1, codigo_paciente);
             rs = PrSt.executeQuery();
@@ -157,12 +157,15 @@ public class DM_Cita extends Datos_Conexion {
         return lista;
     }
 
-    public ArrayList<Cita> ReporteVerCitasPorMedicoYFechas(String codigo_paciente, String nombre_medico, Date fecha1, Date fecha2) {
+    public ArrayList<Cita> ReporteVerCitasPorMedicoYFechas(String codigo_paciente, String nombre_medico, String f1, String f2) {
         ArrayList<Cita> lista = new ArrayList<>();
         try {
+            nombre_medico = "%"+nombre_medico+"%";
+            Date fecha1 = Date.valueOf(f1);
+            Date fecha2 = Date.valueOf(f2);
             PreparedStatement PrSt;
             ResultSet rs = null;
-            String Query = "SELECT c.Codigo, c.Codigo_Paciente, m.Nombre AS Medico, c.Especialidad, c.Fecha, c.Hora FROM Cita c JOIN Medico m ON c.Codigo_Medico = m.Codigo WHERE c.Codigo_Paciente = ? AND m.Nombre LIKE ? AND c.Fecha BETWEEN ? AND ? AND Estado = 'Realizada'";
+            String Query = "SELECT c.Codigo, c.Codigo_Paciente, m.Nombre AS Medico, c.Especialidad, c.Fecha, c.Hora FROM Cita c JOIN Medico m ON c.Codigo_Medico = m.Codigo WHERE c.Codigo_Paciente = ? AND m.Nombre LIKE ? AND c.Fecha BETWEEN ? AND ? AND Estado = 'Realizada' ORDER BY c.Fecha DESC";
             PrSt = conexion.prepareStatement(Query);
             PrSt.setString(1, codigo_paciente);
             PrSt.setString(2, nombre_medico);
@@ -175,7 +178,7 @@ public class DM_Cita extends Datos_Conexion {
             }
             PrSt.close();
             rs.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             lista.clear();
         }
         return lista;
@@ -224,5 +227,34 @@ public class DM_Cita extends Datos_Conexion {
             lista.clear();
         }
         return lista;
+    }
+    
+    public String ObtenerHora(int hora){
+        String Hora = String.valueOf(hora);
+        Hora = Hora + ":00";
+        return Hora;
+    }
+    
+    public Boolean ComprobarCita(String codigo_medico, Date fecha, int hora){
+        boolean comprobacion = false;
+        try {
+            String texhora = ObtenerHora(hora);
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT * FROM Cita WHERE Codigo_Medico = ? AND Fecha = ? AND Hora = ?";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setString(1, codigo_medico);
+            PrSt.setDate(2, fecha);
+            PrSt.setString(3, texhora);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                comprobacion = true;
+            }
+            PrSt.close();
+            rs.close();
+        } catch (SQLException e) {
+             comprobacion = false;
+        }
+        return comprobacion;
     }
 }

@@ -1,9 +1,11 @@
 package acciones_usuarios;
 
+import static java.lang.System.out;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import principal.Datos_Conexion;
 import usuarios.Paciente;
 
@@ -13,6 +15,30 @@ public class DM_Paciente extends Datos_Conexion {
 
     }
 
+    public Paciente Validar(String codigo, String contraseña){
+        Paciente paciente = null;
+        out.println(codigo);
+        out.println(contraseña);
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT * FROM Paciente WHERE Codigo = ? AND Contraseña = ?";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setString(1, codigo);
+            PrSt.setString(2, ObtenerEncriptacion(contraseña));
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+               Paciente nuevo = new Paciente(rs.getString("Codigo"), rs.getString("Nombre"), rs.getString("Sexo"), rs.getDate("Fecha_De_Nacimiento"), rs.getString("DPI"), rs.getInt("Telefono"), rs.getDouble("Peso"), rs.getString("Tipo_De_Sangre"), rs.getString("Correo_Electronico"), rs.getString("Contraseña"));
+               paciente = nuevo;
+            }
+            PrSt.close();
+            rs.close();
+        } catch (Exception e) {
+            paciente = null;
+        }
+        return paciente;
+    }
+    
     public ArrayList<Paciente> VerPacientes() {
         ArrayList<Paciente> lista = new ArrayList<>();
         try {

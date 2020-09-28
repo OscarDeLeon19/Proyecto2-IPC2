@@ -1,18 +1,19 @@
-
 package acciones_funciones;
 
-import funciones.Cita;
 import funciones.Consulta;
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import principal.Datos_Conexion;
+import usuarios.Administrador;
 
-
-public class DM_Consulta extends Datos_Conexion{
+public class DM_Consulta extends Datos_Conexion {
 
     public DM_Consulta() {
     }
-    
+
     public String AgregarConsulta(Consulta consulta) {
         String mensaje = null;
         try {
@@ -34,4 +35,27 @@ public class DM_Consulta extends Datos_Conexion{
         }
         return mensaje;
     }
+
+    public ArrayList<Consulta> VerConsultas() {
+        ArrayList<Consulta> lista = new ArrayList();
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT * FROM Consulta";
+            PrSt = conexion.prepareStatement(Query);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                Consulta consulta = new Consulta(rs.getString("Tipo"), rs.getDouble("Costo"));
+                lista.add(consulta);
+            }
+            PrSt.close();
+            rs.close();
+        } catch (SQLException e) {
+            lista.clear();
+        }
+        return lista;
+    }
+    
+    
+ 
 }
