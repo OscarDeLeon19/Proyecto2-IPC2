@@ -50,12 +50,53 @@ public class DM_Consulta extends Datos_Conexion {
             }
             PrSt.close();
             rs.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             lista.clear();
         }
         return lista;
     }
     
+    public String ModificarConsulta(Consulta consulta) {
+        String mensaje = null;
+        try {
+            PreparedStatement PrSt;
+            String Query = "UPDATE Consulta SET Costo = ? WHERE Tipo = ?";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setDouble(1, consulta.getCosto());
+            PrSt.setString(2, consulta.getTipo());
+            int ejecucion = PrSt.executeUpdate();
+            if (ejecucion > 0) {
+                mensaje = "Informacion modificada";
+            } else {
+                mensaje = "Fallo al modificada";
+            }
+            PrSt.close();
+        } catch (Exception e) {
+            mensaje = e.toString();
+            System.out.println(e.toString());
+        }
+        return mensaje;
+    }
     
+     public String EliminarConsulta(Consulta consulta) {
+        String mensaje = null;
+        try {
+            PreparedStatement PrSt;
+            String Query = "DELETE FROM Consulta  WHERE Tipo = ?";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setString(1, consulta.getTipo());
+            int ejecucion = PrSt.executeUpdate();
+            if (ejecucion > 0) {
+                mensaje = "Informacion Eliminada";
+            } else {
+                mensaje = "Fallo al eliminar";
+            }
+            PrSt.close();
+        } catch (Exception e) {
+            mensaje = e.toString();
+            System.out.println(e.toString());
+        }
+        return mensaje;
+    }
  
 }

@@ -118,4 +118,26 @@ public class DM_TipoExamen extends Datos_Conexion {
         }
         return tipo;
     }
+    
+    public String ModificarExamen(Tipo_Examen examen) {
+        String mensaje = null;
+        try {
+            PreparedStatement PrSt;
+            String Query = "UPDATE Tipo_Examen SET Costo = ? WHERE Codigo = ?";
+            PrSt = conexion.prepareStatement(Query);            
+            PrSt.setDouble(1, examen.getCosto());
+            PrSt.setString(2, examen.getCodigo());
+            int ejecucion = PrSt.executeUpdate();
+            if (ejecucion > 0) {
+                mensaje = "Informacion modificada";
+            } else {
+                mensaje = "Fallo al modificar";
+            }
+            PrSt.close();
+        } catch (SQLException e) {
+            mensaje = e.toString();
+            System.out.println(e.toString());
+        }
+        return mensaje;
+    }
 }

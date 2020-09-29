@@ -59,7 +59,7 @@ public class DM_Examen extends Datos_Conexion {
         }
         return examen;
     }
-    
+
     public ArrayList<Examen> VerExamenesSegunLaboratorista(String tipo_examen) {
         ArrayList<Examen> lista = new ArrayList<>();
         try {
@@ -129,7 +129,7 @@ public class DM_Examen extends Datos_Conexion {
         }
         return lista;
     }
-    
+
     public ArrayList<Examen> VerExamenesSinRealizarPaciente(String codigo_paciente) {
         ArrayList<Examen> lista = new ArrayList<>();
         try {
@@ -149,6 +149,90 @@ public class DM_Examen extends Datos_Conexion {
         } catch (SQLException e) {
             lista.clear();
             System.out.println(e.toString());
+        }
+        return lista;
+    }
+
+    public ArrayList<Examen> ReporteVerGananciasMedico(String f1, String f2) {
+        ArrayList<Examen> lista = new ArrayList<>();
+        try {
+            Date fecha1 = Date.valueOf(f1);
+            Date fecha2 = Date.valueOf(f2);
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT SUM(t.Costo) AS Ganancia, e.Codigo_Medico FROM Examen e JOIN Tipo_Examen t ON e.Codigo_Examen = t.Codigo WHERE e.Fecha BETWEEN ? AND ? GROUP BY Codigo_Medico ORDER BY SUM(t.Costo) DESC";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setDate(1, fecha1);
+            PrSt.setDate(2, fecha2);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                Examen examen = new Examen(rs.getInt("Ganancia"), "xxxx", rs.getString("Codigo_Medico"), "xxxx", Date.valueOf("2020-05-10"));
+                lista.add(examen);
+            }
+            PrSt.close();
+            rs.close();
+        } catch (Exception e) {
+            lista.clear();
+        }
+        return lista;
+    }
+
+    public ArrayList<Examen> ReporteVerExamenesDemandados() {
+        ArrayList<Examen> lista = new ArrayList<>();
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT COUNT(Codigo_Examen) AS Examenes, Codigo_Examen FROM Examen GROUP BY Codigo_Examen ORDER BY COUNT(Codigo_Examen) DESC";
+            PrSt = conexion.prepareStatement(Query);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                Examen examen = new Examen(rs.getInt("Examenes"), "xxxx", "xxxx", rs.getString("Codigo_Examen"), Date.valueOf("2020-05-10"));
+                lista.add(examen);
+            }
+            PrSt.close();
+            rs.close();
+        } catch (Exception e) {
+            lista.clear();
+        }
+        return lista;
+    }
+
+    public ArrayList<Examen> ReporteVerExamenesRequeridosPorMedicos() {
+        ArrayList<Examen> lista = new ArrayList<>();
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT COUNT(Codigo_Medico) AS Examenes, Codigo_Medico FROM Examen GROUP BY Codigo_Medico ORDER BY COUNT(Codigo_Medico) DESC";
+            PrSt = conexion.prepareStatement(Query);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                Examen examen = new Examen(rs.getInt("Examenes"), "xxxx", rs.getString("Codigo_Medico"), "xxxx", Date.valueOf("2020-05-10"));
+                lista.add(examen);
+            }
+            PrSt.close();
+            rs.close();
+        } catch (Exception e) {
+            lista.clear();
+        }
+        return lista;
+    }
+
+    public ArrayList<Examen> ReporteVerGananciasPaciente() {
+        ArrayList<Examen> lista = new ArrayList<>();
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT SUM(t.Costo) AS Ganancia, e.Codigo_Paciente FROM Examen e JOIN Tipo_Examen t ON e.Codigo_Examen = t.Codigo GROUP BY Codigo_Paciente ORDER BY SUM(t.Costo) DESC";
+            PrSt = conexion.prepareStatement(Query);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                Examen examen = new Examen(rs.getInt("Ganancia"), rs.getString("Codigo_Paciente"), "xxxx", "xxxx", Date.valueOf("2020-05-10"));
+                lista.add(examen);
+            }
+            PrSt.close();
+            rs.close();
+        } catch (Exception e) {
+            lista.clear();
         }
         return lista;
     }

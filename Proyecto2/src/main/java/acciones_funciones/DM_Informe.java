@@ -37,7 +37,7 @@ public class DM_Informe extends Datos_Conexion {
         }
         return mensaje;
     }
-    
+
     public ArrayList<String> ReportePacienteConMasInformes(String codigo_medico, String f1, String f2) {
         ArrayList<String> lista = new ArrayList<>();
         try {
@@ -64,5 +64,24 @@ public class DM_Informe extends Datos_Conexion {
         }
         return lista;
     }
-    
+
+    public ArrayList<Informe> ReporteLABFechasConMasTrabajo() {
+        ArrayList<Informe> lista = new ArrayList<>();
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT COUNT(Codigo_Medico) AS Informes, Codigo_Medico FROM Informe  GROUP BY Codigo_Medico ORDER BY COUNT(Codigo_Medico) DESC LIMIT 10";
+            PrSt = conexion.prepareStatement(Query);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                Informe informe = new Informe(rs.getInt("Informes"), "xxxx", rs.getString("Codigo_Medico"), "xxxx", Date.valueOf("2020-05-10"), "XXXX");
+                lista.add(informe);
+            }
+            PrSt.close();
+            rs.close();
+        } catch (Exception e) {
+            lista.clear();
+        }
+        return lista;
+    }
 }

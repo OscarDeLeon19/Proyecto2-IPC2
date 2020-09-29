@@ -304,4 +304,72 @@ public class DM_Cita extends Datos_Conexion {
         }
         return comprobacion;
     }
+    
+    public ArrayList<Cita> ReporteVerGananciasMedico(String f1, String f2) {
+        ArrayList<Cita> lista = new ArrayList<>();
+        try {
+            Date fecha1 = Date.valueOf(f1);
+            Date fecha2 = Date.valueOf(f2);
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT SUM(o.Costo) AS Ganancia, c.Codigo_Medico FROM Cita c JOIN Consulta o ON c.Especialidad = o.Tipo WHERE c.Fecha BETWEEN ? AND ? GROUP BY Codigo_Medico ORDER BY SUM(o.Costo) DESC";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setDate(1, fecha1);
+            PrSt.setDate(2, fecha2);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                Cita cita = new Cita(rs.getInt("Ganancia"), "xxxx", rs.getString("Codigo_Medico"), "xxxx", Date.valueOf("2020-05-10"), "xxxx");
+                lista.add(cita);
+            }
+            PrSt.close();
+            rs.close();
+        } catch (Exception e) {
+            lista.clear();
+        }
+        return lista;
+    }
+    
+    public ArrayList<Cita> ReporteMedicosCitasMenores(String f1, String f2) {
+        ArrayList<Cita> lista = new ArrayList<>();
+        try {
+            Date fecha1 = Date.valueOf(f1);
+            Date fecha2 = Date.valueOf(f2);
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT COUNT(Codigo_Medico) AS Citas, Codigo_Medico FROM Cita WHERE Fecha BETWEEN ? AND ? GROUP BY Codigo_Medico ORDER BY COUNT(Codigo_Medico) ASC LIMIT 5";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setDate(1, fecha1);
+            PrSt.setDate(2, fecha2);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                Cita cita = new Cita(rs.getInt("Citas"), "xxxx", rs.getString("Codigo_Medico"), "xxxx", Date.valueOf("2020-05-10"), "xxxx");
+                lista.add(cita);
+            }
+            PrSt.close();
+            rs.close();
+        } catch (Exception e) {
+            lista.clear();
+        }
+        return lista;
+    }
+    
+    public ArrayList<Cita> ReporteVerGananciasPaciente() {
+        ArrayList<Cita> lista = new ArrayList<>();
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT SUM(o.Costo) AS Ganancia, c.Codigo_Paciente FROM Cita c JOIN Consulta o ON c.Especialidad = o.Tipo GROUP BY Codigo_Paciente ORDER BY SUM(o.Costo) DESC";
+            PrSt = conexion.prepareStatement(Query);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                Cita cita = new Cita(rs.getInt("Ganancia"), rs.getString("Codigo_Paciente"), "xxxx", "xxxx", Date.valueOf("2020-05-10"), "xxxx");
+                lista.add(cita);
+            }
+            PrSt.close();
+            rs.close();
+        } catch (Exception e) {
+            lista.clear();
+        }
+        return lista;
+    }
 }
