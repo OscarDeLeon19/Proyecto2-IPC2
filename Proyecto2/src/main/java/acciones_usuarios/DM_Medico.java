@@ -419,8 +419,12 @@ public class DM_Medico extends Datos_Conexion {
     }
 
     public String ConvertirHora(int hora) {
-        String Hora = String.valueOf(hora);
-        Hora = Hora + ":00";
-        return Hora;
+        if (hora > 23 || hora < 0) {
+            String Hora = String.valueOf(hora);
+            Hora = Hora + ":00";
+            return Hora;
+        } else {
+            return null;
+        }
     }
 }

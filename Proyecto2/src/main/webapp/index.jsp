@@ -30,6 +30,9 @@
         <div>
             <a href="Inicial?accion=medico">Ingreso Medico</a>
         </div>
+        <div>
+            <a href="Inicial?accion=laboratorista">Ingreso Laboratorista</a>
+        </div>
         <div>   
             <%
                 DM_Administrador dmadmin = new DM_Administrador();
@@ -48,7 +51,7 @@
             }
         %>
         <%
-            String mensaje = (String) session.getAttribute("mensaje");
+            String mensaje = (String) session.getAttribute("msj");
             if (mensaje != null) {
         %>
         <div class="alert alert-primary">

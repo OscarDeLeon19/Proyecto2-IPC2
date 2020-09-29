@@ -83,7 +83,7 @@ public class DM_Cita extends Datos_Conexion {
             int ejecucion = PrSt.executeUpdate();
             if (ejecucion > 0) {
                 mensaje = true;
-            } 
+            }
             PrSt.close();
         } catch (SQLException e) {
             mensaje = false;
@@ -92,7 +92,7 @@ public class DM_Cita extends Datos_Conexion {
         return mensaje;
     }
 
-    public Informe ObtenerInforme(String codigo){
+    public Informe ObtenerInforme(String codigo) {
         Informe informe = null;
         try {
             PreparedStatement PrSt;
@@ -102,7 +102,7 @@ public class DM_Cita extends Datos_Conexion {
             PrSt.setString(1, codigo);
             rs = PrSt.executeQuery();
             while (rs.next()) {
-                informe = new Informe(rs.getInt("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), null, rs.getDate("Fecha"), rs.getString("Hora"));                
+                informe = new Informe(rs.getInt("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), null, rs.getDate("Fecha"), rs.getString("Hora"));
             }
             PrSt.close();
             rs.close();
@@ -111,7 +111,7 @@ public class DM_Cita extends Datos_Conexion {
         }
         return informe;
     }
-    
+
     public ArrayList<Cita> VerHistorialCitasPaciente(String codigo_paciente) {
         ArrayList<Cita> lista = new ArrayList<>();
         try {
@@ -178,7 +178,7 @@ public class DM_Cita extends Datos_Conexion {
     public ArrayList<Cita> ReporteVerCitasPorMedicoYFechas(String codigo_paciente, String nombre_medico, String f1, String f2) {
         ArrayList<Cita> lista = new ArrayList<>();
         try {
-            nombre_medico = "%"+nombre_medico+"%";
+            nombre_medico = "%" + nombre_medico + "%";
             Date fecha1 = Date.valueOf(f1);
             Date fecha2 = Date.valueOf(f2);
             PreparedStatement PrSt;
@@ -201,7 +201,7 @@ public class DM_Cita extends Datos_Conexion {
         }
         return lista;
     }
-    
+
     public ArrayList<Cita> ReporteCitasEnIntervaloDeTiempo(String codigo_medico, String f1, String f2) {
         ArrayList<Cita> lista = new ArrayList<>();
         try {
@@ -226,7 +226,7 @@ public class DM_Cita extends Datos_Conexion {
         }
         return lista;
     }
-    
+
     public ArrayList<Cita> ReportesCitasDiaActual(String codigo_medica, String f) {
         ArrayList<Cita> lista = new ArrayList<>();
         try {
@@ -249,7 +249,7 @@ public class DM_Cita extends Datos_Conexion {
         }
         return lista;
     }
-    
+
     public ArrayList<Cita> VerCitaActual(String codigo_paciente, String codigo_medico) {
         ArrayList<Cita> lista = new ArrayList<>();
         try {
@@ -271,14 +271,18 @@ public class DM_Cita extends Datos_Conexion {
         }
         return lista;
     }
-    
-    public String ObtenerHora(int hora){
-        String Hora = String.valueOf(hora);
-        Hora = Hora + ":00";
-        return Hora;
+
+    public String ObtenerHora(int hora) {
+        if (hora > 23 || hora < 0) {
+            String Hora = String.valueOf(hora);
+            Hora = Hora + ":00";
+            return Hora;
+        } else {
+            return null;
+        }
     }
-    
-    public Boolean ComprobarCita(String codigo_medico, Date fecha, int hora){
+
+    public Boolean ComprobarCita(String codigo_medico, Date fecha, int hora) {
         boolean comprobacion = false;
         try {
             String texhora = ObtenerHora(hora);
@@ -296,7 +300,7 @@ public class DM_Cita extends Datos_Conexion {
             PrSt.close();
             rs.close();
         } catch (SQLException e) {
-             comprobacion = false;
+            comprobacion = false;
         }
         return comprobacion;
     }

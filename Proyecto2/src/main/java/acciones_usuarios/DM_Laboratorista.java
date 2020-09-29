@@ -13,6 +13,27 @@ public class DM_Laboratorista extends Datos_Conexion {
     public DM_Laboratorista() {
     }
 
+    public Laboratorista Validar(String codigo, String contraseña) {
+        Laboratorista laboratorista = null;
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT * FROM Laboratorista WHERE Codigo = ? AND Contraseña = ?";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setString(1, codigo);
+            PrSt.setString(2, ObtenerEncriptacion(contraseña));
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                laboratorista = new Laboratorista(rs.getString("Codigo"), rs.getString("Nombre"), rs.getString("Numero_de_Registro"), rs.getString("DPI"), rs.getInt("Telefono"), rs.getString("Tipo_De_Examen"), rs.getString("Correo_Electronico"), rs.getDate("Fecha_Inicio"), rs.getString("Contraseña"));
+            }
+            PrSt.close();
+            rs.close();
+        } catch (Exception e) {
+            laboratorista = null;
+        }
+        return laboratorista;
+    }
+    
     public ArrayList<Laboratorista> VerLaboratoristas() {
         ArrayList<Laboratorista> lista_laboratorista = new ArrayList<>();
         try {

@@ -18,11 +18,11 @@
             <form action ="ServletMedico" method = "POST" class="form-group">
                 <div class="form-group">
                     <label>Codigo</label>
-                    <input type = "text" name = "txcodigo" value="MED-123"  class="form-control">
+                    <input type = "text" name = "txcodigo" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type = "password" name = "pass" value="~fc,X,9;" class="form-control">
+                    <input type = "password" name = "pass" class="form-control">
                 </div>
                 <div class="form-group">
                     <input type="submit" name ="accion" value="Ingresar" class="form-control">

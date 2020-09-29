@@ -41,5 +41,10 @@
                 <a href = "ServletMedico?accion=Reporte4"> Pacientes con mas informes médicos en un intervalo de tiempo. </a>
             </div>
         </div>
+            <div>
+            <form action ="ServletMedico" method = "POST" class="form-group">
+                <input type="submit" name ="accion" value="Salir a la pagina principal" class="btn btn-primary">
+            </form>
+        </div>
     </body>
 </html>

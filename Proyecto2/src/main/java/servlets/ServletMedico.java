@@ -227,6 +227,8 @@ public class ServletMedico extends HttpServlet {
             ArrayList<String> lista = dminf.ReportePacienteConMasInformes(sesion_med, fecha1, fecha2);
             request.setAttribute("lista", lista);
             acceder = "medico/reporte4.jsp";
+        } else if (accion.equalsIgnoreCase("Salir a la pagina principal")){
+            acceder = "index.jsp";
         }
         RequestDispatcher pagina = request.getRequestDispatcher(acceder);
         pagina.forward(request, response);

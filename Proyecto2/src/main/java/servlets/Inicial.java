@@ -70,10 +70,11 @@ public class Inicial extends HttpServlet {
         if (accion.equalsIgnoreCase("paciente")) {
             acceder = "paciente/login.jsp";
 
-        }
-        if (accion.equalsIgnoreCase("medico")) {
+        } else if (accion.equalsIgnoreCase("medico")) {
             acceder = "medico/login.jsp";
-        }
+        } else if (accion.equalsIgnoreCase("laboratorista")) {
+            acceder = "laboratorista/login_lab.jsp";
+        } 
         RequestDispatcher pagina = request.getRequestDispatcher(acceder);
         pagina.forward(request, response);
     }
@@ -95,7 +96,7 @@ public class Inicial extends HttpServlet {
             Carga c = new Carga();
             File fichero = new File(request.getParameter("archivoxml"));
             String msj = c.IngresarDatos(fichero);
-            request.getSession().setAttribute("mensaje", msj);
+            request.getSession().setAttribute("msj", msj);
             acceder = "index.jsp";
             RequestDispatcher pagina = request.getRequestDispatcher(acceder);
             pagina.forward(request, response);

@@ -113,15 +113,16 @@ public class DM_Resultado extends Datos_Conexion{
         return lista;
     }
     
-    public ArrayList<Resultado> ReporteLABExamenesRealizadosDia(String codigo_lab, Date fecha) {
+    public ArrayList<Resultado> ReporteLABExamenesRealizadosDia(String codigo_lab, String f) {
         ArrayList<Resultado> lista = new ArrayList<>();
         try {
+            Date fecha = Date.valueOf(f);
             PreparedStatement PrSt;
             ResultSet rs = null;
             String Query = "SELECT * FROM Resultado WHERE Codigo_Laboratorista = ? AND Fecha = ?";
             PrSt = conexion.prepareStatement(Query);
             PrSt.setString(1, codigo_lab);
-            PrSt.setDate(1, fecha);
+            PrSt.setDate(2, fecha);
             rs = PrSt.executeQuery();
             while (rs.next()) {
                 Resultado resultado = new Resultado(rs.getInt("Codigo"), rs.getString("Codigo_Paciente"), rs.getString("Codigo_Medico"), rs.getString("Codigo_Examen"), rs.getString("Codigo_Laboratorista"), rs.getString("Orden"), rs.getString("Informe"), rs.getDate("Fecha"), rs.getString("Hora"));
@@ -129,7 +130,7 @@ public class DM_Resultado extends Datos_Conexion{
             }
             PrSt.close();
             rs.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             lista.clear();
         }
         return lista;

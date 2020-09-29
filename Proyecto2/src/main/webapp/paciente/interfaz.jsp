@@ -44,7 +44,7 @@
                 <a href="ServletPaciente?accion=Reporte4&id=<%= paciente.getCodigo()%>"> Citas realizadas con un medico en especifico, en un intervalo de tiempo </a>            
             </div>
         </div>
-            <div>
+        <div>
             <form action ="ServletPaciente" method = "POST" class="form-group">
                 <input type="submit" name ="accion" value="Salir a la pagina principal" class="btn btn-primary">
             </form>
