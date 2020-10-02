@@ -14,6 +14,27 @@ public class DM_Administrador extends Datos_Conexion{
     public DM_Administrador() {
     }
     
+    public Administrador Validar(String codigo, String contraseña) {
+        Administrador administrador = null;
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT * FROM Administrador WHERE Codigo = ? AND Contraseña = ?";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setString(1, codigo);
+            PrSt.setString(2, ObtenerEncriptacion(contraseña));
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                administrador = new Administrador(rs.getString("Codigo"), rs.getString("Nombre"), rs.getString("DPI"), rs.getString("Contraseña"));
+            }
+            PrSt.close();
+            rs.close();
+        } catch (Exception e) {
+            administrador = null;
+        }
+        return administrador;
+    }
+    
     public ArrayList<Administrador> VerAdministradores() {
         ArrayList<Administrador> lista = new ArrayList<>();
         try {

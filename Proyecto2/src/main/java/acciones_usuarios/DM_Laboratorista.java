@@ -33,7 +33,7 @@ public class DM_Laboratorista extends Datos_Conexion {
         }
         return laboratorista;
     }
-    
+
     public ArrayList<Laboratorista> VerLaboratoristas() {
         ArrayList<Laboratorista> lista_laboratorista = new ArrayList<>();
         try {
@@ -85,6 +85,7 @@ public class DM_Laboratorista extends Datos_Conexion {
             rs = PrSt.executeQuery();
             while (rs.next()) {
                 Dia_de_trabajo dia = new Dia_de_trabajo(rs.getString("Codigo_Laboratorista"), rs.getString("Dia"));
+                dia.setID(rs.getInt("ID"));
                 lista_dias.add(dia);
             }
             PrSt.close();
@@ -95,25 +96,25 @@ public class DM_Laboratorista extends Datos_Conexion {
         return lista_dias;
     }
 
-    public ArrayList<Dia_de_trabajo> VerDiasPorCodigo(String codigo) {
-        ArrayList<Dia_de_trabajo> lista_dias = new ArrayList<>();
+    public Dia_de_trabajo VerDiasPorCodigo(int ID) {
+        Dia_de_trabajo dia = null;
         try {
             PreparedStatement PrSt;
             ResultSet rs = null;
-            String Query = "SELECT * FROM Dia_De_Trabajo WHERE Codigo_Laboratorista = ?";
+            String Query = "SELECT * FROM Dia_De_Trabajo WHERE ID = ?";
             PrSt = conexion.prepareStatement(Query);
-            PrSt.setString(1, codigo);
+            PrSt.setInt(1, ID);
             rs = PrSt.executeQuery();
             while (rs.next()) {
-                Dia_de_trabajo dia = new Dia_de_trabajo(rs.getString("Codigo_Laboratorista"), rs.getString("Dia"));
-                lista_dias.add(dia);
+                dia = new Dia_de_trabajo(rs.getString("Codigo_Laboratorista"), rs.getString("Dia"));
+                dia.setID(rs.getInt("ID"));
             }
             PrSt.close();
             rs.close();
         } catch (SQLException e) {
-            lista_dias.clear();
+            dia = null;
         }
-        return lista_dias;
+        return dia;
     }
 
     public String AñadirLaboratorista(Laboratorista laboratorista) {
@@ -170,7 +171,7 @@ public class DM_Laboratorista extends Datos_Conexion {
         return mensaje;
     }
 
-    public String ModificarMedico(Laboratorista laboratorista) {
+    public String ModificarLaboratorista(Laboratorista laboratorista) {
         String mensaje = null;
         try {
             PreparedStatement PrSt;
@@ -256,5 +257,26 @@ public class DM_Laboratorista extends Datos_Conexion {
             mensaje = e.toString();
         }
         return mensaje;
+    }
+
+    public Boolean ComprobarDia(String codigo_laboratorista, String dia) {
+        boolean comprobacion = false;
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs;
+            String Query = "SELECT * FROM Dia_De_Trabajo WHERE Codigo_Laboratorista = ? AND Dia = ?";
+            PrSt = conexion.prepareStatement(Query);
+            PrSt.setString(1, codigo_laboratorista);
+            PrSt.setString(2, dia);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                comprobacion = true;
+            }
+            PrSt.close();
+            rs.close();
+        } catch (Exception e) {
+            comprobacion = false;
+        }
+        return comprobacion;
     }
 }

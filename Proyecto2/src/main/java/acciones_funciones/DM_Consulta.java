@@ -78,13 +78,13 @@ public class DM_Consulta extends Datos_Conexion {
         return mensaje;
     }
     
-     public String EliminarConsulta(Consulta consulta) {
+     public String EliminarConsulta(String tipo) {
         String mensaje = null;
         try {
             PreparedStatement PrSt;
             String Query = "DELETE FROM Consulta  WHERE Tipo = ?";
             PrSt = conexion.prepareStatement(Query);
-            PrSt.setString(1, consulta.getTipo());
+            PrSt.setString(1, tipo);
             int ejecucion = PrSt.executeUpdate();
             if (ejecucion > 0) {
                 mensaje = "Informacion Eliminada";

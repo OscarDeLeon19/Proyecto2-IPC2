@@ -4,6 +4,7 @@ package usuarios;
 
 public class Especialidad{
     
+    private int codigo;
     private String codigo_medico;
     private String titulo;
 
@@ -12,6 +13,14 @@ public class Especialidad{
         this.titulo = titulo;
     }
 
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+    
     public String getCodigo_medico() {
         return codigo_medico;
     }

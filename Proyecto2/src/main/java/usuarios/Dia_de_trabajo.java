@@ -2,6 +2,7 @@ package usuarios;
 
 public class Dia_de_trabajo {
 
+    private int ID;
     private String codigo_laboratorista;
     private String Dia;
 
@@ -26,4 +27,13 @@ public class Dia_de_trabajo {
         this.Dia = Dia;
     }
 
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    
 }

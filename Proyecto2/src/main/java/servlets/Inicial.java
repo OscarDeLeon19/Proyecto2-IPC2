@@ -74,6 +74,8 @@ public class Inicial extends HttpServlet {
             acceder = "medico/login.jsp";
         } else if (accion.equalsIgnoreCase("laboratorista")) {
             acceder = "laboratorista/login_lab.jsp";
+        } else if (accion.equalsIgnoreCase("administrador")) {
+            acceder = "admin/login_adm.jsp";
         } 
         RequestDispatcher pagina = request.getRequestDispatcher(acceder);
         pagina.forward(request, response);

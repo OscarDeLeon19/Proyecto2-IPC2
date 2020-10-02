@@ -140,4 +140,25 @@ public class DM_TipoExamen extends Datos_Conexion {
         }
         return mensaje;
     }
+    
+    public String EliminarExamen(Tipo_Examen examen) {
+        String mensaje = null;
+        try {
+            PreparedStatement PrSt;
+            String Query = "DELETE FROM Tipo_Examen WHERE Codigo = ?";
+            PrSt = conexion.prepareStatement(Query);  
+            PrSt.setString(1, examen.getCodigo());
+            int ejecucion = PrSt.executeUpdate();
+            if (ejecucion > 0) {
+                mensaje = "Informacion eliminada";
+            } else {
+                mensaje = "Fallo al eliminar";
+            }
+            PrSt.close();
+        } catch (SQLException e) {
+            mensaje = e.toString();
+            System.out.println(e.toString());
+        }
+        return mensaje;
+    }
 }

@@ -174,6 +174,26 @@ public class DM_Medico extends Datos_Conexion {
         return lista_medicos;
     }
 
+    public ArrayList<Medico> VerTodosLosMedicos() {
+        ArrayList<Medico> lista_medicos = new ArrayList<>();
+        try {
+            PreparedStatement PrSt;
+            ResultSet rs = null;
+            String Query = "SELECT * FROM Medico";
+            PrSt = conexion.prepareStatement(Query);
+            rs = PrSt.executeQuery();
+            while (rs.next()) {
+                Medico medico = new Medico(rs.getString("Codigo"), rs.getString("Nombre"), rs.getInt("Numero_De_Colegiado"), rs.getString("DPI"), rs.getInt("Telefono"), rs.getString("Correo_Electronico"), rs.getString("Hora_Entrada"), rs.getString("Hora_Salida"), rs.getDate("Fecha_Inicio"), rs.getString("Contraseña"));
+                lista_medicos.add(medico);
+            }
+            PrSt.close();
+            rs.close();
+        } catch (SQLException e) {
+            lista_medicos.clear();
+        }
+        return lista_medicos;
+    }
+
     public ArrayList<Especialidad> VerEspecialidades() {
         ArrayList<Especialidad> lista_especialidades = new ArrayList<>();
         try {
@@ -184,6 +204,7 @@ public class DM_Medico extends Datos_Conexion {
             rs = PrSt.executeQuery();
             while (rs.next()) {
                 Especialidad especialidad = new Especialidad(rs.getString("Codigo_Medico"), rs.getString("Titulo"));
+                especialidad.setCodigo(rs.getInt("ID"));
                 lista_especialidades.add(especialidad);
             }
             PrSt.close();
@@ -194,25 +215,25 @@ public class DM_Medico extends Datos_Conexion {
         return lista_especialidades;
     }
 
-    public ArrayList<Especialidad> VerEspecialidadesPorCodigo(String codigo) {
-        ArrayList<Especialidad> lista_especialidades = new ArrayList<>();
+    public Especialidad VerEspecialidadPorCodigo(int codigo) {
+        Especialidad especialidad = null;
         try {
             PreparedStatement PrSt;
             ResultSet rs = null;
-            String Query = "SELECT * FROM Especialidad WHERE Codigo_Medico = ?";
+            String Query = "SELECT * FROM Especialidad WHERE ID = ?";
             PrSt = conexion.prepareStatement(Query);
-            PrSt.setString(1, codigo);
+            PrSt.setInt(1, codigo);
             rs = PrSt.executeQuery();
             while (rs.next()) {
-                Especialidad especialidad = new Especialidad(rs.getString("Codigo_Medico"), rs.getString("Titulo"));
-                lista_especialidades.add(especialidad);
+                especialidad = new Especialidad(rs.getString("Codigo_Medico"), rs.getString("Titulo"));
+                especialidad.setCodigo(rs.getInt("ID"));
             }
             PrSt.close();
             rs.close();
         } catch (SQLException e) {
-            lista_especialidades.clear();
+            especialidad = null;
         }
-        return lista_especialidades;
+        return especialidad;
     }
 
     public String AgregarMedico(Medico medico) {

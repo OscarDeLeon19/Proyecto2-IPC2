@@ -16,8 +16,10 @@
 /home/oscar19/Escritorio/GIT/Proyecto2-IPC2/Proyecto2/src/main/java/principal/Conexion.java
 /home/oscar19/Escritorio/GIT/Proyecto2-IPC2/Proyecto2/src/main/java/acciones_funciones/DM_Consulta.java
 /home/oscar19/Escritorio/GIT/Proyecto2-IPC2/Proyecto2/src/main/java/acciones_usuarios/DM_Paciente.java
+/home/oscar19/Escritorio/GIT/Proyecto2-IPC2/Proyecto2/src/main/java/servlets/ServletLaboratorista.java
 /home/oscar19/Escritorio/GIT/Proyecto2-IPC2/Proyecto2/src/main/java/funciones/Tipo_Examen.java
 /home/oscar19/Escritorio/GIT/Proyecto2-IPC2/Proyecto2/src/main/java/acciones_funciones/DM_Resultado.java
+/home/oscar19/Escritorio/GIT/Proyecto2-IPC2/Proyecto2/src/main/java/servlets/ServletAdmin.java
 /home/oscar19/Escritorio/GIT/Proyecto2-IPC2/Proyecto2/src/main/java/funciones/Cita.java
 /home/oscar19/Escritorio/GIT/Proyecto2-IPC2/Proyecto2/src/main/java/acciones_funciones/DM_TipoExamen.java
 /home/oscar19/Escritorio/GIT/Proyecto2-IPC2/Proyecto2/src/main/java/funciones/Informe.java

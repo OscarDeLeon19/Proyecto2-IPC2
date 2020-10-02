@@ -114,7 +114,8 @@
                 </table>
             </div>            
         </div>
-        <%            String mensaje = (String) session.getAttribute("alerta");
+        <%            
+            String mensaje = (String) session.getAttribute("alerta");
             if (mensaje != null) {
         %>     
         <div class="alert alert-primary">

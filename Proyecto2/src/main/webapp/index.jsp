@@ -33,6 +33,9 @@
         <div>
             <a href="Inicial?accion=laboratorista">Ingreso Laboratorista</a>
         </div>
+        <div>
+            <a href="Inicial?accion=administrador">Ingreso Administrador</a>
+        </div>
         <div>   
             <%
                 DM_Administrador dmadmin = new DM_Administrador();

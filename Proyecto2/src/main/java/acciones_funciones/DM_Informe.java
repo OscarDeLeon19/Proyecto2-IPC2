@@ -65,13 +65,17 @@ public class DM_Informe extends Datos_Conexion {
         return lista;
     }
 
-    public ArrayList<Informe> ReporteLABFechasConMasTrabajo() {
+    public ArrayList<Informe> ReporteADMMedicosConMasInformes(String f1, String f2) {
         ArrayList<Informe> lista = new ArrayList<>();
         try {
+            Date fecha1 = Date.valueOf(f1);
+            Date fecha2 = Date.valueOf(f2);
             PreparedStatement PrSt;
             ResultSet rs = null;
-            String Query = "SELECT COUNT(Codigo_Medico) AS Informes, Codigo_Medico FROM Informe  GROUP BY Codigo_Medico ORDER BY COUNT(Codigo_Medico) DESC LIMIT 10";
+            String Query = "SELECT COUNT(Codigo_Medico) AS Informes, Codigo_Medico FROM Informe WHERE Fecha BETWEEN ? AND ? GROUP BY Codigo_Medico ORDER BY COUNT(Codigo_Medico) DESC LIMIT 10";
             PrSt = conexion.prepareStatement(Query);
+            PrSt.setDate(1, fecha1);
+            PrSt.setDate(2, fecha2);
             rs = PrSt.executeQuery();
             while (rs.next()) {
                 Informe informe = new Informe(rs.getInt("Informes"), "xxxx", rs.getString("Codigo_Medico"), "xxxx", Date.valueOf("2020-05-10"), "XXXX");
