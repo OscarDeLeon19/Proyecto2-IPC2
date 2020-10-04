@@ -83,50 +83,34 @@ public class ServletPaciente extends HttpServlet {
         String accion = request.getParameter("accion");
         if (accion.equalsIgnoreCase("registrar")) {
             acceder = "paciente/registrar.jsp";
-            RequestDispatcher pagina = request.getRequestDispatcher(acceder);
-            pagina.forward(request, response);
         } else if (accion.equalsIgnoreCase("AddConsulta")) {
             Paciente paciente = dmpac.VerPacientePorCodigo(request.getParameter("id"));
             request.setAttribute("paciente", paciente);
             acceder = "paciente/agendar_consulta.jsp";
-            RequestDispatcher pagina = request.getRequestDispatcher(acceder);
-            pagina.forward(request, response);
         } else if (accion.equalsIgnoreCase("VerHistorial")) {
             request.setAttribute("paciente", paciente_sesion);
             acceder = "paciente/historial.jsp";
-            RequestDispatcher pagina = request.getRequestDispatcher(acceder);
-            pagina.forward(request, response);
         } else if (accion.equalsIgnoreCase("VerCitasEnCurso")) {
             request.setAttribute("paciente", paciente_sesion);
             acceder = "paciente/citas.jsp";
-            RequestDispatcher pagina = request.getRequestDispatcher(acceder);
-            pagina.forward(request, response);
         } else if (accion.equalsIgnoreCase("AgendarExamen")) {
-            request.setAttribute("paciente", paciente_sesion);
+            request.getSession().setAttribute("alerta_e", null);
             acceder = "paciente/examen.jsp";
-            RequestDispatcher pagina = request.getRequestDispatcher(acceder);
-            pagina.forward(request, response);
         } else if (accion.equalsIgnoreCase("Reporte1")) {
             ArrayList<Resultado> resultados = dmres.ReporteVerUltimos5Resultados(sesion_pac);
             request.setAttribute("lista", resultados);
             acceder = "paciente/reporte1.jsp";
-            RequestDispatcher pagina = request.getRequestDispatcher(acceder);
-            pagina.forward(request, response);
         } else if (accion.equalsIgnoreCase("Reporte2")) {
             acceder = "paciente/reporte2.jsp";
-            RequestDispatcher pagina = request.getRequestDispatcher(acceder);
-            pagina.forward(request, response);
         } else if (accion.equalsIgnoreCase("Reporte3")) {
             ArrayList<Cita> citas = dmcit.ReporteVerUltimas5Citas(sesion_pac);
             request.setAttribute("lista", citas);
             acceder = "paciente/reporte3.jsp";
-            RequestDispatcher pagina = request.getRequestDispatcher(acceder);
-            pagina.forward(request, response);
         } else if (accion.equalsIgnoreCase("Reporte4")) {
             acceder = "paciente/reporte4.jsp";
-            RequestDispatcher pagina = request.getRequestDispatcher(acceder);
-            pagina.forward(request, response);
         }
+        RequestDispatcher pagina = request.getRequestDispatcher(acceder);
+        pagina.forward(request, response);
     }
 
     /**

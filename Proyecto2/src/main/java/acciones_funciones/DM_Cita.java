@@ -273,7 +273,7 @@ public class DM_Cita extends Datos_Conexion {
     }
 
     public String ObtenerHora(int hora) {
-        if (hora > 23 || hora < 0) {
+        if (hora < 24 && hora >= 0) {
             String Hora = String.valueOf(hora);
             Hora = Hora + ":00";
             return Hora;

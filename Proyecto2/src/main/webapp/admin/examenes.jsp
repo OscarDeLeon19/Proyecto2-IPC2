@@ -22,7 +22,7 @@
         %>
         <div class = "d-flex">
             <div style ="border: 1px solid black" class = "container mt-4 col-lg-4">
-                <h3>Consulta</h3>
+                <h3>Tipo de Examen</h3>
                 <form action ="ServletAdmin" method = "POST" class="form-group">
                     <div class="form-group">
                         <label>Codigo del examen</label>
@@ -62,7 +62,7 @@
                 </form>
             </div>
             <div class = "container mt-4 col-lg-8">
-                <h3>Tipos de Consultas en la empresa</h3>
+                <h3>Tipos de Examen en la empresa</h3>
                 <table class = "table table-hover">
                     <thead>
                         <tr>

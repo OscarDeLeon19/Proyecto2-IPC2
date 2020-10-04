@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">        
         <title>Interfaz Paciente</title>
     </head>
     <body>
@@ -19,6 +19,7 @@
             ArrayList<Resultado> resultados = (ArrayList<Resultado>) request.getAttribute("lista");
         %>
         <div>
+            <h1>Examens realizados de un tipo en especifico en intervalo de tiempo</h1>
             <form action ="ServletPaciente" method = "POST" class="form-group">
                 <div class="form-group">
                     <label>Tipo de Examen</label>
@@ -38,7 +39,7 @@
             </form>
         </div>
         <div>
-            <h1>Ultimos 5 examenes Realizados</h1>
+            <h1>Examens realizados</h1>
             <div style ="border: 1px solid black">
                 <table class = "table table-hover">
                     <thead>
@@ -67,8 +68,16 @@
                             <td><%= resultado.getCodigo_examen()%></td>
                             <td><%= resultado.getCodigo_medico()%></td>
                             <td><%= resultado.getCodigo_laboratorista()%></td> 
-                            <td><%= resultado.getOrden()%></td>
-                            <td><%= resultado.getInforme()%></td> 
+                            <% if (resultado.getOrden() != null) {%>
+                            <td><a href="<%= resultado.getOrden()%>"><%= resultado.getOrden()%></a></td>
+                                <%} else {
+                                %><td> NULL </td><%
+                                }%>
+                            <% if (resultado.getInforme() != null) {%>
+                            <td><a href="<%= resultado.getInforme()%>"><%= resultado.getInforme()%></a></td>
+                                <%} else {
+                                %><td> NULL </td><%
+                                }%>
                             <td><%= resultado.getFecha()%></td> 
                             <td><%= resultado.getHora()%></td> 
                         </tr>

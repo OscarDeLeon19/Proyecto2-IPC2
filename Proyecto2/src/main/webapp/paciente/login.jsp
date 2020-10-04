@@ -27,7 +27,7 @@
                     <input type = "password" name = "pass"  class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="submit" name ="accion" value="Ingresar" class="form-control">
+                    <input type="submit" name ="accion" value="Ingresar" class="btn btn-primary">
                 </div>
             </form>
         </div>
@@ -42,7 +42,7 @@
             }
         %>
         <div>
-            <a href="ServletPaciente?accion=registrar">Registrarse</a>
+            <a href="ServletPaciente?accion=registrar" class="btn btn-primary">Registrarse</a>
         </div>
     </body>
 </html>

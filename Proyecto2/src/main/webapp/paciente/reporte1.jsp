@@ -49,8 +49,16 @@
                             <td><%= resultado.getCodigo_examen()%></td>
                             <td><%= resultado.getCodigo_medico()%></td>
                             <td><%= resultado.getCodigo_laboratorista()%></td> 
-                            <td><%= resultado.getOrden()%></td>
-                            <td><%= resultado.getInforme()%></td> 
+                            <% if (resultado.getOrden() != null) {%>
+                            <td><a href="<%= resultado.getOrden()%>"><%= resultado.getOrden()%></a></td>
+                                <%} else {
+                                %><td> NULL </td><%
+                                }%>
+                            <% if (resultado.getInforme() != null) {%>
+                            <td><a href="<%= resultado.getInforme()%>"><%= resultado.getInforme()%></a></td>
+                                <%} else {
+                                %><td> NULL </td><%
+                                }%>
                             <td><%= resultado.getFecha()%></td> 
                             <td><%= resultado.getHora()%></td> 
                         </tr>

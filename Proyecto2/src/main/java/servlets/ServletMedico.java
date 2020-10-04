@@ -159,7 +159,7 @@ public class ServletMedico extends HttpServlet {
             } catch (Exception e) {
                 mensaje = e.toString();
             }
-            request.getSession().setAttribute("mensaje", mensaje);
+            request.getSession().setAttribute("mensaje_cita", mensaje);
             acceder = "medico/realizar_cita.jsp";
         } else if (accion.equalsIgnoreCase("Agendar Examen")) {
             String alerta = "Fallo para agendar examen";

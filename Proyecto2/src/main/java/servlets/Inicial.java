@@ -69,14 +69,14 @@ public class Inicial extends HttpServlet {
         String accion = request.getParameter("accion");
         if (accion.equalsIgnoreCase("paciente")) {
             acceder = "paciente/login.jsp";
-
+            request.getSession().setAttribute("mensaje", null);
         } else if (accion.equalsIgnoreCase("medico")) {
             acceder = "medico/login.jsp";
         } else if (accion.equalsIgnoreCase("laboratorista")) {
             acceder = "laboratorista/login_lab.jsp";
         } else if (accion.equalsIgnoreCase("administrador")) {
             acceder = "admin/login_adm.jsp";
-        } 
+        }
         RequestDispatcher pagina = request.getRequestDispatcher(acceder);
         pagina.forward(request, response);
     }
@@ -100,10 +100,11 @@ public class Inicial extends HttpServlet {
             String msj = c.IngresarDatos(fichero);
             request.getSession().setAttribute("msj", msj);
             acceder = "index.jsp";
-            RequestDispatcher pagina = request.getRequestDispatcher(acceder);
-            pagina.forward(request, response);
-
+        } else if (accion.equalsIgnoreCase("Salir a la pagina principal")) {
+            acceder = "index.jsp";
         }
+        RequestDispatcher pagina = request.getRequestDispatcher(acceder);
+        pagina.forward(request, response);
     }
 
     /**

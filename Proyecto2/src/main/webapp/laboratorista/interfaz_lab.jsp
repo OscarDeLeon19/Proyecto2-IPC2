@@ -36,5 +36,10 @@
                 <a href="ServletLaboratorista?accion=Reporte3"> 10 fechas con mas trabajo realizado.</a>
             </div>
         </div>
+        <div>
+            <form action ="Inicial" method = "POST" class="form-group">
+                <input type="submit" name ="accion" value="Salir a la pagina principal" class="btn btn-primary">
+            </form>
+        </div>
     </body>
 </html>

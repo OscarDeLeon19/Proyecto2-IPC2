@@ -172,7 +172,7 @@ public class Carga {
                         int telefono = Integer.parseInt(element.getElementsByTagName("TELEFONO").item(0).getTextContent());
                         String tipo_examen = element.getElementsByTagName("EXAMEN").item(0).getTextContent();
                         String correo = element.getElementsByTagName("CORREO").item(0).getTextContent();
-                        Date fecha_inicio = Date.valueOf(element.getElementsByTagName("DIATRABAJO").item(0).getTextContent());
+                        Date fecha_inicio = Date.valueOf(element.getElementsByTagName("TRABAJOF").item(0).getTextContent());
                         String contraseña = element.getElementsByTagName("PASSWORD").item(0).getTextContent();
 
                         Laboratorista laboratorista = new Laboratorista(codigo, nombre, numero_registro, dpi, telefono, tipo_examen, correo, fecha_inicio, contraseña);
