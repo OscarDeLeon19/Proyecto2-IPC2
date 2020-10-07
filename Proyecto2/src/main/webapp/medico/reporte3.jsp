@@ -18,7 +18,7 @@
         <%
             ArrayList<Cita> citas = (ArrayList<Cita>) request.getAttribute("lista");
         %>
-        <div class = "container mt-4 col-lg-8">
+        <div class = "container mt-4 col-lg-8"><!-- Formulario para ingresar la fecha del dia -->
             <form action ="ServletMedico" method = "POST" class="form-group">
                 <div class="form-group">
                     <label>Ingresa la fecha del dia</label>
@@ -29,7 +29,7 @@
                 </div>
             </form>
         </div>
-        <div class = "container mt-4 col-lg-8"> 
+        <div class = "container mt-4 col-lg-8"><!-- Tabla que muestra las citas del paciente --> 
             <h2> Citas </h2>
             <table class = "table table-hover">
                 <thead>
@@ -63,7 +63,7 @@
                 </tbody>
             </table>
         </div>
-        <div>
+        <div><!-- Boton para regresar a la interfaz -->
             <form action ="ServletMedico" method = "POST" class="form-group">
                 <input type="submit" name ="accion" value="Regresar a la interfaz" class="btn btn-primary">
             </form>

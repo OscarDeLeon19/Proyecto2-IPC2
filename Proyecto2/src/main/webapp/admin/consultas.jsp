@@ -20,7 +20,7 @@
             DM_Consulta dmcon = new DM_Consulta();
             ArrayList<Consulta> consultas = dmcon.VerConsultas();
         %>
-        <div class = "d-flex">
+        <div class = "d-flex"><!-- Formulario para agregar o modificar una consulta -->
             <div style ="border: 1px solid black" class = "container mt-4 col-lg-4">
                 <h3>Consulta</h3>
                 <form action ="ServletAdmin" method = "POST" class="form-group">
@@ -38,7 +38,7 @@
                     </div>
                 </form>
             </div>
-            <div class = "container mt-4 col-lg-8">
+            <div class = "container mt-4 col-lg-8"><!-- Tabla que muestra las consultas de la empresa -->
                 <h3>Tipos de Consultas en la empresa</h3>
                 <table class = "table table-hover">
                     <thead>
@@ -77,7 +77,7 @@
         <%
             }
         %>
-        <div>
+        <div><!-- Boton para regresar a la interfaz -->
             <form action ="ServletAdmin" method = "POST" class="form-group">
                 <input type="submit" name ="accion" value="Regresar a la interfaz" class="btn btn-primary">
             </form>

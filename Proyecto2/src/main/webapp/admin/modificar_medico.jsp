@@ -17,7 +17,7 @@
         <%
             Medico medico = (Medico) request.getAttribute("medico");
         %>
-        <div style ="border: 1px solid black" class = "container mt-4 col-lg-4">
+        <div style ="border: 1px solid black" class = "container mt-4 col-lg-4"><!-- Formulario para modificar un medico -->
             <h3>Modificar Medico</h3>
             <form action ="ServletAdmin" method = "POST" class="form-group">
                 <div class="form-group">

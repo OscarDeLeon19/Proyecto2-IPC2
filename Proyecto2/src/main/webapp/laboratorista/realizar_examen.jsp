@@ -15,7 +15,7 @@
         <title>Interfaz Laboratorista</title>
     </head>
     <body>
-        <div class = "container mt-4 col-lg-8"> 
+        <div class = "container mt-4 col-lg-8"><!-- Tabla que muestra los examenes a realizar --> 
             <% ArrayList<Examen> examenes = (ArrayList<Examen>) request.getAttribute("lista"); %>
             <h2> Examenes listos para realizar</h2>
             <table class = "table table-hover">
@@ -53,7 +53,7 @@
                 </tbody>
             </table>
         </div>
-        <div class = "container mt-4 col-lg-8">
+                <div class = "container mt-4 col-lg-8"><!-- Formulario para ingresar el resultado a la base de datos -->
             <h3> Ingresar el examen </h3>
             <form action ="ServletLaboratorista" method = "POST" class="form-group">
                 <div class="form-group">
@@ -87,7 +87,7 @@
         <%
             }
         %>
-        <div>
+        <div><!-- Boton para regresar a la interfaz -->
             <form action ="ServletLaboratorista" method = "POST" class="form-group">
                 <input type="submit" name ="accion" value="Regresar a la interfaz" class="btn btn-primary">
             </form>

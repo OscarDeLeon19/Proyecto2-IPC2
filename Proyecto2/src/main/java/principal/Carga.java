@@ -53,31 +53,11 @@ public class Carga {
     public void setMesajes(ArrayList<String> mesajes) {
         this.mesajes = mesajes;
     }
-
-    public String CargarDatos() {
-        String mensaje = null;
-        try {
-            JFileChooser seleccionar = new JFileChooser();
-            final FileNameExtensionFilter filtro_xml = new FileNameExtensionFilter("Archivo xml", "xml");
-            seleccionar.setFileFilter(filtro_xml);
-            int seleccion = seleccionar.showOpenDialog(null);
-            if (seleccion == JFileChooser.APPROVE_OPTION) {
-                File fichero = seleccionar.getSelectedFile();
-                if (fichero.getName().endsWith(".xml")) {
-                    mensaje = IngresarDatos(fichero);
-                } else {
-                    mensaje = "Archivo incorrecto";
-                }
-
-            } else {
-                mensaje = "No se cargo ningun archivo";
-            }
-        } catch (Exception e) {
-            mensaje = e.toString();
-        }
-        return mensaje;
-    }
-
+    /**
+     * Obtiene los datos del archivo XML y los manda a guardar en la base de datos
+     * @param fichero El fichero donde se encuentra el archivo XML
+     * @return Mensaje que indica si se guardo el archivo o no
+     */
     public String IngresarDatos(File fichero) {
         String mensaje = null;
         if (fichero.getName().endsWith(".xml")) {
@@ -300,44 +280,6 @@ public class Carga {
             }
         } else {
             mensaje = "Error al escoger archivo";
-        }
-        return mensaje;
-    }
-
-    public String CargarOrden(String tipo) {
-        String mensaje = null;
-        try {
-            JFileChooser seleccionar = new JFileChooser();
-            final FileNameExtensionFilter filtro_pdf = new FileNameExtensionFilter("Archivo PDF", "pdf");
-            final FileNameExtensionFilter filtro_img = new FileNameExtensionFilter("Archivo IMG", "jpg", "png");
-            if ("PDF".equals(tipo)) {
-                seleccionar.setFileFilter(filtro_pdf);
-            } else if ("IMG".equals(tipo)) {
-                seleccionar.setFileFilter(filtro_img);
-            }
-
-            int seleccion = seleccionar.showOpenDialog(null);
-            if (seleccion == JFileChooser.APPROVE_OPTION) {
-                File fichero = seleccionar.getSelectedFile();
-                if ("PDF".equals(tipo)) {
-                    if (fichero.getName().endsWith(".pdf")) {
-                        mensaje = fichero.getPath();
-                    } else {
-                        mensaje = "Archivo incorrecto";
-                    }
-                }
-                if ("IMG".equals(tipo)) {
-                    if (fichero.getName().endsWith(".jpg") || fichero.getName().endsWith(".png")) {
-                        mensaje = fichero.getPath();
-                    } else {
-                        mensaje = "Archivo incorrecto";
-                    }
-                }
-            } else {
-                mensaje = "No se cargo ningun archivo";
-            }
-        } catch (Exception e) {
-            mensaje = e.toString();
         }
         return mensaje;
     }

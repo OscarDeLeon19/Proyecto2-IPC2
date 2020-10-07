@@ -1,11 +1,9 @@
 package acciones_usuarios;
 
-import static java.lang.System.out;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import principal.Datos_Conexion;
 import usuarios.Paciente;
 
@@ -14,7 +12,12 @@ public class DM_Paciente extends Datos_Conexion {
     public DM_Paciente() {
 
     }
-
+    /**
+     * Valida si un paciente se encuentra en la base de datos
+     * @param codigo El codigo del paciente
+     * @param contraseña La contraseña del paciente
+     * @return El paciente de la base de datos
+     */
     public Paciente Validar(String codigo, String contraseña){
         Paciente paciente = null;
         try {
@@ -36,7 +39,10 @@ public class DM_Paciente extends Datos_Conexion {
         }
         return paciente;
     }
-    
+    /**
+     * Obtiene todos los pacientes que se encuentran en la base de datos
+     * @return La lista de pacientes
+     */
     public ArrayList<Paciente> VerPacientes() {
         ArrayList<Paciente> lista = new ArrayList<>();
         try {
@@ -56,7 +62,11 @@ public class DM_Paciente extends Datos_Conexion {
         }
         return lista;
     }
-
+    /**
+     * Obtiene un paciente en base a su codigo
+     * @param codigo El codigo del paciente
+     * @return El paciente obtenido
+     */
     public Paciente VerPacientePorCodigo(String codigo) {
         Paciente paciente = null;
         try {
@@ -77,7 +87,11 @@ public class DM_Paciente extends Datos_Conexion {
         }
         return paciente;
     }
-
+    /**
+     * Agrega un paciente a la base de datos
+     * @param paciente El paciente que agregaremos
+     * @return Un mensaje que indica si la operacion fue exitosa o no
+     */
     public String AgregarPaciente(Paciente paciente) {
         String mensaje = null;
         try {
@@ -107,7 +121,11 @@ public class DM_Paciente extends Datos_Conexion {
         }
         return mensaje;
     }
-
+    /**
+     * Modifica un paciente en la base de datos
+     * @param paciente El paciene que se va a modificar
+     * @return Un mensaje que indica si la operacion fue exitosa o no
+     */
     public String ModificarPaciente(Paciente paciente) {
         String mensaje = null;
         try {
@@ -135,7 +153,11 @@ public class DM_Paciente extends Datos_Conexion {
         }
         return mensaje;
     }
-
+    /**
+     * Elimina un paciente de la base de datos
+     * @param codigo El codigo del paciente
+     * @return Un mensaje que indica si la operacion fue exitosa o no
+     */
     public String EliminarPaciente(String codigo) {
         String mensaje;
         try {

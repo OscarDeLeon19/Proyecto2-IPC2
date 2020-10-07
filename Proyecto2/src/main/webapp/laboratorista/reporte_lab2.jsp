@@ -15,7 +15,7 @@
         <title>Interfaz Laboratorista</title>
     </head>
     <body>
-        <div class = "container mt-4 col-lg-8">
+        <div class = "container mt-4 col-lg-8"><!-- Formulario para ingresar la fecha del dia de hoy -->
             <form action ="ServletLaboratorista" method = "POST" class="form-group">
                 <div class="form-group">
                     <label>Ingresa la fecha del dia de hoy </label>
@@ -26,7 +26,7 @@
                 </div>
             </form>
         </div>
-        <div class = "container mt-4 col-lg-8">
+        <div class = "container mt-4 col-lg-8"><!-- Tabla que muestra los resultados realizados -->
             <%
                 ArrayList<Resultado> resultados = (ArrayList<Resultado>) request.getAttribute("lista");
             %>
@@ -61,14 +61,14 @@
                             <td><%= resultado.getCodigo_laboratorista()%></td> 
                             <% if (resultado.getOrden() != null) {%>
                             <td><a href="<%= resultado.getOrden()%>"><%= resultado.getOrden()%></a></td>
-                            <%} else {
-                            %><td> NULL </td><%
+                                <%} else {
+                                %><td> NULL </td><%
                                 }%>
                             <% if (resultado.getInforme() != null) {%>
                             <td><a href="<%= resultado.getInforme()%>"><%= resultado.getInforme()%></a></td>
                                 <%} else {
                                 %><td> NULL </td><%
-                                }%>
+                                    }%>
                             <td><%= resultado.getFecha()%></td> 
                             <td><%= resultado.getHora()%></td> 
                         </tr>
@@ -79,7 +79,7 @@
                 </table>
             </div>
         </div>
-        <div>
+        <div><!-- Boton para regresar a la interfaz -->
             <form action ="ServletLaboratorista" method = "POST" class="form-group">
                 <input type="submit" name ="accion" value="Regresar a la interfaz" class="btn btn-primary">
             </form>

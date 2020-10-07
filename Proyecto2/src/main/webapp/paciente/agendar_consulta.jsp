@@ -23,7 +23,7 @@
             ArrayList<Consulta> lista = dmcon.VerConsultas();
         %>
         <div class = "d-flex">
-            <div style ="border: 1px solid black" class = "container mt-4 col-lg-2">
+            <div style ="border: 1px solid black" class = "container mt-4 col-lg-2"><!-- Formulario para agendar una consulta -->
                 <h3>Agendar Cita</h3>
                 <form action ="ServletPaciente" method = "POST" class="form-group">
                     <div class="form-group">
@@ -62,7 +62,7 @@
                 </form>
             </div>
             <div style ="border: 1px solid black" class = "container mt-4 col-lg-12">
-                <div>
+                <div><!-- Botones y caja para la busqueda de los medicos  -->
                     <form action ="ServletPaciente" method = "POST" class="form-group">
                         <div class="form-group">
                             <input type="submit" name ="accion" value="Busqueda Por Nombre" class="btn btn-primary">
@@ -74,7 +74,7 @@
                     </form>    
                 </div>
                 <% ArrayList<Medico> lista_medicos = (ArrayList<Medico>) request.getAttribute("medicos");            %>
-                <table class = "table table-hover">
+                <table class = "table table-hover"><!-- Tabla que muestra los medicos en la base de datos -->
                     <thead>
                         <tr>
                             <th>Codigo de Medico</th>

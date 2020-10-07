@@ -14,12 +14,16 @@ public class Datos_Conexion {
     private final String USSERNAME = "root";
     private final String PASSWORD = "mariobros99";
 
-    Conexion clase_conexion = new Conexion(URL, USSERNAME, PASSWORD);
+    private Conexion clase_conexion = new Conexion(URL, USSERNAME, PASSWORD);
     protected Connection conexion = clase_conexion.getConnection();
 
     public Datos_Conexion() {
     }
-
+    /**
+     * Encripta una contraseña para guardarla en la base de datos
+     * @param contraseña La contraseña que se va a encriptar
+     * @return La contraseña encriptada
+     */
     public String ObtenerEncriptacion(String contraseña) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
@@ -35,7 +39,9 @@ public class Datos_Conexion {
         }
 
     }
-
+    /**
+     * Elimina la sesion de la base de datos 
+     */
     public void EliminarSesion() {
         try {
             PreparedStatement PrSt;
@@ -47,7 +53,10 @@ public class Datos_Conexion {
             System.out.println(e.toString());
         }
     }
-
+    /**
+     * Obtiene el codigo de la persona que esta en sesion durante el uso de la aplicacion WEB
+     * @return 
+     */
     public String ObtenerCodigoSesion() {
         String codigo = null;
         try {
@@ -66,7 +75,10 @@ public class Datos_Conexion {
         }
         return codigo;
     }
-
+    /**
+     * Guarda el codigo de la persona que esta en sesion en la base de datos
+     * @param codigo 
+     */
     public void AbrirSesion(String codigo) {
 
         try {

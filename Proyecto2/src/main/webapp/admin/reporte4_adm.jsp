@@ -20,7 +20,7 @@
             DM_Examen dmexa = new DM_Examen();
             ArrayList<Examen> examenes = dmexa.ReporteVerExamenesDemandados();
         %>
-        <div>
+        <div><!-- Tabla que muestra todos los examenes -->
             <h3> Examenes mas Demandados </h3>
             <table class = "table table-hover">
                 <thead>
@@ -45,7 +45,7 @@
                 </tbody>
             </table>
         </div>
-        <div>
+        <div><!-- Boton para regresar a la interfaz -->
             <form action ="ServletAdmin" method = "POST" class="form-group">
                 <input type="submit" name ="accion" value="Regresar a la interfaz" class="btn btn-primary">
             </form>

@@ -27,7 +27,7 @@
 
         %>
         <h2> Ganancias generadas por pacientes </h2>
-        <div class = "container mt-4 col-lg-8"> 
+        <div class = "container mt-4 col-lg-8"><!-- Tabla que muestra las ganancias generadas por medico en citas --> 
             <h3> Citas </h3>
             <table class = "table table-hover">
                 <thead>
@@ -52,7 +52,7 @@
                 </tbody>
             </table>
             <h3> Examen </h3>
-            <table class = "table table-hover">
+            <table class = "table table-hover"><!-- Tabla que muestra las ganancias generadas por paciente en la base de datos -->
                 <thead>
                     <tr>
                         <th>Ganancias</th>
@@ -75,7 +75,7 @@
                 </tbody>
             </table>
         </div>
-        <div>
+        <div><!-- Boton para regresar a la interfaz -->
             <form action ="ServletAdmin" method = "POST" class="form-group">
                 <input type="submit" name ="accion" value="Regresar a la interfaz" class="btn btn-primary">
             </form>

@@ -13,7 +13,7 @@
         <title>Interfaz Laboratorista</title>
     </head>
     <body>
-        <div>
+        <div><!-- Formulario para ingresar los datos del laboratorista -->
             <h1>Login Laboratorista</h1>
             <form action ="ServletLaboratorista" method = "POST" class="form-group">
                 <div class="form-group">

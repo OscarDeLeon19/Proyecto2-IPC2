@@ -17,7 +17,7 @@
         <%
             Medico medico = (Medico) request.getAttribute("medico");
         %>
-        <div>
+        <div><!-- Enlaces para acciones del medico -->
             <h1>Usuario: <%= medico.getNombre()%></h1>
             <div>
                 <a href = "ServletMedico?accion=RealizarCita"> Realizar una cita </a>
@@ -26,7 +26,7 @@
                 <a href = "ServletMedico?accion=AgendarExamen"> Agendar Examen para un paciente </a>
             </div>
         </div>
-        <div>
+        <div><!-- Enlaces para los reportes del medico -->
             <h1> Reportes </h1>
             <div>
                 <a href = "ServletMedico?accion=Reporte1"> Historial Medico de Pacientes </a>
@@ -41,7 +41,7 @@
                 <a href = "ServletMedico?accion=Reporte4"> Pacientes con mas informes médicos en un intervalo de tiempo. </a>
             </div>
         </div>
-        <div>
+            <div><!-- Enlace para salir a la pagina inicial -->
             <form action ="Inicial" method = "POST" class="form-group">
                 <input type="submit" name ="accion" value="Salir a la pagina principal" class="btn btn-primary">
             </form>

@@ -19,7 +19,7 @@
         <title>Interfaz Medico</title>
     </head>
     <body>        
-        <div class = "container mt-4 col-lg-8">
+        <div class = "container mt-4 col-lg-8"><!-- Formulario para ingresar el codigo del paciente -->
             <form action ="ServletMedico" method = "POST" class="form-group">
                 <div class="form-group">
                     <label>Ingresa el codigo del paciente</label>
@@ -40,7 +40,7 @@
                 ArrayList<Resultado> resultados = dmres.VerHistorialPacientes(paciente.getCodigo());
 
         %>
-        <div class = "container mt-4 col-lg-8"> 
+        <div class = "container mt-4 col-lg-8"><!-- Tabla que muestra las citas del paciente --> 
             <h2> Historial de citas realizadas en el hospital</h2>
             <table class = "table table-hover">
                 <thead>
@@ -75,7 +75,7 @@
                 </tbody>
             </table>
         </div>
-        <div class = "container mt-4 col-lg-8"> 
+        <div class = "container mt-4 col-lg-8"><!-- Tabla que muestra los resultados del paciente --> 
             <h2> Historial de examens realizadas en el hospital</h2>
             <table class = "table table-hover">
                 <thead>
@@ -113,7 +113,7 @@
                         <td><a href="<%= resultado.getInforme()%>"><%= resultado.getInforme()%></a></td>
                             <%} else {
                             %><td> NULL </td><%
-                                    }%>
+                                }%>
                         <td><%= resultado.getFecha()%></td> 
                         <td><%= resultado.getHora()%></td> 
                     </tr>
@@ -125,7 +125,7 @@
             </table>
         </div>
         <% }%>        
-        <div>
+        <div><!-- Boton para regresar a la interfaz -->
             <form action ="ServletMedico" method = "POST" class="form-group">
                 <input type="submit" name ="accion" value="Regresar a la interfaz" class="btn btn-primary">
             </form>

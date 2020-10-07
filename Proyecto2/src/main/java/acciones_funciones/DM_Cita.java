@@ -72,7 +72,11 @@ public class DM_Cita extends Datos_Conexion {
         }
         return cita;
     }
-
+    /**
+     * Cambia el estado de la cita a Realizada en la base de datos
+     * @param cita La cita a modificar 
+     * @return Si la modificacion fue exitosa o no
+     */
     public Boolean RealizarCita(Cita cita) {
         boolean mensaje = false;
         try {
@@ -91,7 +95,11 @@ public class DM_Cita extends Datos_Conexion {
         }
         return mensaje;
     }
-
+    /**
+     * Obtiene algunos parametros del informe despues de realizar una cita
+     * @param codigo El codigo de la cita realizada
+     * @return El informe
+     */
     public Informe ObtenerInforme(String codigo) {
         Informe informe = null;
         try {
@@ -111,7 +119,11 @@ public class DM_Cita extends Datos_Conexion {
         }
         return informe;
     }
-
+    /**
+     * Muestra todas las citas en las que ha estado un paciente
+     * @param codigo_paciente El codigo del paciente
+     * @return La lista de citas
+     */
     public ArrayList<Cita> VerHistorialCitasPaciente(String codigo_paciente) {
         ArrayList<Cita> lista = new ArrayList<>();
         try {
@@ -132,7 +144,11 @@ public class DM_Cita extends Datos_Conexion {
         }
         return lista;
     }
-
+    /**
+     * Obtiene todas las citas que aun no se han realizado de un paciente
+     * @param codigo_paciente El codigo del paciente
+     * @return La lista de citas
+     */
     public ArrayList<Cita> VerCitasEnCurso(String codigo_paciente) {
         ArrayList<Cita> lista = new ArrayList<>();
         try {
@@ -153,7 +169,11 @@ public class DM_Cita extends Datos_Conexion {
         }
         return lista;
     }
-
+    /**
+     * Obtiene las ultimas 5 citas realizadas por un paciente
+     * @param codigo_paciente El codigo del paciente
+     * @return La lista de citas
+     */
     public ArrayList<Cita> ReporteVerUltimas5Citas(String codigo_paciente) {
         ArrayList<Cita> lista = new ArrayList<>();
         try {
@@ -174,7 +194,14 @@ public class DM_Cita extends Datos_Conexion {
         }
         return lista;
     }
-
+    /**
+     * Muetra todas las citas realizadas con un medico en especifico en un intervalo de tiempo
+     * @param codigo_paciente El codigo del paciente
+     * @param nombre_medico El nombre del medico
+     * @param f1 La primera fecha
+     * @param f2 La segunda fecha
+     * @return  La lista de citas
+     */
     public ArrayList<Cita> ReporteVerCitasPorMedicoYFechas(String codigo_paciente, String nombre_medico, String f1, String f2) {
         ArrayList<Cita> lista = new ArrayList<>();
         try {
@@ -201,7 +228,13 @@ public class DM_Cita extends Datos_Conexion {
         }
         return lista;
     }
-
+    /**
+     * Muestra todas las citas realizadas por un medico en un intervalo de tiempo
+     * @param codigo_medico El codigo del medico
+     * @param f1 La primera fecha
+     * @param f2 La segunda fecha
+     * @return La lista de citas
+     */
     public ArrayList<Cita> ReporteCitasEnIntervaloDeTiempo(String codigo_medico, String f1, String f2) {
         ArrayList<Cita> lista = new ArrayList<>();
         try {
@@ -226,7 +259,12 @@ public class DM_Cita extends Datos_Conexion {
         }
         return lista;
     }
-
+    /**
+     * Obtiene las citas de un medico para la fecha ingresada
+     * @param codigo_medica El codigo del medico
+     * @param f La fecha del dia
+     * @return La lista de citas
+     */
     public ArrayList<Cita> ReportesCitasDiaActual(String codigo_medica, String f) {
         ArrayList<Cita> lista = new ArrayList<>();
         try {
@@ -248,8 +286,13 @@ public class DM_Cita extends Datos_Conexion {
             lista.clear();
         }
         return lista;
-    }
-
+    }   
+    /**
+     * Muestra Las citas con un paciente que aun no se han realizado
+     * @param codigo_paciente El codigo del pacietne
+     * @param codigo_medico El codigo del medico
+     * @return 
+     */
     public ArrayList<Cita> VerCitaActual(String codigo_paciente, String codigo_medico) {
         ArrayList<Cita> lista = new ArrayList<>();
         try {
@@ -271,7 +314,11 @@ public class DM_Cita extends Datos_Conexion {
         }
         return lista;
     }
-
+    /**
+     * Obtiene una hora de un numero entero
+     * @param hora El numero entero de la hora
+     * @return La hora transformada
+     */
     public String ObtenerHora(int hora) {
         if (hora < 24 && hora >= 0) {
             String Hora = String.valueOf(hora);
@@ -281,7 +328,13 @@ public class DM_Cita extends Datos_Conexion {
             return null;
         }
     }
-
+    /**
+     * Comprueba que el medico no tenga una cita en curso en una fecha y en una hora
+     * @param codigo_medico El codigo del medico
+     * @param fecha La fecha del dia
+     * @param hora La hora de la cita
+     * @return Si el medico tiene cita o no
+     */
     public Boolean ComprobarCita(String codigo_medico, Date fecha, int hora) {
         boolean comprobacion = false;
         try {
@@ -304,7 +357,12 @@ public class DM_Cita extends Datos_Conexion {
         }
         return comprobacion;
     }
-    
+    /**
+     * Obtiene las ganancias generada por un medico en citas, en un intervalo de tiempo
+     * @param f1 La primera fecha
+     * @param f2 La segunda fecha
+     * @return  La lista de citas
+     */
     public ArrayList<Cita> ReporteVerGananciasMedico(String f1, String f2) {
         ArrayList<Cita> lista = new ArrayList<>();
         try {
@@ -328,7 +386,12 @@ public class DM_Cita extends Datos_Conexion {
         }
         return lista;
     }
-    
+    /**
+     * Obtiene un conteo de los medicos con menos citas realizadas en el hospital
+     * @param f1 La primera fecha
+     * @param f2 La segunda fecha
+     * @return La lista de citas
+     */
     public ArrayList<Cita> ReporteMedicosCitasMenores(String f1, String f2) {
         ArrayList<Cita> lista = new ArrayList<>();
         try {
@@ -352,7 +415,10 @@ public class DM_Cita extends Datos_Conexion {
         }
         return lista;
     }
-    
+    /**
+     * Obtiene todas las ganancias generadas por un paciente en citas
+     * @return La lista de citas
+     */
     public ArrayList<Cita> ReporteVerGananciasPaciente() {
         ArrayList<Cita> lista = new ArrayList<>();
         try {

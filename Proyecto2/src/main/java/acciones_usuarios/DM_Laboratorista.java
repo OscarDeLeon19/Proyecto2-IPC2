@@ -12,7 +12,12 @@ public class DM_Laboratorista extends Datos_Conexion {
 
     public DM_Laboratorista() {
     }
-
+    /**
+     * Valida si existe el laboratorista en la base de datos
+     * @param codigo El codigo del laboratorista
+     * @param contraseña La constraseña del laboratorista
+     * @return El laboratorista validado
+     */
     public Laboratorista Validar(String codigo, String contraseña) {
         Laboratorista laboratorista = null;
         try {
@@ -33,7 +38,10 @@ public class DM_Laboratorista extends Datos_Conexion {
         }
         return laboratorista;
     }
-
+    /**
+     * Muestra todos los laboratoristas de la base de datos
+     * @return La lista de laboratoristas
+     */
     public ArrayList<Laboratorista> VerLaboratoristas() {
         ArrayList<Laboratorista> lista_laboratorista = new ArrayList<>();
         try {
@@ -53,7 +61,11 @@ public class DM_Laboratorista extends Datos_Conexion {
         }
         return lista_laboratorista;
     }
-
+    /**
+     * Muestra un laboratorista en base a su codigo
+     * @param codigo El codigo del laboratorista
+     * @return El laboratorista obtenido
+     */
     public Laboratorista VerLaboratoristasPorCodigo(String codigo) {
         Laboratorista laboratorista = null;
         try {
@@ -74,7 +86,10 @@ public class DM_Laboratorista extends Datos_Conexion {
         }
         return laboratorista;
     }
-
+    /**
+     * Muestra todos los dias de trabajo de cada laboratorista
+     * @return La lista de dias de trabajo
+     */
     public ArrayList<Dia_de_trabajo> VerDias() {
         ArrayList<Dia_de_trabajo> lista_dias = new ArrayList<>();
         try {
@@ -95,7 +110,11 @@ public class DM_Laboratorista extends Datos_Conexion {
         }
         return lista_dias;
     }
-
+    /**
+     * Obtiene un dia de trabajo en base al ID
+     * @param ID El ID del dia de trabajo
+     * @return El dia de trabajo
+     */
     public Dia_de_trabajo VerDiasPorCodigo(int ID) {
         Dia_de_trabajo dia = null;
         try {
@@ -116,7 +135,11 @@ public class DM_Laboratorista extends Datos_Conexion {
         }
         return dia;
     }
-
+    /**
+     * Añade un laboratorista a la base de datos
+     * @param laboratorista El laboratorista que vamos a agregar
+     * @return El mensaje que indica si fue efectivo el ingreso del laboratorista o no
+     */
     public String AñadirLaboratorista(Laboratorista laboratorista) {
         String mensaje = null;
         try {
@@ -153,8 +176,12 @@ public class DM_Laboratorista extends Datos_Conexion {
             System.out.println(e.toString());
         }
         return mensaje;
-    }
-
+    }   
+    /**
+     * Agrega un dia de trabajo de un laboratorista a la base de datos
+     * @param dia El dia de trabajo
+     * @return Si la operacion fue exitosa o no
+     */
     public String AgregarDiaDeTrabajo(Dia_de_trabajo dia) {
         String mensaje = null;
         try {
@@ -170,7 +197,11 @@ public class DM_Laboratorista extends Datos_Conexion {
         }
         return mensaje;
     }
-
+    /**
+     * Modifica un laboratorista en la base de datos
+     * @param laboratorista El laboratorista que vamos a modificar
+     * @return Un mensaje que indica si la operacion fue exitosa o no
+     */
     public String ModificarLaboratorista(Laboratorista laboratorista) {
         String mensaje = null;
         try {
@@ -197,7 +228,11 @@ public class DM_Laboratorista extends Datos_Conexion {
         }
         return mensaje;
     }
-
+    /**
+     * Elimina un laboratorista de la base de datos
+     * @param codigo El codigo del laboratorista que se eliminara
+     * @return Un mensaje que indica si la operacion fue exitosa o no
+     */
     public String EliminarLaboratorista(String codigo) {
         String mensaje;
         try {
@@ -217,7 +252,12 @@ public class DM_Laboratorista extends Datos_Conexion {
         }
         return mensaje;
     }
-
+    /**
+     * Elimina un dia de trabajo de laboratorista de la base de datos
+     * @param codigo_laboratorista el codigo del laboratorista
+     * @param dia El dia que se va a eliminar
+     * @return Un mensaje que indica si la operacion fue exitosa o no
+     */
     public String EliminarDia(String codigo_laboratorista, String dia) {
         String mensaje;
         try {
@@ -238,27 +278,12 @@ public class DM_Laboratorista extends Datos_Conexion {
         }
         return mensaje;
     }
-
-    public String EliminarTodosLosDias(String codigo_laboratorista) {
-        String mensaje;
-        try {
-            PreparedStatement PrSt;
-            String Query = "DELETE FROM Dia_De_Trabajo WHERE Codigo_Laboratorista = ?";
-            PrSt = conexion.prepareStatement(Query);
-            PrSt.setString(1, codigo_laboratorista);
-            int ejecucion = PrSt.executeUpdate();
-            if (ejecucion > 0) {
-                mensaje = "Informacion eliminada";
-            } else {
-                mensaje = "No existe ese codigo o dia";
-            }
-            PrSt.close();
-        } catch (Exception e) {
-            mensaje = e.toString();
-        }
-        return mensaje;
-    }
-
+    /**
+     * Comprueba si un dia ya esta en la base de datos
+     * @param codigo_laboratorista El codigo del laboratorista
+     * @param dia El dia que se va a comprobar
+     * @return Si el dia esta en la base de datos o no
+     */
     public Boolean ComprobarDia(String codigo_laboratorista, String dia) {
         boolean comprobacion = false;
         try {

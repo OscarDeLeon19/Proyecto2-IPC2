@@ -20,7 +20,7 @@
                 ArrayList<Resultado> resultados = (ArrayList<Resultado>) request.getAttribute("lista");
             %>
             <h1>10 fechas con mas trabajo realizado</h1>
-            <div style ="border: 1px solid black">
+            <div style ="border: 1px solid black"><!-- Tabla que muestra las fechas con mas trabajo realizado -->
                 <table class = "table table-hover">
                     <thead>
                         <tr>
@@ -46,7 +46,7 @@
                 </table>
             </div>
         </div>
-        <div class = "container mt-4 col-lg-8">
+        <div class = "container mt-4 col-lg-8"><!-- Boton para regresar a la interfaz -->
             <form action ="ServletLaboratorista" method = "POST" class="form-group">
                 <input type="submit" name ="accion" value="Regresar a la interfaz" class="btn btn-primary">
             </form>

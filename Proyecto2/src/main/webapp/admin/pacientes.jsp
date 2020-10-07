@@ -20,7 +20,7 @@
             DM_Paciente dmpac = new DM_Paciente();
             ArrayList<Paciente> pacientes = dmpac.VerPacientes();
         %>
-        <div>
+        <div><!-- Tabla que muestra los pacientes de la empresa -->
             <h3>Pacientes en la empresa</h3>
             <table class = "table table-hover">
                 <thead>

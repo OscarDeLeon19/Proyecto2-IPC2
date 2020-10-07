@@ -22,7 +22,7 @@
             ArrayList<Laboratorista> labs = dmlab.VerLaboratoristas();
             ArrayList<Dia_de_trabajo> dias = dmlab.VerDias();
         %>
-        <div class = "d-flex">
+        <div class = "d-flex"><!-- Formulario para agregar un laboratorista -->
             <div style ="border: 1px solid black" class = "container mt-4 col-lg-4">
                 <h3>Laboratorista</h3>
                 <form action ="ServletAdmin" method = "POST" class="form-group">
@@ -67,7 +67,7 @@
                     </div>
                 </form>
             </div>
-            <div class = "container mt-4 col-lg-8">
+            <div class = "container mt-4 col-lg-8"><!-- Tabla que muestra a los laboratoristas de la empresa -->
                 <h3>Laboratoristas en la empresa</h3>
                 <table class = "table table-hover">
                     <thead>
@@ -84,7 +84,6 @@
                         </tr>
                     </thead>
                     <tbody>
-
                         <% if (labs != null) {
                                 for (int i = 0; i < labs.size(); i++) {
                                     Laboratorista m = labs.get(i);
@@ -112,7 +111,7 @@
                 </table>
             </div>
         </div>
-        <div class = "d-flex">
+        <div class = "d-flex"><!-- Formulario para ingresar un dia de trabajo de laboratorista -->
             <div style ="border: 1px solid black" class = "container mt-4 col-lg-4">
                 <h3>Dias de trabajo</h3>
                 <form action ="ServletAdmin" method = "POST" class="form-group">
@@ -122,14 +121,22 @@
                     </div>
                     <div class="form-group">
                         <label>Dia de trabajo</label>
-                        <input type = "text" name = "dia" class="form-control">
+                        <select class="form-control" name = "dia" class="form-control">
+                            <option>Lunes</option>
+                            <option>Martes</option>
+                            <option>Miercoles</option> 
+                            <option>Jueves</option> 
+                            <option>Viernes</option> 
+                            <option>Sabado</option> 
+                            <option>Domingo</option> 
+                        </select>
                     </div> 
                     <div class="form-group">
                         <input type="submit" name ="accion" value="Agregar Dia" class="btn btn-primary">
                     </div>
                 </form>
             </div>
-            <div class = "container mt-4 col-lg-8">
+            <div class = "container mt-4 col-lg-8"><!-- Tabla que muestra los dias de trabajo de todos los laboratoristas -->
                 <h3>Dias de trabajos de los laboratoristas</h3>
                 <table class = "table table-hover">
                     <thead>
@@ -169,7 +176,7 @@
         <%
             }
         %>
-        <div>
+        <div><!-- Boton para regresar a la interfaz -->
             <form action ="ServletAdmin" method = "POST" class="form-group">
                 <input type="submit" name ="accion" value="Regresar a la interfaz" class="btn btn-primary">
             </form>

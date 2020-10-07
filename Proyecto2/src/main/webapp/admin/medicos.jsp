@@ -27,7 +27,7 @@
                 medico = (Medico) med;
             }
         %>
-        <div class = "d-flex">
+        <div class = "d-flex"><!-- Fomulario para ingresar los medicos a la base de datos -->
             <div style ="border: 1px solid black" class = "container mt-4 col-lg-4">
                 <h3>Medico</h3>
                 <form action ="ServletAdmin" method = "POST" class="form-group">
@@ -76,7 +76,7 @@
                     </div>
                 </form>
             </div>
-            <div class = "container mt-4 col-lg-8">
+            <div class = "container mt-4 col-lg-8"><!-- Tabla para mostrar los medicos de la empresa -->
                 <h3>Medicos en la empresa</h3>
                 <table class = "table table-hover">
                     <thead>
@@ -94,7 +94,6 @@
                         </tr>
                     </thead>
                     <tbody>
-
                         <% if (medicos != null) {
                                 for (int i = 0; i < medicos.size(); i++) {
                                     Medico m = medicos.get(i);
@@ -123,7 +122,7 @@
                 </table>
             </div>
         </div>            
-        <div class = "d-flex">
+        <div class = "d-flex"><!-- Formulario para ingresar una especialidad a un medico -->
             <div style ="border: 1px solid black" class = "container mt-4 col-lg-4">
                 <h3>Especialidades</h3>
                 <form action ="ServletAdmin" method = "POST" class="form-group">
@@ -140,7 +139,7 @@
                     </div>
                 </form>
             </div>
-            <div class = "container mt-4 col-lg-8">
+            <div class = "container mt-4 col-lg-8"><!-- Tabla que muestra las especialidades de los medicos -->
                 <h3>Medicos en la empresa</h3>
                 <table class = "table table-hover">
                     <thead>
@@ -157,8 +156,8 @@
 
                         %>
                         <tr>
-                            <td><%= e.getCodigo_medico() %></td>
-                            <td><%= e.getTitulo() %></td>
+                            <td><%= e.getCodigo_medico()%></td>
+                            <td><%= e.getTitulo()%></td>
                             <td> 
                                 <a href="ServletAdmin?accion=eliminar_especialidad&code=<%= e.getCodigo()%>"> Eliminar </a>
                             </td>
@@ -180,7 +179,7 @@
         <%
             }
         %>
-        <div>
+        <div><!-- Boton para regresar a la interfaz -->
             <form action ="ServletAdmin" method = "POST" class="form-group">
                 <input type="submit" name ="accion" value="Regresar a la interfaz" class="btn btn-primary">
             </form>

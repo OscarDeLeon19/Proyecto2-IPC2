@@ -26,7 +26,7 @@
             ArrayList<Cita> citas = dmcit.VerCitasEnCurso(paciente.getCodigo());
             ArrayList<Examen> examenes = dmexa.VerExamenesSinRealizarPaciente(paciente.getCodigo());
         %>
-        <div class = "container mt-4 col-lg-8"> 
+        <div class = "container mt-4 col-lg-8"><!-- Tabla que muestra las citas pendientes --> 
             <h2> Citas por realizar</h2>
             <table class = "table table-hover">
                 <thead>
@@ -61,7 +61,7 @@
                 </tbody>
             </table>
         </div>
-        <div class = "container mt-4 col-lg-8"> 
+        <div class = "container mt-4 col-lg-8"><!-- Tabla que muestra los examenes pendientes --> 
             <h2> Examenes que deben realizar</h2>
             <table class = "table table-hover">
                 <thead>
@@ -98,7 +98,7 @@
                 </tbody>
             </table>
         </div>
-        <div>
+        <div><!-- Boton para regresar a la interfaz -->
             <form action ="ServletPaciente" method = "POST" class="form-group">
                 <input type="submit" name ="accion" value="Regresar a la interfaz" class="btn btn-primary">
             </form>

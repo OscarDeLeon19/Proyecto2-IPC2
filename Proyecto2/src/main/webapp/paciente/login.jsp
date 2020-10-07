@@ -15,7 +15,7 @@
         <title>Interfaz Paciente</title>
     </head>
     <body>
-        <div>
+        <div><!-- El formulario para el login de el paciente -->
             <h1>Login Paciente</h1>
             <form action ="ServletPaciente" method = "POST" class="form-group">
                 <div class="form-group">

@@ -15,13 +15,13 @@
     </head>
     <body>
         <% Laboratorista lab = (Laboratorista) request.getAttribute("laboratorista");%>
-        <div>
+        <div><!-- Enlaces para las acciones del laboratorista -->
             <h1>Usuario: <%= lab.getNombre()%></h1>
             <div>
                 <a href="ServletLaboratorista?accion=RealizarExamen"> Realizar Examen </a>
             </div>
         </div>
-        <div>
+            <div><!-- Enlaces para ver los reportes del laboratorista -->
             <h1>Reportes</h1>
             <div>
                 <a href="ServletLaboratorista?accion=Reporte1"> Examenes para el dia </a>
@@ -36,7 +36,7 @@
                 <a href="ServletLaboratorista?accion=Reporte3"> 10 fechas con mas trabajo realizado.</a>
             </div>
         </div>
-        <div>
+            <div><!-- Enlace para salir a la pagina principal -->
             <form action ="Inicial" method = "POST" class="form-group">
                 <input type="submit" name ="accion" value="Salir a la pagina principal" class="btn btn-primary">
             </form>

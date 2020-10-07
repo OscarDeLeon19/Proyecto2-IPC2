@@ -15,7 +15,7 @@
     </head>
     <body>
         <%Laboratorista lab = (Laboratorista) request.getAttribute("laboratorista");%>
-        <div style ="border: 1px solid black" class = "container mt-4 col-lg-4">
+        <div style ="border: 1px solid black" class = "container mt-4 col-lg-4"><!-- Formulario para modificar un laboratorista -->
             <h3>Modificar Laboratorista</h3>
             <form action ="ServletAdmin" method = "POST" class="form-group">
                 <div class="form-group">

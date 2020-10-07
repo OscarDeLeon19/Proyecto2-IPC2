@@ -13,7 +13,7 @@
         <title>Interfaz Administrador</title>
     </head>
     <body>
-        <div>
+        <div><!-- Formulario para ingresar los datos del administrador -->
             <h1>Login Laboratorista</h1>
             <form action ="ServletAdmin" method = "POST" class="form-group">
                 <div class="form-group">

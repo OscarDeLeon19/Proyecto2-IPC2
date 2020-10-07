@@ -107,7 +107,11 @@ public class Laboratorista {
     public void setDias_de_trabajo(ArrayList<Dia_de_trabajo> dias_de_trabajo) {
         this.dias_de_trabajo = dias_de_trabajo;
     }
-
+    
+    /**
+     * Agrega un dia de trabajo al Laboratorista
+     * @param Dia El dia que se va a agregar
+     */
     public void AñadirDiaDeTrabajo(String Dia) {
         Dia_de_trabajo dia = new Dia_de_trabajo(codigo, Dia);
         dias_de_trabajo.add(dia);

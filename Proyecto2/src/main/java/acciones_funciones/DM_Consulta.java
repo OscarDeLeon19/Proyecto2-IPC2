@@ -13,7 +13,11 @@ public class DM_Consulta extends Datos_Conexion {
 
     public DM_Consulta() {
     }
-
+    /**
+     * Agrega una consulta a la base de datos
+     * @param consulta La consulta que vamos a agregar
+     * @return Un mensaje que indica si la operacion fue exitosa o no
+     */
     public String AgregarConsulta(Consulta consulta) {
         String mensaje = null;
         try {
@@ -35,7 +39,10 @@ public class DM_Consulta extends Datos_Conexion {
         }
         return mensaje;
     }
-
+    /**
+     * Obtiene todas las consultas de la base de datos
+     * @return La lista de consultas
+     */
     public ArrayList<Consulta> VerConsultas() {
         ArrayList<Consulta> lista = new ArrayList();
         try {
@@ -55,7 +62,11 @@ public class DM_Consulta extends Datos_Conexion {
         }
         return lista;
     }
-    
+    /**
+     * Modifica el costo de una consulta en la base de datos
+     * @param consulta La consulta que se modificara
+     * @return Un mensaje que indica si la operacion fue exitosa o no
+     */
     public String ModificarConsulta(Consulta consulta) {
         String mensaje = null;
         try {
@@ -77,7 +88,11 @@ public class DM_Consulta extends Datos_Conexion {
         }
         return mensaje;
     }
-    
+     /**
+      * Elimina una consulta de la base de datos
+      * @param tipo El tipo de consulta que se eliminara
+      * @return Un mensaje que indica si la operacion fue exitosa o no
+      */
      public String EliminarConsulta(String tipo) {
         String mensaje = null;
         try {

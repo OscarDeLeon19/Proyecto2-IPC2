@@ -13,7 +13,11 @@ public class DM_Examen extends Datos_Conexion {
 
     public DM_Examen() {
     }
-
+    /**
+     * Agrega un examen a la base de datos
+     * @param examen El examen que se agregara
+     * @return Un mensaje que indica si la operacion fue exitosa o no
+     */
     public String AgendarExamen(Examen examen) {
         String mensaje = null;
         try {
@@ -38,7 +42,11 @@ public class DM_Examen extends Datos_Conexion {
         }
         return mensaje;
     }
-
+    /**
+     * Obtiene un examen en base a su codigo
+     * @param codigo El codigo del examen
+     * @return El examen obtenido
+     */
     public Examen ObtenerExamen(int codigo) {
         Examen examen = null;
         try {
@@ -59,7 +67,11 @@ public class DM_Examen extends Datos_Conexion {
         }
         return examen;
     }
-
+    /**
+     * Obtiene los examenes segun la especialidad de un laboratorista
+     * @param tipo_examen El tipo de examen
+     * @return La lista de examenes
+     */
     public ArrayList<Examen> VerExamenesSegunLaboratorista(String tipo_examen) {
         ArrayList<Examen> lista = new ArrayList<>();
         try {
@@ -82,7 +94,11 @@ public class DM_Examen extends Datos_Conexion {
         }
         return lista;
     }
-
+    /**
+     * Cambia el estado de un examen a Realizado y agrega sus datos a un Resuñtadp
+     * @param examen El examen que se cambiara
+     * @return El resultado con los datos obtenidos
+     */
     public Resultado RealizarExamen(Examen examen) {
         Resultado resultado = new Resultado();
         try {
@@ -105,7 +121,12 @@ public class DM_Examen extends Datos_Conexion {
         }
         return resultado;
     }
-
+    /**
+     * Obtiene los examenes a realizar en el dia
+     * @param tipo_examen El tipo de examen
+     * @param f La fecha del dia
+     * @return La lista de examenes
+     */
     public ArrayList<Examen> ReporteLabExamenesParaElDia(String tipo_examen, String f) {
         ArrayList<Examen> lista = new ArrayList<>();
         try {
@@ -129,7 +150,11 @@ public class DM_Examen extends Datos_Conexion {
         }
         return lista;
     }
-
+    /**
+     * Obtiene los examenes del paciente que aun no se han realizado
+     * @param codigo_paciente El codigo del paciente
+     * @return La lista de examenes
+     */
     public ArrayList<Examen> VerExamenesSinRealizarPaciente(String codigo_paciente) {
         ArrayList<Examen> lista = new ArrayList<>();
         try {
@@ -152,7 +177,12 @@ public class DM_Examen extends Datos_Conexion {
         }
         return lista;
     }
-
+    /**
+     * Obtiene las ganancias realizadas por el medico en examenes en intervalo de tiempo 
+     * @param f1 La primera fecha
+     * @param f2 La segunda fecha
+     * @return La lista de examenes
+     */
     public ArrayList<Examen> ReporteVerGananciasMedico(String f1, String f2) {
         ArrayList<Examen> lista = new ArrayList<>();
         try {
@@ -176,7 +206,10 @@ public class DM_Examen extends Datos_Conexion {
         }
         return lista;
     }
-
+    /**
+     * Obtiene los examenes mas demandados en el hospital
+     * @return La lista de examenes
+     */
     public ArrayList<Examen> ReporteVerExamenesDemandados() {
         ArrayList<Examen> lista = new ArrayList<>();
         try {
@@ -196,7 +229,10 @@ public class DM_Examen extends Datos_Conexion {
         }
         return lista;
     }
-
+    /**
+     * Obtiene los examenes mas requeridos a medicos 
+     * @return La lista de examenes
+     */
     public ArrayList<Examen> ReporteVerExamenesRequeridosPorMedicos() {
         ArrayList<Examen> lista = new ArrayList<>();
         try {
@@ -216,7 +252,10 @@ public class DM_Examen extends Datos_Conexion {
         }
         return lista;
     }
-
+    /**
+     * Obtiene las ganancias del pacietne en examenes
+     * @return La lista de examenes
+     */
     public ArrayList<Examen> ReporteVerGananciasPaciente() {
         ArrayList<Examen> lista = new ArrayList<>();
         try {

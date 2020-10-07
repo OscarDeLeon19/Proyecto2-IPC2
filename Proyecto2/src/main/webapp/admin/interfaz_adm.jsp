@@ -15,7 +15,7 @@
     </head>
     <body>
         <% Administrador admin = (Administrador) request.getAttribute("administrador");%>
-        <div>
+        <div><!-- Enlaces para las acciones del administrador -->
             <h1>Usuario: <%= admin.getNombre()%></h1>
             <div>
                 <a href="ServletAdmin?accion=medicos"> Medicos del Hospital </a>
@@ -36,7 +36,7 @@
                 <a href="ServletAdmin?accion=examenes"> Tipos de Examen del Hospital </a>
             </div>
         </div>
-        <div>
+        <div><!-- Enlaces para los reportes del administrador-->
             <h1> Reportes </h1>
             <div>
                 <a href="ServletAdmin?accion=reporte1_adm"> Los 10 medicos que han realizado mas informes en un intervalo de tiempo </a>
@@ -57,7 +57,7 @@
                 <a href="ServletAdmin?accion=reporte6_adm"> Ingresos generados por paciente </a>
             </div>
         </div>   
-        <div>
+            <div><!-- Boton para salir a la pagina inicial -->
             <form action ="Inicial" method = "POST" class="form-group">
                 <input type="submit" name ="accion" value="Salir a la pagina principal" class="btn btn-primary">
             </form>

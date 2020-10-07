@@ -12,7 +12,11 @@ public class DM_Informe extends Datos_Conexion {
 
     public DM_Informe() {
     }
-
+    /**
+     * Agrega un informe a la base de datos
+     * @param informe El informe que se agregara
+     * @return Un mensaje que indica si la operacion fue exitosa o no
+     */
     public String AgregarInforme(Informe informe) {
         String mensaje = null;
         try {
@@ -37,7 +41,13 @@ public class DM_Informe extends Datos_Conexion {
         }
         return mensaje;
     }
-
+    /**
+     * Obtiene el conteo de pacientes con mas informes realizados segun el medico, en un intervalo de tiempo
+     * @param codigo_medico El codigo del medico
+     * @param f1 La primera fecha
+     * @param f2 La segunda fecha
+     * @return La lista de Informes
+     */
     public ArrayList<String> ReportePacienteConMasInformes(String codigo_medico, String f1, String f2) {
         ArrayList<String> lista = new ArrayList<>();
         try {
@@ -64,7 +74,12 @@ public class DM_Informe extends Datos_Conexion {
         }
         return lista;
     }
-
+    /**
+     * Obtiene un conteo de los medicos con mas informes realizados en el hospital, en un intervalo de tiempo.
+     * @param f1 La primera fecha
+     * @param f2 La segunda fecha
+     * @return La lista de informes
+     */
     public ArrayList<Informe> ReporteADMMedicosConMasInformes(String f1, String f2) {
         ArrayList<Informe> lista = new ArrayList<>();
         try {

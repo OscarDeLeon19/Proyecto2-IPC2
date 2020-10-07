@@ -11,7 +11,11 @@ public class DM_TipoExamen extends Datos_Conexion {
 
     public DM_TipoExamen() {
     }
-
+    /**
+     * Agrega un tipo de examen a la base de datos
+     * @param examen El tipo de examen que se agregara
+     * @return Un mensaje que indica si la operacion fue exitosa o no
+     */
     public String AgregarExamen(Tipo_Examen examen) {
         String mensaje = null;
         try {
@@ -37,7 +41,10 @@ public class DM_TipoExamen extends Datos_Conexion {
         }
         return mensaje;
     }
-
+    /**
+     * Obtiene todos los tipos de examen en la base de datos
+     * @return La lista de examenes
+     */
     public ArrayList<Tipo_Examen> VerExamenes() {
         ArrayList<Tipo_Examen> lista = new ArrayList<>();
         try {
@@ -57,7 +64,11 @@ public class DM_TipoExamen extends Datos_Conexion {
         }
         return lista;
     }
-
+    /**
+     * Obtiene un tipo de examen en base a su codigo
+     * @param codigo El codigo del tipo de examen
+     * @return El tipo de examen obtenido
+     */
     public Tipo_Examen VerExamenePorCodigo(String codigo) {
         Tipo_Examen examen = null;
         try {
@@ -78,7 +89,11 @@ public class DM_TipoExamen extends Datos_Conexion {
         }
         return examen;
     }
-
+    /**
+     * Comprueba si un examen necesita una orden para agendarse
+     * @param codigo El codigo del examen
+     * @return Si necesita la orden o no
+     */
     public Boolean ComprobarOrden(String codigo) {
         boolean comprobacion = false;
         try {
@@ -98,7 +113,11 @@ public class DM_TipoExamen extends Datos_Conexion {
         }
         return comprobacion;
     }
-    
+    /**
+     * Obtiene el tipo de un examen en base a su codigo
+     * @param codigo El codigo del examen
+     * @return El tipo del examen
+     */
     public String ObtenerTipo(String codigo) {
         String tipo = null;
         try {
@@ -118,7 +137,11 @@ public class DM_TipoExamen extends Datos_Conexion {
         }
         return tipo;
     }
-    
+    /**
+     * Modifica el costo de un tipo de examen
+     * @param examen el examen que se modificara
+     * @return Un mensaje que indica si la operacion fue exitosa o no
+     */
     public String ModificarExamen(Tipo_Examen examen) {
         String mensaje = null;
         try {
@@ -140,7 +163,11 @@ public class DM_TipoExamen extends Datos_Conexion {
         }
         return mensaje;
     }
-    
+    /**
+     * Elimina un tipo de examen de la base de datos
+     * @param examen El tipo de examen que se eliminara
+     * @return Un mensaje que indica si la operacion fue exitosa o no
+     */
     public String EliminarExamen(Tipo_Examen examen) {
         String mensaje = null;
         try {

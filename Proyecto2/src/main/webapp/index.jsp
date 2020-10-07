@@ -23,7 +23,7 @@
             Datos_Conexion dc = new Datos_Conexion();
             dc.EliminarSesion();
         %>
-        <div>
+        <div><<!-- Enlaces para ingresar a las diferentes interfaces -->
             <h1> Hospital Proyecto 2 </h1>
             <a href="Inicial?accion=paciente">Ingreso Paciente</a>
         </div>
@@ -36,7 +36,7 @@
         <div>
             <a href="Inicial?accion=administrador">Ingreso Administrador</a>
         </div>
-        <div>   
+        <div><!-- Codigo para ingresar el archivo xml -->   
             <%
                 DM_Administrador dmadmin = new DM_Administrador();
                 ArrayList<Administrador> lista = dmadmin.VerAdministradores();

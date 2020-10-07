@@ -20,7 +20,7 @@
             DM_TipoExamen dmtip = new DM_TipoExamen();
         %>
         <div class = "d-flex">
-            <div style ="border: 1px solid black" class = "container mt-4 col-lg-4">
+            <div style ="border: 1px solid black" class = "container mt-4 col-lg-4"><!-- Formulario para agendar un nuevo examen -->
                 <h3>Agendar Exmanen Medico</h3>
                 <form action ="ServletPaciente" method = "POST" class="form-group">
                     <div class="form-group">
@@ -51,7 +51,7 @@
                 </form>
             </div>
             <% ArrayList<Tipo_Examen> examenes = dmtip.VerExamenes();         %>
-            <div style ="border: 1px solid black" class = "container mt-4 col-lg-8">
+            <div style ="border: 1px solid black" class = "container mt-4 col-lg-8"><!-- Tabla que muestra los tipo de examenes que realiza el hospital -->
                 <h3>Examenes disponibles en el hospital</h3>
                 <table class = "table table-hover">
                     <thead>

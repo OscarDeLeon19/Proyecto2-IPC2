@@ -13,7 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <div class = "container mt-4 col-lg-8">
+        <div class = "container mt-4 col-lg-8"><!-- Formulario para registrar un paciente -->
             <h3>Datos del Paciente</h3>
             <form action ="ServletPaciente" method = "POST" class="form-group">
                 <div class="form-group">

@@ -15,7 +15,7 @@
         <title>Interfaz Paciente</title>
     </head>
     <body>
-        <div class = "container mt-4 col-lg-8">
+        <div class = "container mt-4 col-lg-8"><!-- Formulario para buscar las citas del paciente -->
             <h3> Ver citas del paciente pendientes </h3>
             <form action ="ServletMedico" method = "POST" class="form-group">
                 <div class="form-group">
@@ -27,7 +27,7 @@
                 </div>
             </form>    
         </div>
-        <div class = "container mt-4 col-lg-8">
+        <div class = "container mt-4 col-lg-8"><!-- Tabla que muestra las citas del paciente -->
             <% ArrayList<Cita> citas = (ArrayList<Cita>) request.getAttribute("lista");            %>
             <table class = "table table-hover">
                 <thead>
@@ -61,7 +61,7 @@
                 </tbody>
             </table>
         </div>
-        <div class = "container mt-4 col-lg-8">
+                <div class = "container mt-4 col-lg-8"><!-- Formulario para realizar una cita -->
             <h3> Realizar el informe </h3>
             <form action ="ServletMedico" method = "POST" class="form-group">
                 <div class="form-group">
@@ -86,7 +86,7 @@
         <%
             }
         %>
-        <div>
+        <div><!-- Boton para regresar a la interfaz -->
             <form action ="ServletMedico" method = "POST" class="form-group">
                 <input type="submit" name ="accion" value="Regresar a la interfaz" class="btn btn-primary">
             </form>

@@ -27,7 +27,7 @@
             ArrayList<Resultado> resultados = dmres.VerHistorialPacientes(paciente.getCodigo());
 
         %>
-        <div class = "container mt-4 col-lg-8"> 
+        <div class = "container mt-4 col-lg-8"><!-- Tabla que muestra todas las citas realizadas en el hospital -->
             <h2> Historial de citas realizadas en el hospital</h2>
             <table class = "table table-hover">
                 <thead>
@@ -62,7 +62,7 @@
                 </tbody>
             </table>
         </div>
-        <div class = "container mt-4 col-lg-8"> 
+        <div class = "container mt-4 col-lg-8"><!-- Tabla que muestra todos los examenes realizados en el hospital --> 
             <h2> Historial de examens realizadas en el hospital</h2>
             <table class = "table table-hover">
                 <thead>

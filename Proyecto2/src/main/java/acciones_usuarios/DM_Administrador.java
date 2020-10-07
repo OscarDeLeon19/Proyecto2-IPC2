@@ -13,7 +13,12 @@ public class DM_Administrador extends Datos_Conexion{
 
     public DM_Administrador() {
     }
-    
+    /**
+     * Valida si el codigo y contraseña pertenecen a un administrador en la base de datos
+     * @param codigo Codigo del administrador
+     * @param contraseña Contraseña del administrador
+     * @return El administrador que accedio a la aplicacion
+     */
     public Administrador Validar(String codigo, String contraseña) {
         Administrador administrador = null;
         try {
@@ -34,7 +39,10 @@ public class DM_Administrador extends Datos_Conexion{
         }
         return administrador;
     }
-    
+    /**
+     * Muestra todos los administradores en la base de datos
+     * @return La lista de administradores
+     */
     public ArrayList<Administrador> VerAdministradores() {
         ArrayList<Administrador> lista = new ArrayList<>();
         try {
@@ -54,7 +62,11 @@ public class DM_Administrador extends Datos_Conexion{
         }
         return lista;
     }
-    
+    /**
+     * Obtiene un administrador segun el codigo que ingresemos
+     * @param codigo El codigo del administrador
+     * @return El administrador obtenido
+     */
     public Administrador VerAdministradorPorCodigo(String codigo) {
         Administrador admin = null;
         try {
@@ -75,7 +87,11 @@ public class DM_Administrador extends Datos_Conexion{
         }
         return admin;
     }
-    
+    /**
+     * Agrega un administrador a la base de datos
+     * @param administrador El administrador que se agregara
+     * @return Un mensaje que dice si el ingreso fue exitoso o no
+     */
     public String AgregarAdministrador(Administrador administrador) {
         String mensaje = null;
         try {
@@ -99,7 +115,11 @@ public class DM_Administrador extends Datos_Conexion{
         }
         return mensaje;
     }
-    
+    /**
+     * Modifica algunos atributos de el administrador en la base de datos
+     * @param administrador El administrador que se modificara
+     * @return Si la modificacion fue exitosa o no
+     */
     public String ModificarAdministrador(Administrador administrador) {
         String mensaje = null;
         try {
@@ -121,7 +141,11 @@ public class DM_Administrador extends Datos_Conexion{
         }
         return mensaje;
     }
-    
+    /**
+     * Elimina un administrador de la base de datos
+     * @param codigo El codigo del adminsitrador que se va a eliminar
+     * @return El mensaje que indica si fue eliminado el administrador o no
+     */
     public String EliminarAdministrador(String codigo) {
         String mensaje = null;
         try {

@@ -13,7 +13,7 @@
         <title>Interfaz Medico</title>
     </head>
     <body>
-        <div>
+        <div><!-- Formulario para ingresar los datos de login del medico -->
             <h1>Login Medico</h1>
             <form action ="ServletMedico" method = "POST" class="form-group">
                 <div class="form-group">

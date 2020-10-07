@@ -18,7 +18,7 @@
         <%
             ArrayList<Resultado> resultados = (ArrayList<Resultado>) request.getAttribute("lista");
         %>
-        <div>
+        <div><!-- Formulario para ingresar las fechas -->
             <h1>Examens realizados de un tipo en especifico en intervalo de tiempo</h1>
             <form action ="ServletPaciente" method = "POST" class="form-group">
                 <div class="form-group">
@@ -38,7 +38,7 @@
                 </div>
             </form>
         </div>
-        <div>
+        <div><!-- Tabla que muestra los exmamenes realizados -->
             <h1>Examens realizados</h1>
             <div style ="border: 1px solid black">
                 <table class = "table table-hover">
@@ -72,12 +72,12 @@
                             <td><a href="<%= resultado.getOrden()%>"><%= resultado.getOrden()%></a></td>
                                 <%} else {
                                 %><td> NULL </td><%
-                                }%>
+                                    }%>
                             <% if (resultado.getInforme() != null) {%>
                             <td><a href="<%= resultado.getInforme()%>"><%= resultado.getInforme()%></a></td>
                                 <%} else {
                                 %><td> NULL </td><%
-                                }%>
+                                    }%>
                             <td><%= resultado.getFecha()%></td> 
                             <td><%= resultado.getHora()%></td> 
                         </tr>
@@ -88,7 +88,7 @@
                 </table>
             </div>
         </div>
-        <div>
+        <div><!-- Boton para regresar a la interfaz -->
             <form action ="ServletPaciente" method = "POST" class="form-group">
                 <input type="submit" name ="accion" value="Regresar a la interfaz" class="btn btn-primary">
             </form>

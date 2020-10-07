@@ -15,7 +15,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <div class = "container mt-4 col-lg-8">
+        <div class = "container mt-4 col-lg-8"><!-- Formulario para ingresar la fecha del dia -->
             <form action ="ServletLaboratorista" method = "POST" class="form-group">
                 <div class="form-group">
                     <label>Ingresa la fecha del dia de hoy </label>
@@ -26,7 +26,7 @@
                 </div>
             </form>
         </div>
-        <div class = "container mt-4 col-lg-8"> 
+        <div class = "container mt-4 col-lg-8"><!-- Tabla de examenes listos para realizar --> 
             <% ArrayList<Examen> examenes = (ArrayList<Examen>) request.getAttribute("lista"); %>
             <h2> Examenes listos para realizar</h2>
             <table class = "table table-hover">
@@ -64,7 +64,7 @@
                 </tbody>
             </table>
         </div>
-        <div>
+        <div><!-- Boton para regresar a la interfaz -->
             <form action ="ServletLaboratorista" method = "POST" class="form-group">
                 <input type="submit" name ="accion" value="Regresar a la interfaz" class="btn btn-primary">
             </form>

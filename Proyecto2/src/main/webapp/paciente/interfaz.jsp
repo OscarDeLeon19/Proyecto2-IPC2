@@ -14,7 +14,7 @@
     </head>
     <body>
         <% Paciente paciente = (Paciente) request.getAttribute("paciente");%>
-        <div>
+        <div><!-- Enlaces hacia funciones del paciente -->
             <h1> Usuario <%= paciente.getNombre()%></h1>
             <div>
                 <a href="ServletPaciente?accion=AddConsulta&id=<%= paciente.getCodigo()%>"> Agendar Consulta </a>            
@@ -29,7 +29,7 @@
                 <a href="ServletPaciente?accion=AgendarExamen&id=<%= paciente.getCodigo()%>"> Agendar Examen Medico</a>
             </div>
         </div>
-        <div>
+        <div><!-- Enlaces de los reportes que puede obtener en paciente -->
             <h3>Reportes</h3> 
             <div>
                 <a href="ServletPaciente?accion=Reporte1&id=<%= paciente.getCodigo()%>"> Ultimos 5 examenes realizados </a>            
@@ -44,7 +44,7 @@
                 <a href="ServletPaciente?accion=Reporte4&id=<%= paciente.getCodigo()%>"> Citas realizadas con un medico en especifico, en un intervalo de tiempo </a>            
             </div>
         </div>
-        <div>
+            <div><!-- Boton para regresar al index -->
             <form action ="ServletPaciente" method = "POST" class="form-group">
                 <input type="submit" name ="accion" value="Salir a la pagina principal" class="btn btn-primary">
             </form>

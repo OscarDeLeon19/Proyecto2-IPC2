@@ -14,7 +14,11 @@ public class DM_Resultado extends Datos_Conexion{
 
     public DM_Resultado() {
     }
-    
+    /**
+     * Agrega un resultado a la base de datos
+     * @param resultado El resultado que se agregara
+     * @return Un mensaje que indica si la operacion fue exitosa o no
+     */
     public String AgregarResultado(Resultado resultado) {
         String mensaje = null;
         try {
@@ -42,7 +46,11 @@ public class DM_Resultado extends Datos_Conexion{
         }
         return mensaje;
     }
-    
+    /**
+     * Obtiene todos los resultados que ha obtenido un paciente 
+     * @param codigo_paciente El codigo del paciente
+     * @return La lista de resultados
+     */
     public ArrayList<Resultado> VerHistorialPacientes(String codigo_paciente) {
         ArrayList<Resultado> lista = new ArrayList<>();
         try {
@@ -63,7 +71,11 @@ public class DM_Resultado extends Datos_Conexion{
         }
         return lista;
     }
-    
+    /**
+     * Obtiene los ultimos 5 resultados de un paciente
+     * @param codigo_paciente El codigo del paciente 
+     * @return La lista de resultados
+     */
     public ArrayList<Resultado> ReporteVerUltimos5Resultados(String codigo_paciente) {
         ArrayList<Resultado> lista = new ArrayList<>();
         try {
@@ -84,7 +96,14 @@ public class DM_Resultado extends Datos_Conexion{
         }
         return lista;
     }
-    
+    /**
+     * OBtiene los examenes realizados de un tipo en especifico en un intervalo de tiempo.
+     * @param codigo_paciente El codigo del paciente
+     * @param nombre_examen El nombre del examen
+     * @param f1 La primera fecha
+     * @param f2 La segunda fecha
+     * @return La lista de resultados
+     */
     public ArrayList<Resultado> ReporteVerExamenesDeUnTipo(String codigo_paciente, String nombre_examen, String f1, String f2) {
         nombre_examen = "%" + nombre_examen + "%";
         ArrayList<Resultado> lista = new ArrayList<>();
@@ -112,7 +131,12 @@ public class DM_Resultado extends Datos_Conexion{
         }
         return lista;
     }
-    
+    /**
+     * Obtiene los resultados realizados en el dia por un laboratorista.
+     * @param codigo_lab El codigo laboratorista
+     * @param f La fecha del dia
+     * @return La lista de resultados
+     */
     public ArrayList<Resultado> ReporteLABExamenesRealizadosDia(String codigo_lab, String f) {
         ArrayList<Resultado> lista = new ArrayList<>();
         try {
@@ -135,7 +159,11 @@ public class DM_Resultado extends Datos_Conexion{
         }
         return lista;
     }
-    
+    /**
+     * Obtiene el conteo de fechas con mas trabajo realizado por laboratorista
+     * @param codigo_lab El codigo de laboratorista
+     * @return La lista de resultados
+     */
     public ArrayList<Resultado> ReporteLABFechasConMasTrabajo(String codigo_lab) {
         ArrayList<Resultado> lista = new ArrayList<>();
         try {

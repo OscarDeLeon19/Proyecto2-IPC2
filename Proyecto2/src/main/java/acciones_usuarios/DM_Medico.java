@@ -13,7 +13,12 @@ public class DM_Medico extends Datos_Conexion {
 
     public DM_Medico() {
     }
-
+    /**
+     * Valida si un medico se encuentra en la base de datos
+     * @param codigo El codigo del medico
+     * @param contraseña La contraseña del medico
+     * @return El medico en la base de datos
+     */
     public Medico Validar(String codigo, String contraseña) {
         Medico medico = null;
         try {
@@ -34,7 +39,10 @@ public class DM_Medico extends Datos_Conexion {
         }
         return medico;
     }
-
+    /**
+     * Obtiene a todos los medicos en la base de datos
+     * @return La la lista de medicos
+     */
     public ArrayList<Medico> VerMedicos() {
         ArrayList<Medico> lista_medicos = new ArrayList<>();
         try {
@@ -55,7 +63,11 @@ public class DM_Medico extends Datos_Conexion {
         }
         return lista_medicos;
     }
-
+    /**
+     * Obtiene un medico de la base de datos en base a su codigo
+     * @param codigo El codigo del medico
+     * @return El medico de la base de datos
+     */
     public Medico VerMedicoPorCodigo(String codigo) {
         Medico medico = null;
         try {
@@ -76,7 +88,11 @@ public class DM_Medico extends Datos_Conexion {
         }
         return medico;
     }
-
+    /**
+     * Obtiene medicos en base al nombre
+     * @param Nombre Nombre del medico
+     * @return La lista de medicos
+     */
     public ArrayList<Medico> VerMedicoPorNombre(String Nombre) {
         ArrayList<Medico> lista_medicos = new ArrayList<>();
         Nombre = "%" + Nombre + "%";
@@ -99,7 +115,11 @@ public class DM_Medico extends Datos_Conexion {
         }
         return lista_medicos;
     }
-
+    /**
+     * Obtiene medicos de la base de datos en base a sus especialidades
+     * @param titulo Titulo de la especialidad
+     * @return La lista de medicos
+     */
     public ArrayList<Medico> VerMedicoPorTitulo(String titulo) {
         ArrayList<Medico> lista_medicos = new ArrayList<>();
         titulo = "%" + titulo + "%";
@@ -122,7 +142,11 @@ public class DM_Medico extends Datos_Conexion {
         }
         return lista_medicos;
     }
-
+    /**
+     * Obtiene mediocos en base al horario de trabajo
+     * @param hora La hora en que se quiere la cita
+     * @return La lista de medicos
+     */
     public ArrayList<Medico> VerMedicoPorHorario(String hora) {
         ArrayList<Medico> lista_medicos = new ArrayList<>();
         try {
@@ -150,7 +174,11 @@ public class DM_Medico extends Datos_Conexion {
         }
         return lista_medicos;
     }
-
+    /**
+     * Obtienes a los medicos que tienen una fecha de inicio mayor a la fecha ingresada
+     * @param fecha_medico La fecha ingresada para el intervalo
+     * @return  La lista de medicos
+     */
     public ArrayList<Medico> VerMedicoPorFecha(String fecha_medico) {
         ArrayList<Medico> lista_medicos = new ArrayList<>();
         try {
@@ -173,7 +201,10 @@ public class DM_Medico extends Datos_Conexion {
         }
         return lista_medicos;
     }
-
+    /**
+     * Obtiene todos los medicos de la empresa 
+     * @return La lista de medicos
+     */
     public ArrayList<Medico> VerTodosLosMedicos() {
         ArrayList<Medico> lista_medicos = new ArrayList<>();
         try {
@@ -193,7 +224,10 @@ public class DM_Medico extends Datos_Conexion {
         }
         return lista_medicos;
     }
-
+    /**
+     * Obtiene todas las especialidades de los medicos en la base de datos
+     * @return La lista de especialidades
+     */
     public ArrayList<Especialidad> VerEspecialidades() {
         ArrayList<Especialidad> lista_especialidades = new ArrayList<>();
         try {
@@ -214,7 +248,11 @@ public class DM_Medico extends Datos_Conexion {
         }
         return lista_especialidades;
     }
-
+    /**
+     * Obtiene una especialidad en base a su ID
+     * @param codigo El Id de la especialidad
+     * @return La especialidad requerida
+     */
     public Especialidad VerEspecialidadPorCodigo(int codigo) {
         Especialidad especialidad = null;
         try {
@@ -235,7 +273,11 @@ public class DM_Medico extends Datos_Conexion {
         }
         return especialidad;
     }
-
+    /**
+     * Agrega un medico a la base de datos
+     * @param medico el medico que se agregara
+     * @return Un mensaje que indica si la operacion fue exitosa o no
+     */
     public String AgregarMedico(Medico medico) {
         String mensaje = null;
         try {
@@ -274,7 +316,11 @@ public class DM_Medico extends Datos_Conexion {
         }
         return mensaje;
     }
-
+    /**
+     * Agrega una especialidad de un medico a la base de datos
+     * @param especialidad La especialidad que se agregara
+     * @return Un mensaje que indica si la operacion fue exitosa o no
+     */
     public String AgregarEspecialidad(Especialidad especialidad) {
         String mensaje = null;
         try {
@@ -290,7 +336,11 @@ public class DM_Medico extends Datos_Conexion {
         }
         return mensaje;
     }
-
+    /**
+     * Modifica los datos del medico en la base de datos
+     * @param medico El medico que se modificara
+     * @return Un mensaje que indica si la operacion fue exitosa o no
+     */
     public String ModificarMedico(Medico medico) {
         String mensaje = null;
         try {
@@ -318,7 +368,11 @@ public class DM_Medico extends Datos_Conexion {
         }
         return mensaje;
     }
-
+    /**
+     * Elimina un medico de la base de datos
+     * @param codigo El codigo del medico que se eliminara
+     * @return Un mensaje que indica si la operacion fue exitosa o no
+     */
     public String EliminarMedico(String codigo) {
         String mensaje;
         try {
@@ -338,7 +392,12 @@ public class DM_Medico extends Datos_Conexion {
         }
         return mensaje;
     }
-
+    /**
+     * Elimina una especialidad de la base de datos
+     * @param codigo_medico El codigo del medico 
+     * @param titulo el titulo de la especialidad
+     * @return Un mensaje que indica si la operacion fue exitosa o no
+     */
     public String EliminarEspecialidad(String codigo_medico, String titulo) {
         String mensaje;
         try {
@@ -359,27 +418,13 @@ public class DM_Medico extends Datos_Conexion {
         }
         return mensaje;
     }
-
-    public String EliminarEspecialidades(String codigo_medico) {
-        String mensaje;
-        try {
-            PreparedStatement PrSt;
-            String Query = "DELETE FROM Especialidad WHERE Codigo_Medico = ?";
-            PrSt = conexion.prepareStatement(Query);
-            PrSt.setString(1, codigo_medico);
-            int ejecucion = PrSt.executeUpdate();
-            if (ejecucion > 0) {
-                mensaje = "Informacion eliminada";
-            } else {
-                mensaje = "No existe ese codigo o titulo";
-            }
-            PrSt.close();
-        } catch (Exception e) {
-            mensaje = e.toString();
-        }
-        return mensaje;
-    }
-
+    
+    /**
+     * Comprueba si un medico ya tiene una especialidad a la base de datos
+     * @param codigo_medico El codigo del medico
+     * @param titulo El titulo de la especialidad
+     * @return Si el medico tiene la especialidad o no
+     */
     public Boolean ComprobarEspecialidad(String codigo_medico, String titulo) {
         Boolean comprobacion = false;
         try {
@@ -400,7 +445,12 @@ public class DM_Medico extends Datos_Conexion {
         }
         return comprobacion;
     }
-
+    /**
+     * Comprueba si un medico trabaja en el horario requerido para una cita
+     * @param codigo_medico el codigo del medico
+     * @param hora La hora en que se quiere realizar la cita
+     * @return Si el medico trabaja en ese horario o no
+     */
     public Boolean ComprobarHorario(String codigo_medico, int hora) {
         Boolean comprobacion = false;
         try {
@@ -426,7 +476,11 @@ public class DM_Medico extends Datos_Conexion {
         }
         return comprobacion;
     }
-
+    /**
+     * Convierte la hora en la base de datos a Entero
+     * @param hora La hora en la base de datos
+     * @return La hora en numero entero
+     */
     public int ObtenerHora(String hora) {
         int signo = 0;
         for (int i = 0; i < hora.length(); i++) {
@@ -438,7 +492,11 @@ public class DM_Medico extends Datos_Conexion {
         int numero = Integer.parseInt(hora.substring(0, signo));
         return numero;
     }
-
+    /**
+     * Convierte un numero entero a hora
+     * @param hora La hora que convertiremos
+     * @return La hora convertida
+     */
     public String ConvertirHora(int hora) {
         if (hora < 24 && hora >= 0) {
             String Hora = String.valueOf(hora);

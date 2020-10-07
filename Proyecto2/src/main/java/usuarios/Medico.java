@@ -129,7 +129,11 @@ public class Medico {
     }
     
     
-
+    /**
+     * Agrega una especialidad al medico
+     * @param titulo El titulo de la especialidad
+     * @return El mensaje segun que se realizo
+     */
     public String AñadirEspecialidad(String titulo) {
         Especialidad especialidad = new Especialidad(codigo, titulo);
         String mensaje = null;
