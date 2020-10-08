@@ -17,11 +17,7 @@
     </head>
     <body>
         <%
-            Object l = request.getAttribute("lista");
-            ArrayList<String> informe = null;
-            if (l != null) {
-                informe = (ArrayList<String>) l;
-            }
+            ArrayList<Informe> informes = (ArrayList<Informe>) request.getAttribute("lista");
         %>
         <div class = "container mt-4 col-lg-8"><!-- Formulario para ingresar las fechas del dia -->
             <form action ="ServletMedico" method = "POST" class="form-group">
@@ -49,21 +45,17 @@
                 </thead>
                 <tbody>
 
-                    <% if (informe != null) {
+                    <% if (informes != null) {
+                            for (int i = 0; i < informes.size(); i++) {
+                                Informe inf = informes.get(i);
 
                     %>
                     <tr>
-                        <td><%= informe.get(0)%></td>
-                        <td><%= informe.get(1)%></td>
+                        <td><%= inf.getCodigo()%></td>
+                        <td><%= inf.getCodigo_paciente()%></td>
                     </tr>
                     <%
-                    } else {
-                    %>
-                    <tr>
-                        <td>Hola</td>
-                        <td>H</td>
-                    </tr>
-                    <%
+                            }
                         }
                     %>
                 </tbody>

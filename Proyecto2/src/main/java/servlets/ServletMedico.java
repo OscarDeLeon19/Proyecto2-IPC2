@@ -226,7 +226,7 @@ public class ServletMedico extends HttpServlet {
         } else if (accion.equalsIgnoreCase("Obtener Conteo")) {
             String fecha1 = request.getParameter("rep4fecha1");
             String fecha2 = request.getParameter("rep4fecha2");
-            ArrayList<String> lista = dminf.ReportePacienteConMasInformes(sesion_med, fecha1, fecha2);
+            ArrayList<Informe> lista = dminf.ReportePacienteConMasInformes(sesion_med, fecha1, fecha2);
             request.setAttribute("lista", lista);
             acceder = "medico/reporte4.jsp";
         } else if (accion.equalsIgnoreCase("Salir a la pagina principal")){

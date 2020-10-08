@@ -48,24 +48,22 @@ public class DM_Informe extends Datos_Conexion {
      * @param f2 La segunda fecha
      * @return La lista de Informes
      */
-    public ArrayList<String> ReportePacienteConMasInformes(String codigo_medico, String f1, String f2) {
-        ArrayList<String> lista = new ArrayList<>();
+    public ArrayList<Informe> ReportePacienteConMasInformes(String codigo_medico, String f1, String f2) {
+        ArrayList<Informe> lista = new ArrayList<>();
         try {
             Date fecha1 = Date.valueOf(f1);
             Date fecha2 = Date.valueOf(f2);
             PreparedStatement PrSt;
             ResultSet rs = null;
-            String Query = "SELECT COUNT(Codigo_Paciente) AS Informes, Codigo_Paciente FROM Informe WHERE Codigo_Medico = ? AND Fecha BETWEEN ? AND ? GROUP BY Codigo_Paciente ORDER BY COUNT(Codigo_Paciente) DESC LIMIT 1";
+            String Query = "SELECT COUNT(Codigo_Paciente) AS Informes, Codigo_Paciente FROM Informe WHERE Codigo_Medico = ? AND Fecha BETWEEN ? AND ? GROUP BY Codigo_Paciente ORDER BY COUNT(Codigo_Paciente) DESC";
             PrSt = conexion.prepareStatement(Query);
             PrSt.setString(1, codigo_medico);
             PrSt.setDate(2, fecha1);
             PrSt.setDate(3, fecha2);
             rs = PrSt.executeQuery();
             while (rs.next()) {
-                String informes = rs.getString("Informes");
-                String codigo = rs.getString("Codigo_Paciente");
-                lista.add(informes);
-                lista.add(codigo);
+                Informe informe = new Informe(rs.getInt("Informes"), rs.getString("Codigo_Paciente"), "XXXXX", "XXXXX", fecha2, "XXXXX");
+                lista.add(informe);
             }
             PrSt.close();
             rs.close();
