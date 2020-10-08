@@ -44,5 +44,10 @@
         <div>
             <a href="ServletPaciente?accion=registrar" class="btn btn-primary">Registrarse</a>
         </div>
+        <div>
+            <form action ="Inicial" method = "POST" class="form-group">
+                <input type="submit" name ="accion" value="Regresar a la pagina principal" class="btn btn-primary">
+            </form>
+        </div>
     </body>
 </html>

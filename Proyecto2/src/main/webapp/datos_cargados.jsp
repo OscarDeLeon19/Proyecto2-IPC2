@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Datos cargados</title>
     </head>
@@ -18,9 +19,9 @@
             <%
                 for (int i = 0; i < mensajes.size(); i++) {
                     out.println(mensajes.get(i));
-                    %>
-                    <br>
-                    <%
+            %>
+            <br>
+            <%
                 }
             %>
         </div>
