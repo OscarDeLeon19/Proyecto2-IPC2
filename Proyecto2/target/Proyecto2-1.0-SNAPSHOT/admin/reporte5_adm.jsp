@@ -21,7 +21,7 @@
             ArrayList<Examen> examenes = dmexa.ReporteVerExamenesRequeridosPorMedicos();
         %>
         <div><!-- Tabla que muestra los examenes mas demandados del medico  -->
-            <h3> Examenes mas Demandados </h3>
+            <h3> Medicos con mas examenes demandados </h3>
             <table class = "table table-hover">
                 <thead>
                     <tr>

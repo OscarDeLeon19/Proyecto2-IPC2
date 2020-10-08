@@ -190,7 +190,7 @@ public class DM_Examen extends Datos_Conexion {
             Date fecha2 = Date.valueOf(f2);
             PreparedStatement PrSt;
             ResultSet rs = null;
-            String Query = "SELECT SUM(t.Costo) AS Ganancia, e.Codigo_Medico FROM Examen e JOIN Tipo_Examen t ON e.Codigo_Examen = t.Codigo WHERE e.Fecha BETWEEN ? AND ? GROUP BY Codigo_Medico ORDER BY SUM(t.Costo) DESC";
+            String Query = "SELECT SUM(t.Costo) AS Ganancia, e.Codigo_Medico FROM Resultado e JOIN Tipo_Examen t ON e.Codigo_Examen = t.Codigo WHERE e.Fecha BETWEEN ? AND ? GROUP BY Codigo_Medico ORDER BY SUM(t.Costo) DESC";
             PrSt = conexion.prepareStatement(Query);
             PrSt.setDate(1, fecha1);
             PrSt.setDate(2, fecha2);
@@ -215,7 +215,7 @@ public class DM_Examen extends Datos_Conexion {
         try {
             PreparedStatement PrSt;
             ResultSet rs = null;
-            String Query = "SELECT COUNT(Codigo_Examen) AS Examenes, Codigo_Examen FROM Examen GROUP BY Codigo_Examen ORDER BY COUNT(Codigo_Examen) DESC";
+            String Query = "SELECT COUNT(Codigo_Examen) AS Examenes, Codigo_Examen FROM Resultado GROUP BY Codigo_Examen ORDER BY COUNT(Codigo_Examen) DESC";
             PrSt = conexion.prepareStatement(Query);
             rs = PrSt.executeQuery();
             while (rs.next()) {
@@ -238,7 +238,7 @@ public class DM_Examen extends Datos_Conexion {
         try {
             PreparedStatement PrSt;
             ResultSet rs = null;
-            String Query = "SELECT COUNT(Codigo_Medico) AS Examenes, Codigo_Medico FROM Examen GROUP BY Codigo_Medico ORDER BY COUNT(Codigo_Medico) DESC";
+            String Query = "SELECT COUNT(Codigo_Medico) AS Examenes, Codigo_Medico FROM Resultado GROUP BY Codigo_Medico ORDER BY COUNT(Codigo_Medico) DESC";
             PrSt = conexion.prepareStatement(Query);
             rs = PrSt.executeQuery();
             while (rs.next()) {
@@ -261,7 +261,7 @@ public class DM_Examen extends Datos_Conexion {
         try {
             PreparedStatement PrSt;
             ResultSet rs = null;
-            String Query = "SELECT SUM(t.Costo) AS Ganancia, e.Codigo_Paciente FROM Examen e JOIN Tipo_Examen t ON e.Codigo_Examen = t.Codigo GROUP BY Codigo_Paciente ORDER BY SUM(t.Costo) DESC";
+            String Query = "SELECT SUM(t.Costo) AS Ganancia, e.Codigo_Paciente FROM Resultado e JOIN Tipo_Examen t ON e.Codigo_Examen = t.Codigo GROUP BY Codigo_Paciente ORDER BY SUM(t.Costo) DESC";
             PrSt = conexion.prepareStatement(Query);
             rs = PrSt.executeQuery();
             while (rs.next()) {
