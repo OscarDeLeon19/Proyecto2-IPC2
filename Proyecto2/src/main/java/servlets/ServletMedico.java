@@ -82,8 +82,10 @@ public class ServletMedico extends HttpServlet {
         String acceder = "";
         String accion = request.getParameter("accion");
         if (accion.equalsIgnoreCase("RealizarCita")) {
+            request.getSession().setAttribute("mensaje_cita", null);
             acceder = "medico/realizar_cita.jsp";
         } else if (accion.equalsIgnoreCase("AgendarExamen")) {
+            request.getSession().setAttribute("alerta_e", null);
             acceder = "medico/agendar_examen.jsp";
         } else if (accion.equalsIgnoreCase("Reporte1")) {
             acceder = "medico/reporte1.jsp";

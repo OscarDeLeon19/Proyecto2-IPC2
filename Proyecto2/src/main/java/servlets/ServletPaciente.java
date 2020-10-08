@@ -82,8 +82,10 @@ public class ServletPaciente extends HttpServlet {
         String acceder = "";
         String accion = request.getParameter("accion");
         if (accion.equalsIgnoreCase("registrar")) {
+            request.getSession().setAttribute("mensaje_r", null);
             acceder = "paciente/registrar.jsp";
         } else if (accion.equalsIgnoreCase("AddConsulta")) {
+            request.getSession().setAttribute("alerta", null);
             Paciente paciente = dmpac.VerPacientePorCodigo(request.getParameter("id"));
             request.setAttribute("paciente", paciente);
             acceder = "paciente/agendar_consulta.jsp";

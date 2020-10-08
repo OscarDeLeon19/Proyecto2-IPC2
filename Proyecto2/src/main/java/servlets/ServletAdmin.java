@@ -95,10 +95,13 @@ public class ServletAdmin extends HttpServlet {
         String acceder = "";
         String accion = request.getParameter("accion");
         if (accion.equalsIgnoreCase("medicos")) {
+            request.getSession().setAttribute("error_agregar", null);
             acceder = "admin/medicos.jsp";
         } else if (accion.equalsIgnoreCase("laboratoristas")) {
+            request.getSession().setAttribute("error_agregar_lab", null);
             acceder = "admin/laboratoristas.jsp";
         } else if (accion.equalsIgnoreCase("administradores")) {
+            request.getSession().setAttribute("error_agregar_adm", null);
             acceder = "admin/administradores.jsp";
         } else if (accion.equalsIgnoreCase("pacientes")) {
             acceder = "admin/pacientes.jsp";
@@ -225,6 +228,24 @@ public class ServletAdmin extends HttpServlet {
                 String hora_salida = request.getParameter("hora2");
                 Date fecha_inicio = Date.valueOf(request.getParameter("fecha"));
                 String contraseña = "XXXXX";
+                if ("".equals(codigo)) {
+                    codigo = null;
+                }
+                if ("".equals(nombre)) {
+                    nombre = null;
+                }
+                if ("".equals(dpi)) {
+                    dpi = null;
+                }
+                if ("".equals(correo)) {
+                    correo = null;
+                }
+                if ("".equals(hora_entrada)) {
+                    hora_entrada = null;
+                }
+                if ("".equals(hora_salida)) {
+                    hora_salida = null;
+                }
                 Medico medico = new Medico(codigo, nombre, numero_colegiado, dpi, telefono, correo, hora_entrada, hora_salida, fecha_inicio, contraseña);
                 dmmed.ModificarMedico(medico);
                 acceder = "admin/medicos.jsp";
@@ -246,6 +267,24 @@ public class ServletAdmin extends HttpServlet {
                 String hora_salida = request.getParameter("hora2");
                 String fecha = request.getParameter("fecha");
                 String contraseña = request.getParameter("cr");
+                if ("".equals(codigo)) {
+                    codigo = null;
+                }
+                if ("".equals(nombre)) {
+                    nombre = null;
+                }
+                if ("".equals(dpi)) {
+                    dpi = null;
+                }
+                if ("".equals(correo)) {
+                    correo = null;
+                }
+                if ("".equals(hora_entrada)) {
+                    hora_entrada = null;
+                }
+                if ("".equals(hora_salida)) {
+                    hora_salida = null;
+                }
                 int numero_colegiado = Integer.parseInt(colegiado);
                 int telefono = Integer.parseInt(cell);
                 Date fecha_inicio = Date.valueOf(fecha);
@@ -283,6 +322,24 @@ public class ServletAdmin extends HttpServlet {
                 String correo = request.getParameter("correo");
                 Date fecha_inicio = Date.valueOf(request.getParameter("fecha"));
                 String contraseña = "XXXXX";
+                if ("".equals(codigo)) {
+                    codigo = null;
+                }
+                if ("".equals(nombre)) {
+                    nombre = null;
+                }
+                if ("".equals(numero_registro)) {
+                    numero_registro = null;
+                }
+                if ("".equals(dpi)) {
+                    dpi = null;
+                }
+                if ("".equals(tipo_examen)) {
+                    tipo_examen = null;
+                }
+                if ("".equals(correo)) {
+                    correo = null;
+                }
                 Laboratorista laboratorista = new Laboratorista(codigo, nombre, numero_registro, dpi, telefono, tipo_examen, correo, fecha_inicio, contraseña);
                 dmlab.ModificarLaboratorista(laboratorista);
                 acceder = "admin/laboratoristas.jsp";
@@ -302,6 +359,24 @@ public class ServletAdmin extends HttpServlet {
                 String correo = request.getParameter("correo");
                 Date fecha_inicio = Date.valueOf(request.getParameter("fecha"));
                 String contraseña = request.getParameter("cr");
+                if ("".equals(codigo)) {
+                    codigo = null;
+                }
+                if ("".equals(nombre)) {
+                    nombre = null;
+                }
+                if ("".equals(numero_registro)) {
+                    numero_registro = null;
+                }
+                if ("".equals(dpi)) {
+                    dpi = null;
+                }
+                if ("".equals(tipo_examen)) {
+                    tipo_examen = null;
+                }
+                if ("".equals(correo)) {
+                    correo = null;
+                }
                 Laboratorista laboratorista = new Laboratorista(codigo, nombre, numero_registro, dpi, telefono, tipo_examen, correo, fecha_inicio, contraseña);
                 String error = "";
                 error = dmlab.AñadirLaboratorista(laboratorista);
@@ -331,6 +406,18 @@ public class ServletAdmin extends HttpServlet {
             String nombre = request.getParameter("nombre");
             String dpi = request.getParameter("dpi");
             String contraseña = request.getParameter("cr");
+            if ("".equals(codigo)) {
+                codigo = null;
+            }
+            if ("".equals(nombre)) {
+                nombre = null;
+            }
+            if ("".equals(dpi)) {
+                dpi = null;
+            }
+            if ("".equals(contraseña)) {
+                contraseña = null;
+            }
             Administrador admin = new Administrador(codigo, nombre, dpi, contraseña);
             String error = "";
             error = dmadm.AgregarAdministrador(admin);
@@ -358,6 +445,24 @@ public class ServletAdmin extends HttpServlet {
                 String tipo_sangre = request.getParameter("sangre");
                 String correo = request.getParameter("correo");
                 String contraseña = "XXXX";
+                if ("".equals(codigo)) {
+                    codigo = null;
+                }
+                if ("".equals(nombre)) {
+                    nombre = null;
+                }
+                if ("".equals(sexo)) {
+                    sexo = null;
+                }
+                if ("".equals(dpi)) {
+                    dpi = null;
+                }
+                if ("".equals(tipo_sangre)) {
+                    tipo_sangre = null;
+                }
+                if ("".equals(correo)) {
+                    correo = null;
+                }
                 Paciente paciente = new Paciente(codigo, nombre, sexo, fecha_de_nacimiento, dpi, telefono, peso, tipo_sangre, correo, contraseña);
                 dmpac.ModificarPaciente(paciente);
                 acceder = "admin/pacientes.jsp";
@@ -371,6 +476,9 @@ public class ServletAdmin extends HttpServlet {
             try {
                 String tipo = request.getParameter("tipo");
                 double costo = Double.parseDouble(request.getParameter("costo"));
+                if ("".equals(tipo)){
+                    tipo = null;
+                }
                 Consulta consulta = new Consulta(tipo, costo);
                 error = dmcon.AgregarConsulta(consulta);
             } catch (Exception e) {
@@ -399,6 +507,15 @@ public class ServletAdmin extends HttpServlet {
                 String descripcion = request.getParameter("descripcion");
                 double costo = Double.parseDouble(request.getParameter("costo"));
                 String tipo_informe = request.getParameter("tipo");
+                if ("".equals(codigo)){
+                    codigo = null;
+                }
+                if ("".equals(nombre)){
+                    nombre = null;
+                }
+                if ("".equals(descripcion)){
+                    descripcion = null;
+                }
                 Tipo_Examen tipo_examen = new Tipo_Examen(codigo, nombre, orden, descripcion, costo, tipo_informe);
                 error = dmtip.AgregarExamen(tipo_examen);
             } catch (Exception e) {
@@ -425,7 +542,7 @@ public class ServletAdmin extends HttpServlet {
             ArrayList<Informe> lista = dminf.ReporteADMMedicosConMasInformes(fecha1, fecha2);
             request.setAttribute("lista", lista);
             acceder = "admin/reporte1_adm.jsp";
-        }  else if (accion.equalsIgnoreCase("Obtener Ganancias")) {
+        } else if (accion.equalsIgnoreCase("Obtener Ganancias")) {
             String fecha1 = request.getParameter("rep2fecha1");
             String fecha2 = request.getParameter("rep2fecha2");
             String[] fechas = new String[2];
@@ -439,7 +556,9 @@ public class ServletAdmin extends HttpServlet {
             ArrayList<Cita> lista = dmcit.ReporteMedicosCitasMenores(fecha1, fecha2);
             request.setAttribute("lista", lista);
             acceder = "admin/reporte3_adm.jsp";
-        } 
+        } else if (accion.equalsIgnoreCase("Regresar a los examenes")) {
+            acceder = "admin/examenes.jsp";
+        }
         RequestDispatcher pagina = request.getRequestDispatcher(acceder);
         pagina.forward(request, response);
     }

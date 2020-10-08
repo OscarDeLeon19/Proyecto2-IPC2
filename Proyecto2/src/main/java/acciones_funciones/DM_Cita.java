@@ -282,7 +282,7 @@ public class DM_Cita extends Datos_Conexion {
             }
             PrSt.close();
             rs.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             lista.clear();
         }
         return lista;

@@ -5,20 +5,14 @@
  */
 package servlets;
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.FilePart;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import principal.Carga;
 
 /**
@@ -98,9 +92,11 @@ public class Inicial extends HttpServlet {
             Carga c = new Carga();
             File fichero = new File(request.getParameter("archivoxml"));
             String msj = c.IngresarDatos(fichero);
-            request.getSession().setAttribute("msj", msj);
-            acceder = "index.jsp";
+            request.setAttribute("mensajes", c.getMesajes());
+            acceder = "datos_cargados.jsp";
         } else if (accion.equalsIgnoreCase("Salir a la pagina principal")) {
+            acceder = "index.jsp";
+        } else if (accion.equalsIgnoreCase("Regresar a la pagina principal")) {
             acceder = "index.jsp";
         }
         RequestDispatcher pagina = request.getRequestDispatcher(acceder);
