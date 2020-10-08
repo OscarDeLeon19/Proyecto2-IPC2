@@ -11,8 +11,8 @@ import java.sql.SQLException;
 public class Datos_Conexion {
 
     private final String URL = "jdbc:mysql://localhost:3306/Proyecto2";
-    private final String USSERNAME = "root";
-    private final String PASSWORD = "mariobros99";
+    private final String USSERNAME = "Hospital";
+    private final String PASSWORD = "Hospital_123";
 
     private Conexion clase_conexion = new Conexion(URL, USSERNAME, PASSWORD);
     protected Connection conexion = clase_conexion.getConnection();

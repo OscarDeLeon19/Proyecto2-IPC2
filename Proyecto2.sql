@@ -2,6 +2,9 @@ DROP SCHEMA Proyecto2;
 
 CREATE DATABASE Proyecto2;
 
+CREATE USER 'Hospital'@'localhost' IDENTIFIED BY 'Hospital_123';
+GRANT SELECT, INSERT, DELETE, UPDATE ON Proyecto2.* TO 'Hospital'@'localhost';
+
 USE Proyecto2;
 
 CREATE TABLE Paciente(
